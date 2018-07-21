@@ -1,0 +1,99 @@
+//- //- ====================
+//- //- Главная страница.
+//- //- ====================
+
+//- //- Используем стандартный шаблон Project
+//- extends ./template/empty_layout
+
+//- block variables
+//-     - var file_name = 'css_var'
+
+//- //- Модифицируем head
+//- block head
+//-     - var pageTitle = 'css-var';
+
+//- //- Выводим попапы
+//- block popup
+
+//- //- Выводим content
+//- block content
+//-     // общий класс для тестов
+//-     +b.css
+//-         +e.wrapper
+//-             p(style='text-align:right')
+//-                 a.logo(href='/', title='', aria-label="Homepage") Home
+            
+//-             +e('h1').heading Css vars and color-theme for site:
+//-             +e('p').sub-heading Maxim G.
+
+//-             +e('h4').heading Цветовые темы: 
+//-             +e.paragraph
+//-                 p Цветовая схема:
+//-                 p
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-color='1') Green
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-color='2') Blue
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-color='3') Orange
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-color='4') Purpure
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-color='5') Yellow
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-color='6') Water
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-color='7') Deep sea
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-color='8') Under green
+
+//-                 p Контрастная схема:
+//-                 p 
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-style='normal') Normal
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-style='dark') Dark
+//-                     +e('a').button.js-swap-theme(href='javascript:void(0);', title='', data-theme-style='light') Light
+                        
+
+//-             +e('h4').heading А работает это довольно просто.
+//-             +e.paragraph
+//-                 p Создаём базовый цвет который будет меняться. Привязываем его к data-theme на html.
+//-                 +e.light-box
+//-                     pre.
+//-                         html[data-theme='green'] {
+//-                             --theme-color: 110;
+//-                         }
+
+//-                 p Теперь нам нужны сами цвета. А точнее их яркость и насыщенность. Для этого будем использовать схему hsl. Помещаем все переменные в :root.
+//-                 +e.light-box
+//-                     pre.
+//-                         :root {
+//-                             --color: ~'hsl(var(--theme-color), 15%, 44%)';
+//-                             --background-color: ~'hsl(var(--theme-color), 30%, 10%)';
+//-                         }
+
+//-                 p Ну вот. Дело за малым. Хватаем нужный элемент и применяем к нему нашу переменную.
+//-                 +e.light-box
+//-                     pre.
+//-                         .class-name {
+//-                             color: var(--color);
+//-                             background-color: var(--background-color);
+//-                         }
+                
+//-                 p Теперь будем менять контрастность. Заменяем :root на html[с атрибутом].
+//-                 +e.light-box
+//-                     pre.
+//-                         // :root = html
+//-                         html {
+//-                             &[data-theme-style='normal'] { }
+//-                             &[data-theme-style='dark'] { }
+//-                         }
+
+//-                 p Теперь для каждой темы берём свои s,l значения.
+//-                 +e.light-box
+//-                     pre.
+//-                         html {
+//-                             &[data-theme-style='normal'] {
+//-                                 --color: ~'hsl(var(--theme-color), 15%, 44%)';
+//-                                 --background-color: ~'hsl(var(--theme-color), 30%, 10%)';
+//-                             }
+//-                             &[data-theme-style='dark'] {
+//-                                 --color: ~'hsl(var(--theme-color), 70%, 31%)';
+//-                                 --background-color: ~'hsl(var(--theme-color), 3%, 3%)';
+//-                             }
+//-                         }
+
+//-             +e('h5').heading Links:
+//-             +e.paragraph
+//-                 a(href='https://medium.com/@mwichary/dark-theme-in-a-day-3518dde2955a', target='_blank', title='Посмотреть оригинал') За идею спасибо Marcin Wichary

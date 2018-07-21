@@ -1,0 +1,85 @@
+//- //- ====================
+//- //- Project: main
+//- //- 00-00-2017:
+//- //- --------------------
+//- //- Главная страница.
+//- //- ====================
+
+//- //- Используем стандартный шаблон Project
+//- extends ./template/base_layout
+
+//- block variables
+//-     - var file_name = 'animation'
+
+//- //- Модифицируем head
+//- block head
+//-     - var pageTitle = 'Главная страница';
+
+//- //- Выводим попапы
+//- block popup
+
+//- //- Выводим content
+//- block content
+//-     include template/layout/header.pug
+//-     +header({
+//-         'hideMidLine': true
+//-     }).--no-back.--only-top
+
+//-     +b('main').main.--content
+//-         +b.container
+//-             //- include section/ui-kit/title.pug
+//-             //- +title('h1', 'Animations')
+
+//-             div
+//-                 //- span.element 4.07.1993
+            
+//-                 //- <div id="svgAttributes">
+//-                 //-     <svg width="128" height="128" viewBox="0 0 128 128">
+//-                 //-         <polygon points="64 126.5159687690518 8.574 96.10000210451133 9.945828869686487 32.8920187722411 64 0.10000210451133462 118.0541711303135 32.8920187722411 119.426 96.10000210451133 " fill="currentColor"></polygon>
+//-                 //-     </svg>
+//-                 //- </div>
+
+//-                 //- br
+//-                 //- br
+
+//-                 //- <div id="functionBasedPropVal">
+//-                 //-     <div class="line">
+//-                 //-         <div data-x="160" class="small square el">[1]</div>
+//-                 //-     </div>
+//-                 //-     <div class="line">
+//-                 //-         <div data-x="80" class="small square el">[2]</div>
+//-                 //-     </div>
+//-                 //-     <div class="line">
+//-                 //-         <div data-x="250" class="small square el">[3]</div>
+//-                 //-     </div>
+//-                 //- </div>
+
+//-                 //- br
+//-                 //- br
+
+//-                 //- p hearth
+
+//-                 include section/spin-circle.pug
+//-                 +spin-circle()
+//-                 span(style='vertical-align: middle; margin-left: -72px; font-size: 1.6rem; margin-top: -8px; display: inline-block;')
+//-                     | A nimation
+//-                     //- | A medomary
+
+//-                 br
+//-                 br
+//-                 br
+//-                 br
+
+//-                 <svg class='animation-text' viewBox="0 0 1000 200">
+//-                     <symbol id="s-text">
+//-                         <text text-anchor="middle" x="50%" y="80%">AMEDOMARY</text>
+//-                     </symbol>
+
+//-                     <g class = "g-ants">
+//-                         <use xlink:href="#s-text" class="text-copy"></use>
+//-                         <use xlink:href="#s-text" class="text-copy"></use>
+//-                         <use xlink:href="#s-text" class="text-copy"></use>
+//-                         <use xlink:href="#s-text" class="text-copy"></use>
+//-                         <use xlink:href="#s-text" class="text-copy"></use>
+//-                     </g>
+//-                 </svg>

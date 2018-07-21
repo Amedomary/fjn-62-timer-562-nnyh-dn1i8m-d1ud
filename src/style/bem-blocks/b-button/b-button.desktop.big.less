@@ -1,0 +1,126 @@
+/* 1440 + */
+.b-button {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
+    transition: .2s;
+
+    &--block {
+        display: block;
+    }
+
+    .no-touchevents &:hover,
+    .touchevents &:active {
+        color: white; 
+    }
+
+    &.fade {
+        opacity: .5;
+        .transitionModOpacity();
+        pointer-events: none;
+    }
+
+    &--glass {
+        overflow: hidden;
+        position: relative;
+        z-index: 10;
+        border-radius: 5px;
+        width: 200px;
+        background-color: transparent;
+
+        &:before {
+            content: "";
+            background: #fff;
+            height: 155px;
+            left: -75px;
+            opacity: .2;
+            position: absolute;
+            top: -50px;
+            transform: translateX(0) rotate(35deg);
+            transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+            width: 50px;
+            z-index: 5;
+        }
+
+        .no-touchevents &:hover,
+        .touchevents &:active,
+        &:focus {
+            color: var(--cl-orange, #ffedb9);
+            border-color: var(--cl-orange, #ffedb9);
+            border-radius: 2px;
+
+            &:before {
+                transform: translateX(295px) rotate(35deg);
+            }
+        }
+
+        .no-touchevents &:active {
+            color: @cl-red;
+            border-color: @cl-red;
+        }
+    }
+
+    &--main-nav {
+        position: absolute;
+        bottom: 50px;
+        right: 100px;
+        width: 240px;
+        pointer-events: all;
+        border-color: white;
+
+        transition: .4s;
+        transform: translateY(-60px);
+
+        &.disable {
+            pointer-events: none;
+            border-color: transparent;
+            background-color: transparent;
+            transform: translateY(0);
+        }
+
+        .no-touchevents &:hover,
+        .touchevents &:active {
+            color: white;
+        }
+    }
+
+    &--flower {
+        position: absolute;
+        bottom: 0;
+        border-radius: 0;
+        border-color: #702231;
+        border-width: 1px;
+        background-color: rgba(123, 25, 37, 0.05);
+        font-size: 15px;
+        padding: 16px 22px;
+
+        &:after,
+        &:before {
+            content: '';
+            position: absolute;
+            height: 1px;
+            width: 1px;
+            background-color: #bc2e4b;
+        }
+        &:after {
+            width: 11px;
+            right: -5px;
+            top: -1px;
+        }
+        &:before {
+            height: 11px;
+            top: -5px;
+            right: -1px;
+        }
+
+        .no-touchevents &:hover,
+        .touchevents &:active {
+            background-color: rgba(123, 25, 37, 0.15);
+        }
+    }
+}

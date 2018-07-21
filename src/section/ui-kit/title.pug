@@ -1,0 +1,10 @@
+//- ====================
+//- 4lapy: title
+//- 30-10-2017: drtvader
+//- --------------------
+//- заголовок
+//- ====================
+
+mixin title(type, title)
+    +b(type).title(class!=attributes.class) #{title}
+        block

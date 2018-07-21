@@ -1,0 +1,35 @@
+/* 1440 + */
+.b-page-wrapper {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    min-width: 320px;
+    flex-direction: column;
+    justify-content: space-between;
+    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
+
+    &--scroll {
+        overflow-y: auto;
+    }
+
+    &.no-scroll {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
+    
+    &.no-touch {
+        pointer-events: none;
+        touch-action: none;
+    }
+
+    .no-touchevents &.no-jump-windows-os {
+        border-right: 17px solid #f1f1f1;
+    }
+}

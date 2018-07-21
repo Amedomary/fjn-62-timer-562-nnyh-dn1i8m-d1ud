@@ -1,0 +1,85 @@
+/* 1440 + */
+// TODO: Стили скопрированы с Ростелекома. Переделать и дудалить коммент
+.b-tab {
+    &__tab-nav-list {
+        display: flex;
+        padding: 0;
+        border-bottom: solid 1px @cl-black;
+    }
+
+    &__tab-nav-item {
+        flex: 1 1 auto;
+        list-style-type: none;
+        text-align: center;
+
+        &.active {
+            position: relative;
+        }
+    }
+
+    &__link {
+        display: block;
+        text-decoration: none;
+        font-family: @font-base;
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: -0.2px;
+        color: @cl-font-black;
+        text-transform: uppercase;
+        padding: 23px 0;
+        position: relative;
+        transition: color 0.3s;
+
+        .no-touchevents &:hover {
+            color: @cl-font-black;
+        }
+    }
+
+    &__number {
+        display: inline-block;
+        vertical-align: middle;
+        font-family: @font-base;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: -0.2px;
+        color: @cl-white;
+        padding: 0 5px;
+        border-radius: 2px;
+        background-color: @cl-main-orange;
+        text-align: center;
+        line-height: 16px;
+        max-width: 33px;
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        margin-top: -9px;
+        margin-right: -70px;
+
+    }
+
+    &__content {
+        padding: 0 20px;
+        position: relative;
+        overflow: hidden;
+        display: none;
+
+        &.active,
+        &--active {
+            display: block;
+        }
+    }
+
+    &__line-block {
+        position: relative;
+        height: 4px;
+        margin-top: -4px;
+    }
+
+    &__line-nav {
+        width: 10px;
+        position: absolute;
+        border-bottom: 4px solid @cl-main-orange;
+        height: 4px;
+    }
+
+}

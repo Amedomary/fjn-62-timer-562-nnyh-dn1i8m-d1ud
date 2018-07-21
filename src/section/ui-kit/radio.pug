@@ -1,0 +1,14 @@
+//- ====================
+//- 4P: radio
+//- 04-12-2017: VD
+//- --------------------
+//- Радио-баттон
+//- ====================
+
+mixin radio(textLabel, name, id, checked, js)
+    +b.radio(class!=attributes.class)
+        +e('input')(type="radio", name=name, id=id, checked=checked || false).input
+        +e('label').label(for=id, class!=attributes.class, class=(js ? js : ''))
+            if textLabel
+                +e('span').text-label(class!=attributes.class) #{textLabel}
+        block

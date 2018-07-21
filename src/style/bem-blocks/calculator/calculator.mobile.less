@@ -1,0 +1,50 @@
+/* 320 + */
+.calculator {
+    // margin: 0 -15px;
+
+    &__wrapper {
+        width: 100%;
+    }
+
+    &__btns {
+        width: 100%;
+        overflow: auto;
+    }
+
+    &__row {
+        // min-width: 431px;
+        min-width: 0;
+    }
+
+    & .button {
+        flex-grow: 1;
+
+        &--gray {
+            width: 35px;
+            flex: 0 0 auto;
+            padding: 10px 0;
+            font-size: 1rem;
+            order: 10;
+            margin: 0 0 0 1px;
+
+            display: none;
+        }
+
+        &--size-l {
+            flex-grow: 2;
+        }
+    }
+
+    & .input__control {
+        height: auto;
+        font-size: 3.5rem;
+        line-height: 1;
+    }
+}
+
+.calculator-display {
+    &__output {
+        line-height: 1;
+        font-size: 1.6rem;
+    }
+}

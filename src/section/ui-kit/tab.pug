@@ -1,0 +1,26 @@
+//- ====================
+//- RBZ: tab
+//- 16.01.2018: Amedomary
+//- --------------------
+//- Табы
+//- ====================
+
+mixin tab()
+    +b.tab
+        +e('div').tab-nav-wrapper
+            +e('ul').tab-nav-list
+                +e('li').tab-nav-item(class='-active')
+                    +e('a').link.js-tab-link(href="javascript:void(0);" title="Информация" data-tab="1") Название первого таба
+                +e('li').tab-nav-item
+                    +e('a').link.js-tab-link(href="javascript:void(0);" title="Услуги" data-tab="2") Второго
+                +e('li').tab-nav-item
+                    +e('a').link.js-tab-link(href="javascript:void(0);" title="Документы" data-tab="3")
+                        | Три
+                        +e('span').number 7
+                +e('li').tab-nav-item
+                    +e('a').link.js-tab-link(href="javascript:void(0);" title="История начислений" data-tab="4") Четвёртый
+                +e('li').tab-nav-item
+                    +e('a').link.js-tab-link(href="javascript:void(0);" title="История платежей" data-tab="5") Пятый
+            +e('div').line-block
+                +e('div').line-nav.js-line-nav
+        block

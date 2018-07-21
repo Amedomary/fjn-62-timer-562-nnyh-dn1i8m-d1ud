@@ -1,0 +1,56 @@
+.b-breadcrumbs {
+    .roboto-regular;
+    font-size: 1rem;
+    line-height: 1.43;
+    color: @cl-font-main;
+    margin: 25px 0px 0px;
+
+    &--catalog-main {
+        display: none;
+    }
+
+    &__list {
+        padding: 0px;
+    }
+
+    &__item {
+        list-style-type: none;
+        margin-right: 30px;
+        display: inline-block;
+        position: relative;
+
+        &:before {
+            display: block;
+            position: absolute;
+            content: none;
+            left: 10px;
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            border-right: 1px solid @cl-light-gray;
+            border-bottom: 1px solid @cl-light-gray;
+            transform: rotate(-45deg);
+            right: -18px;
+            top: 7px;
+            width: 6px;
+            height: 6px;
+        }
+
+        &:last-child {
+            margin-right: 0px;
+            &:after {
+                content: none;
+
+                right: auto;
+                left: 30px;
+            }
+        }
+    }
+
+    &__link {
+        color: @cl-font-main;
+    }
+}

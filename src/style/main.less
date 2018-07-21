@@ -1,0 +1,30 @@
+@import "partials/variables.less";
+@import "partials/fonts.less";
+@import "partials/theme.less";
+@import "partials/icons.less";
+@import "partials/normalize.less";
+
+// MediaQ
+
+// 1440 +
+@import "concat-less/bem.desktop.big.less";
+
+// 1170 +
+@media @desktop {
+    @import "concat-less/bem.desktop.less";
+}
+
+// 1024 +
+@media @desktop-min {
+    @import "concat-less/bem.desktop.min.less";
+}
+
+// 768 +
+@media @tablet {
+    @import "concat-less/bem.tablet.less";
+}
+
+// 320 +
+@media @mobile {
+    @import "concat-less/bem.mobile.less";
+}

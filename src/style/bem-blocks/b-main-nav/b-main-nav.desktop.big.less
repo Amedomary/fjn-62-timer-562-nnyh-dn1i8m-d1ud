@@ -1,0 +1,95 @@
+/* 1440 + */
+.b-main-nav {
+    width: 300px;
+    background-color: rgba(18, 17, 17, 0.95);
+    padding: 15px 25px 15px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    overflow-y: auto;
+
+    &__item {
+        position: relative;
+        list-style: none;
+        margin-bottom: 15px;
+
+        // Марка списка (кружок)
+        &:before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: -4px;
+            background-color: @cl-font-orange;
+            opacity: 0;
+            transition: .3s;
+        }
+
+        &.active-li {
+            &:before {
+                opacity: 1;
+            }
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &--close {
+            padding-top: 10px;
+            font-size: 1rem;
+
+            &:before {
+                display: none;
+            }
+        }
+
+        &--disabled {
+            pointer-events: none;
+            opacity: .3;
+        }
+    }
+
+    &__link {
+        display: inline-block;
+        transition: .3s;
+        color: inherit;
+
+        &.active {
+            color: @cl-font-orange;
+            transform: translateX(17px);
+        }
+
+        &:focus {
+            outline: none;
+            color: @cl-font-orange;
+        }
+
+        &--close {
+            color: @cl-red;
+            opacity: 0;
+            transition: .3s;
+            pointer-events: none;
+            visibility: hidden;
+
+            &.active {
+                opacity: 1;
+                color: @cl-red;
+                transform: translateX(0);
+                pointer-events: all;
+                visibility: visible;
+
+                &:focus {
+                    text-decoration: underline;
+                }
+            }
+
+            .no-touchevents &:hover,
+            .touchevents &:active {
+                color: @cl-red;
+            }
+        }
+    }
+}

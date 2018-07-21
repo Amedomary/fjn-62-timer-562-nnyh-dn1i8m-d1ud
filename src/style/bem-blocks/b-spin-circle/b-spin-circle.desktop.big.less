@@ -1,0 +1,46 @@
+/* 1440 + */
+.b-spin-circle {
+    display: inline-block;
+    vertical-align: middle;
+    width: 130px;
+    height: 130px;
+
+    & .ellipse {
+        display: inline-block;
+        vertical-align: top;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 2px solid red;
+        transform-origin: 50% 50%;
+        animation-name: rotate-circle;
+        animation-duration: 1.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+
+        &.two {
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+        }
+        &.three {
+            animation-duration: 1.5s;
+            animation-direction: reverse;
+        }
+        &.four {
+            animation-duration: 2.5s;
+            animation-timing-function: ease;
+        }
+        &.five {
+            animation-duration: 1.3s;
+        }
+    }
+}
+
+@keyframes rotate-circle {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}

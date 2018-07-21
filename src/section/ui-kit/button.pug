@@ -1,0 +1,22 @@
+//- ====================
+//- RBZ: button block link
+//- 16.01.2018: Amedomary
+//- --------------------
+//- Блочная ссылка
+//- ====================
+
+//- if <a>        link = true
+//- if <button>   link = false
+//- add_text - если есть доп текст, для мобилки например
+
+//- Вызов
+//- +button('text', 'add-text', false).js-class.-active(data-popup="open-test")
+
+mixin button(content, link)
+    if link == true
+        +b('a').button( href="javascript:void(0);" title='' )&attributes( attributes ) #{content}
+            block
+
+    else
+        +b('button').button&attributes( attributes ) #{content}
+            block

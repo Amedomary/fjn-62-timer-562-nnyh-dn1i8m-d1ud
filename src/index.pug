@@ -1,0 +1,69 @@
+//- //- ====================
+//- //- Project: main
+//- //- 00-00-2017:
+//- //- --------------------
+//- //- Главная страница.
+//- //- ====================
+
+//- //- Используем стандартный шаблон Project
+//- extends ./template/base_layout
+
+//- block variables
+//-     - var file_name = 'main'
+
+//- //- Модифицируем head
+//- block head
+//-     - var pageTitle = 'Главная страница';
+
+//- //- Выводим попапы
+//- block popup
+
+//- //- Выводим content
+//- block content
+//-     +b.background.js-background-wrapper
+//-         +e('img').image(src='images/content/back-1.png', alt='', title='', data-background='back-1').js-background
+//-         +e('img').image(src='images/content/back-3.png', alt='', title='', data-background='back-3').js-background
+//-         +e('img').image(src='images/content/back-4.png', alt='', title='', data-background='back-4').js-background
+//-         +e('img').image(src='images/content/calculator.png', alt='', title='', data-background='back-5').js-background
+//-         +e('img').image(src='images/content/form.jpg', alt='', title='', data-background='back-6').js-background
+//-         +e('img').image(src='images/content/css-vars.png', alt='', title='', data-background='back-7').js-background
+
+
+//-     +b('main').main
+//-         nav
+//-             +b('ul').main-nav
+//-                 +e('li').item
+//-                     +e('a').link(href='javascript:void(0);', title='', data-href='portfolio.html', data-background='back-1', data-color='rgba(54, 13, 78, .3)').js-background-link Прочитать информацию обо&nbsp;мне 
+//-                 +e('li').item
+//-                     +e('a').link(href='javascript:void(0);', title='', data-href='checklist.html', data-background='back-3', data-color='rgba(199,26,49,.3)').js-background-link Мой список навыков 
+//-                 +e('li').item
+//-                     +e('a').link(href='javascript:void(0);', title='', data-href='animation.html', data-background='back-4', data-color='rgba(83, 18, 91, .3)').js-background-link Анимации
+//-                 +e('li').item
+//-                     +e('a').link(href='javascript:void(0);', title='', data-href='calculator.html', data-background='back-5', data-color='rgba(28, 107, 185, .2)').js-background-link Калькулятор 
+//-                 +e('li').item
+//-                     +e('a').link(href='javascript:void(0);', title='', data-href='form.html', data-background='back-6', data-color='rgba(65, 0, 0, .3)').js-background-link Формы 
+//-                 +e('li').item
+//-                     +e('a').link(href='javascript:void(0);', title='', data-href='css_var.html', data-background='back-7', data-color='rgba(0, 184, 255, 0.1)').js-background-link Css vars
+//-                 +e('li').item
+//-                     +e('a').link(href='javascript:void(0);', title='', data-href='landing.html', data-background='back-6', data-color='rgba(0, 184, 255, 0.1)').js-background-link Landing flower
+//-                 +e('li').item.--disabled
+//-                     +e('a').link(href='javascript:void(0);', title='') 3D interface - άλφα
+//-                 +e('li').item.--disabled
+//-                     +e('a').link(href='javascript:void(0);', title='') Charts - άλφα
+
+//-                 +e('li').item.--close
+//-                     +e('a').link(href='javascript:void(0);', title='').--close.js-background-link-close Закрыть всё
+
+//-         include section/ui-kit/button.pug
+//-         +button('Выберите раздел...', true).--main-nav.-disable.js-main-nav
+
+//-         //- TODO: в миксин
+//-         +b.short-cut
+//-             +e('dl').dl
+//-                 +e('dt').key Tab
+//-                 +e('dd').dd - Navigation
+
+//-                 br
+
+//-                 +e('dt').key M
+//-                 +e('dd').dd - Menu

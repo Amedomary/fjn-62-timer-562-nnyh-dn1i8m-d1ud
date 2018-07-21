@@ -1,0 +1,22 @@
+//- ====================
+//- Project: Шапка сайта
+//- 00-00-2017: Author
+//- --------------------
+//- Шапка
+//- ====================
+
+mixin header(data)
+    include ../../section/ui-kit/title.pug
+    include ../../section/ui-kit/button.pug
+
+    +b.header(class!=attributes.class)
+        +e.top-line
+            .b-container
+                +e('a').logo(href='/', title='', aria-label="Homepage") Home
+        if data.hideMidLine == true
+        else
+            +e.mid-line
+                .b-container
+                    +title('h2', "Maxim 'Amedomary ' Grishin ").--header
+                    +title('h3', 'Ulyanovsk - city').--sub-header
+                    +b('a').button(href="mailto:Amedomaryyo93@gmail.com" title='Send mail').--glass Write me

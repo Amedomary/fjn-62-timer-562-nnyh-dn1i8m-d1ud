@@ -1,0 +1,48 @@
+.b-breadcrumbs {
+    &__item {
+
+        display: none;
+        margin-right: 20px;
+
+        &:first-child,
+        &:last-child {
+            display: inline-block;
+
+            &:after {
+                content: "";
+            }
+        }
+
+        &:last-child {
+            padding-left: 50px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+
+            &:before {
+                content: "..."
+            }
+        }
+
+        &:only-child {
+            padding-left: 0px;
+            &:before,
+            &:after {
+                content: none;
+            }
+        }
+    }
+
+    &__link {
+
+        white-space: nowrap;
+        min-width: 0;
+    }
+
+    &__list {
+        display: flex;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        // display: block;
+    }
+}

@@ -1,0 +1,14 @@
+//- ====================
+//- 4P: checkbox
+//- 01-11-2017: Mell.Blimm
+//- --------------------
+//- checkbox
+//- ====================
+
+mixin checkbox(name, id, title, js)
+    +b.checkbox( class!=attributes.class )
+        +e('input').input( type="checkbox", name=name, id=id, value=title, class=(js ? js : '') )
+        +e('label').name( for=id, class!=attributes.class )
+            if title
+                +e('span').text #{title}
+            block

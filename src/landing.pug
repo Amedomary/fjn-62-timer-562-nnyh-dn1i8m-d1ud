@@ -1,0 +1,153 @@
+//- ====================
+//- Главная страница.
+//- ====================
+
+//- Используем стандартный шаблон Project
+extends ./template/empty_layout
+
+block variables
+    - var file_name = 'landing'
+
+//- Модифицируем head
+block head
+    - var pageTitle = 'landing';
+    //- Событие которое я ожидаю
+
+//- Выводим попапы
+block popup
+
+//- Выводим content
+block content
+    include section/ui-kit/button.pug
+    include section/ui-kit/icon.pug
+
+    +b.landing#landing-app(:class='vueAppClass')
+        +e('img').background(src='images/content/flower.jpg', alt='', title='', :class='vueBackClass')
+
+        +b('svg').svg-grid
+            //- фоновая сетка
+            g
+                +e('line').line(x1="20%" y1="0" x2="20%" y2="100%").--mobile-hide
+                +e('line').line(x1="40%" y1="0" x2="40%" y2="100%")
+                +e('line').line(x1="60%" y1="0" x2="60%" y2="100%").--mobile-hide
+                +e('line').line(x1="80%" y1="0" x2="80%" y2="100%")
+
+                +e('line').line(x1="0" y1="20%" x2="100%" y2="20%")
+                +e('line').line(x1="0" y1="50%" x2="100%" y2="50%")
+                +e('line').line(x1="0" y1="80%" x2="100%" y2="80%")
+
+            //- рамка
+            g
+                +e('line').line(x1="40px" y1="40px" x2="40px" y2="100px")
+                +e('line').line(x1="40px" y1="40px" x2="100px" y2="40px")
+
+                +e('line').line(x1="calc(100% - 40px)" y1="40px" x2="calc(100% - 40px)" y2="100px")
+                +e('line').line(x1="calc(100% - 100px)" y1="40px" x2="calc(100% - 40px)" y2="40px")
+
+                +e('line').line(x1="40px" y1="calc(100% - 40px)" x2="40px" y2="calc(100% - 100px)")
+                +e('line').line(x1="40px" y1="calc(100% - 40px)" x2="100px" y2="calc(100% - 40px)")
+
+                +e('line').line(x1="calc(100% - 40px)" y1="calc(100% - 40px)" x2="calc(100% - 40px)" y2="calc(100% - 100px)")
+                +e('line').line(x1="calc(100% - 100px)" y1="calc(100% - 40px)" x2="calc(100% - 40px)" y2="calc(100% - 40px)")
+            
+            //- белые плюсики
+            g
+                +e('rect').plus(x="40px" y="35px" width="1px" height="11px")
+                +e('rect').plus(x="35px" y="40px" width="11px" height="1px")
+
+                +e('rect').plus(x="calc(100% - 40px)" y="35px" width="1px" height="11px")
+                +e('rect').plus(x="calc(100% - 45px)" y="40px" width="11px" height="1px")
+
+                +e('rect').plus(x="calc(100% - 40px)" y="calc(100% - 45px)" width="1px" height="11px")
+                +e('rect').plus(x="calc(100% - 45px)" y="calc(100% - 40px)" width="11px" height="1px")
+
+                +e('rect').plus(x="40px" y="calc(100% - 45px)" width="1px" height="11px")
+                +e('rect').plus(x="35px" y="calc(100% - 40px)" width="11px" height="1px")
+
+                //- ----------------------------------------------------------------------
+                // 1
+                +e('rect').plus(x="20%" y="calc(20% - 5px)" width="1px" height="11px").--mobile-hide
+                +e('rect').plus(x="calc(20% - 5px)" y="20%" width="11px" height="1px").--mobile-hide
+                // 2
+                +e('rect').plus(x="40%" y="calc(20% - 5px)" width="1px" height="11px")
+                +e('rect').plus(x="calc(40% - 5px)" y="20%" width="11px" height="1px")
+                // 3
+                +e('rect').plus(x="60%" y="calc(20% - 5px)" width="1px" height="11px").--mobile-hide
+                +e('rect').plus(x="calc(60% - 5px)" y="20%" width="11px" height="1px").--mobile-hide
+                // 4
+                +e('rect').plus(x="80%" y="calc(20% - 5px)" width="1px" height="11px")
+                +e('rect').plus(x="calc(80% - 5px)" y="20%" width="11px" height="1px")
+
+                // 5
+                +e('rect').plus(x="20%" y="calc(50% - 5px)" width="1px" height="11px").--mobile-hide
+                +e('rect').plus(x="calc(20% - 5px)" y="50%" width="11px" height="1px").--mobile-hide
+                // 6
+                +e('rect').plus(x="40%" y="calc(50% - 5px)" width="1px" height="11px")
+                +e('rect').plus(x="calc(40% - 5px)" y="50%" width="11px" height="1px")
+                // 7
+                +e('rect').plus(x="60%" y="calc(50% - 5px)" width="1px" height="11px").--mobile-hide
+                +e('rect').plus(x="calc(60% - 5px)" y="50%" width="11px" height="1px").--mobile-hide
+                // 8
+                +e('rect').plus(x="80%" y="calc(50% - 5px)" width="1px" height="11px")
+                +e('rect').plus(x="calc(80% - 5px)" y="50%" width="11px" height="1px")
+
+                // 9
+                +e('rect').plus(x="20%" y="calc(80% - 5px)" width="1px" height="11px").--mobile-hide
+                +e('rect').plus(x="calc(20% - 5px)" y="80%" width="11px" height="1px").--mobile-hide
+                // 10
+                +e('rect').plus(x="40%" y="calc(80% - 5px)" width="1px" height="11px")
+                +e('rect').plus(x="calc(40% - 5px)" y="80%" width="11px" height="1px")
+                // 11
+                +e('rect').plus(x="60%" y="calc(80% - 5px)" width="1px" height="11px").--flower.--mobile-hide
+                +e('rect').plus(x="calc(60% - 5px)" y="80%" width="11px" height="1px").--flower.--mobile-hide
+                // 12
+                +e('rect').plus(x="80%" y="calc(80% - 5px)" width="1px" height="11px")
+                +e('rect').plus(x="calc(80% - 5px)" y="80%" width="11px" height="1px")
+
+        +e.header
+
+            +e('a').link-create(@click="createTimer" href='javascript:void(0)', title='')
+                span(v-if='createTimerShow', v-cloak)
+                    span Отмена  
+                span(v-else)
+                    span Создать    
+                    b свой 
+            +e.link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='').--accept
+                span(v-cloak) ✔ Применить  
+                b(v-cloak) изменения  
+
+        +e('svg')(x="0px" y="0px" viewBox="0 0 705 705", :class='vueCircleClass').circle
+            <circle class="st0" cx="352.5" cy="352.5" r="350.5"/>
+            <circle class="st1" cx="352.5" cy="352.5" r="225.5"/>
+            <circle class="st2" cx="70" cy="352.5" r="4"/>
+            <circle class="st3" cx="70" cy="352.5" r="5"/>
+            <circle class="st4" cx="70" cy="352.5" r="3"/>
+            <circle class="st5" cx="70" cy="352.5" r="6"/>
+
+        +e.clock(:class='vueClockClass', @click='editClock')
+            +e('span').month#js-clock-mounth Mounth
+            +e('span').hour#js-clock-hour 12
+            +e('span').slash / 
+            +e('span').minutes#js-clock-minutes 45
+            +e('span').minutes :
+            +e('span').minutes#js-clock-seconds 07
+
+            +icon('pen-solid').--clock-edit
+
+        +e.description
+            +e('h2').pre-heading Жди вместе с друзьями
+            
+            //- Заголовок
+            +e('h1').heading(:class='vueHeadingClass', v-if="!stateEditHeading", @click='editHeading', v-cloak) {{ headingMessage }}
+                +icon('pen-solid').--heading-edit
+            +e('input').heading(id='', type='', placeholder='Ваш заголовок', name='', value='', autofocus='autofocus', v-else, v-model="headingMessage", @blur='compleateEditHeading', v-cloak)
+
+            //- Описание
+            +e('p').description-text(:class='vueDescriptionTextClass', v-if='!stateEditDescriptionText', @click='editDescriptionText', v-cloak) {{ descriptionTextMessage }}
+            +e('input').description-text(id='', type='', placeholder='Ваше описание', name='', value='', autofocus='autofocus', v-else, v-model="descriptionTextMessage", @blur='compleateEditDescriptionText', v-cloak)
+            
+            +button('Добавить в календарь', true).--flower(:class='vueButtonClass')
+
+        +e.share(:class='vueShareClass')
+            +icon--link('fb').--share
+            +icon--link('insta').--share

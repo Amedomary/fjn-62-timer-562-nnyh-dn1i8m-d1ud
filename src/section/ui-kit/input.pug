@@ -1,0 +1,10 @@
+//- ====================
+//- 4P: input
+//- 16.01.2018: Amedomary
+//- --------------------
+//- инпут
+//- ====================
+
+mixin input(id, type, placeholder, name, value)
+    +b.input(class!=attributes.class)
+        +e('input').input-field&attributes( attributes )(id=id, type=type, placeholder=placeholder, name=name, value=value )

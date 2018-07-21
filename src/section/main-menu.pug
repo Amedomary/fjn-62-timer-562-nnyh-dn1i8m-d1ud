@@ -1,0 +1,57 @@
+//- ====================
+//- 00-00-2017: Amed
+//- --------------------
+//- main-menu
+//- ====================
+
+mixin main-menu()
+    +b.main-menu(class!=attributes.class)
+        +e.grid
+            +cell('Site map:').--one
+                <ul>
+                    <li><a href="/">Main</a></li>
+                    <li><a href="3d.html">3d</a></li>
+                    <li><a href="animation.html">animation</a></li>
+                    <li><a href="calculator.html">calculator</a></li>
+                    <li><a href="chart.html">chart</a></li>
+                    <li><a href="checklist.html">checklist</a></li>
+                    <li><a href="css_var.html">css-var</a></li>
+                    <li><a href="form.html">form</a></li>
+                    <li><a href="portfolio.html">portfolio</a></li>
+                </ul>
+
+            +cell('My name:').--two
+                ul
+                    li Maxim 'Amedomary'
+            +cell('Color theme - beta').--three
+                ul
+                    li Dark
+                    li Light
+            +cell('').--four
+                ul
+                    li 
+            +cell('').--five
+                ul
+                    li 
+            +cell('').--six
+                ul
+                    li 
+            +cell('').--seven
+                ul
+                    li 
+            +cell('').--eight
+                ul
+                    li 
+            +cell('').--nine
+                ul
+                    li 
+            +cell('Copyright').--ten
+                ul
+                    li Amedomary.Inc 2006-2018. ©
+                    li All right reserved.
+
+
+mixin cell(title)
+    +e.cell(class!=attributes.class)
+        +e('h3').heading #{title}
+        block

@@ -1,0 +1,27 @@
+/* 1440 + */
+.b-link {
+    display: inline;
+    text-decoration: none;
+    transition: color @animation-time;
+
+    &--block {
+        display: block;
+    }
+
+    &--github {
+        display: inline-block;
+        vertical-align: top;
+
+        svg {
+            fill: rgba(255, 255, 255, .35);
+            transition: fill .2s;
+        }
+
+        .no-touchevents &:hover,
+        .touchevents &:active {
+            svg {
+                fill: ~'var(--cl-orange, #ffedb9)';
+            }
+        }
+    }
+}

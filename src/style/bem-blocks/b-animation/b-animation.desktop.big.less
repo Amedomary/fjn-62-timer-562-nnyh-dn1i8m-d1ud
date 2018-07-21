@@ -1,0 +1,63 @@
+/* 1440 + */
+.animation-text {
+    font-size: 150px;
+    font-family: @font-sans;
+    
+    .text-copy {
+        fill: none;
+        stroke: white;
+        stroke-dasharray: 6% 29%;
+        stroke-width: 1px;
+        transition: 4s;
+        stroke-dashoffset: 0%;
+        animation: stroke-offset 5.5s infinite linear, stroke-width 11s infinite linear;
+    }
+    
+    .text-copy:nth-child(1){
+        stroke: #BD0034;
+        animation-delay: -1;
+    }
+    
+    .text-copy:nth-child(2){
+        stroke: #12ca51;
+        animation: stroke-offset 5.5s infinite linear, stroke-width 8s infinite linear;
+        animation-delay: -2s;
+    }
+    
+    .text-copy:nth-child(3){
+        stroke: #a35cff;
+        animation-delay: -3s;
+    }
+    
+    .text-copy:nth-child(4){
+        stroke: #BD0034;
+        animation: stroke-offset 5.5s infinite linear, stroke-width 15s infinite linear;
+        animation-delay: -4s;
+    }
+    
+    .text-copy:nth-child(5){
+        stroke: #FDB731;
+        animation-delay: -5s;
+    }    
+}
+
+@keyframes stroke-offset{
+    0% {
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: 35%;
+    }
+}
+
+@keyframes stroke-width {
+    0% {
+        stroke-width: 6px;
+    }
+    50% {
+        stroke-width: 0px;
+    }
+    100% {
+        stroke-width: 6px;
+    }
+}
