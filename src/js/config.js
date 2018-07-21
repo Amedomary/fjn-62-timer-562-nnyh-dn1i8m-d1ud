@@ -22,7 +22,6 @@ require.config({
 require([
     'modernizr',
     'ofi',
-    'partials/menu',
-    'partials/main_menu',
-    'partials/calculator'
+    'partials/landing_vue',
+    'partials/clock'
 ]);

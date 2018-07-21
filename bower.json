@@ -15,7 +15,6 @@
   "dependencies": {
     "html5shiv": "latest",
     "jquery": "^3.0.0",
-    "jquery-validation": "~1.14.0",
     "vue": "^2.5.16"
   },
   "devDependencies": {
