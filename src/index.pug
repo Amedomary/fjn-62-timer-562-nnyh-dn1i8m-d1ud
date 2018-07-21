@@ -6,11 +6,11 @@
 extends ./template/empty_layout
 
 block variables
-    - var file_name = 'landing'
+    - var file_name = 'main'
 
 //- Модифицируем head
 block head
-    - var pageTitle = 'landing';
+    - var pageTitle = 'Запусти свой таймер';
     //- Событие которое я ожидаю
 
 //- Выводим попапы
@@ -135,6 +135,7 @@ block content
             +icon('pen-solid').--clock-edit
 
         +e.description
+            //- TODO: создать форму как и другие поля (js заготовлен) 
             +e('h2').pre-heading Жди вместе с друзьями
             
             //- Заголовок

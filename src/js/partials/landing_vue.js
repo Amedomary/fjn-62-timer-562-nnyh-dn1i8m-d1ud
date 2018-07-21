@@ -33,14 +33,17 @@ define(['jquery', 'vuejs'], function ($, Vue) {
             stateEditDescriptionText: false, // изменяется ли Описание
 
             headingMessage: '', // текст заголовка
+            lastEditHeadingMessage: '',
             oldHeadingMessage: '', // ячейка для сохранения предыдущего текста
             newHeadingMessage: '', // ячейка для нового текста
 
             descriptionTextMessage: '', // текст описания
-            oldDescriptionTextMessage: '', // ячейка для сохранения предыдущего описания
+            lastEditDescriptionTextMessage: '', // описание предыдущего сохранения
+            oldDescriptionTextMessage: '', // ячейка для сохранения предыдущего описания во время редактирования
             newDescriptionTextMessage: '', // ячейка для нового описания
 
             preHeadingMessage: '', // текст пред Заголовка
+            lastEditPreHeadingMessage: '',
             oldPreHeadingMessage: '', // ячейка для сохранения предыдущего пред Заголовка
             newPreHeadingMessage: '' // ячейка для нового пред Заголовка
 
@@ -59,7 +62,14 @@ define(['jquery', 'vuejs'], function ($, Vue) {
                     this.vueClockClass = 'editable'; // "editable edited"
                     this.vueHeadingClass = 'editable'; // "editable edited"
                     this.vueDescriptionTextClass = 'editable';
-                } else {
+
+                    this.lastEditHeadingMessage = this.headingMessage;
+                    this.lastEditDescriptionTextMessage = this.descriptionTextMessage;
+                    this.lastEditPreHeadingMessage = this.preHeadingMessage;
+
+                } 
+                // Клик по Отмене редактирования
+                else {
                     this.vueAppClass = '';
                     this.vueBackClass = '';
                     this.vueShareClass = '';
@@ -69,10 +79,14 @@ define(['jquery', 'vuejs'], function ($, Vue) {
                     this.vueHeadingClass = '';
                     this.vueDescriptionTextClass = '';
                     // присваеваем переменным значения с сервера
-                    this.preHeadingMessage = this.CONTENTFROMSERVER.preHeading;
-                    this.headingMessage = this.CONTENTFROMSERVER.heading;
-                    this.descriptionTextMessage = this.CONTENTFROMSERVER.description;
+                    // this.preHeadingMessage = this.CONTENTFROMSERVER.preHeading;
+                    // this.headingMessage = this.CONTENTFROMSERVER.heading;
+                    // this.descriptionTextMessage = this.CONTENTFROMSERVER.description;
+                    this.headingMessage = this.lastEditHeadingMessage;
+                    this.descriptionTextMessage = this.lastEditDescriptionTextMessage;
+                    this.preHeadingMessage = this.lastEditPreHeadingMessage;
 
+                    this.stateWasModified = false; //выключаем состояние "в редактировании"
                 }
             },
 
