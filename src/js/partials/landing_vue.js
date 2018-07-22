@@ -1,7 +1,7 @@
 // ====================
 // ====================
 
-define(['jquery', 'vuejs'], function ($, Vue) {
+// define(['jquery', 'vuejs'], function ($, Vue) {
 
     var $app = $('#landing-app');
 
@@ -17,6 +17,7 @@ define(['jquery', 'vuejs'], function ($, Vue) {
             vueCircleClass: '',
             vueButtonClass: '',
             vueClockClass: '',
+            vuePreHeadingClass: '',
             vueHeadingClass: '',
             vueDescriptionTextClass: '',
 
@@ -29,6 +30,7 @@ define(['jquery', 'vuejs'], function ($, Vue) {
 
             stateWasModified: false, // было ло ли изменено состояние
 
+            stateEditPreHeading: false, // изменяется ли под-Заголовок
             stateEditHeading: false, // изменяется ли Заголовок
             stateEditDescriptionText: false, // изменяется ли Описание
 
@@ -60,6 +62,7 @@ define(['jquery', 'vuejs'], function ($, Vue) {
                     this.vueCircleClass = 'fade';
                     this.vueButtonClass = 'fade';
                     this.vueClockClass = 'editable'; // "editable edited"
+                    this.vuePreHeadingClass = 'editable'; // "editable edited"
                     this.vueHeadingClass = 'editable'; // "editable edited"
                     this.vueDescriptionTextClass = 'editable';
 
@@ -76,15 +79,16 @@ define(['jquery', 'vuejs'], function ($, Vue) {
                     this.vueCircleClass = '';
                     this.vueButtonClass = '';
                     this.vueClockClass = '';
+                    this.vuePreHeadingClass = '';
                     this.vueHeadingClass = '';
                     this.vueDescriptionTextClass = '';
                     // присваеваем переменным значения с сервера
                     // this.preHeadingMessage = this.CONTENTFROMSERVER.preHeading;
                     // this.headingMessage = this.CONTENTFROMSERVER.heading;
                     // this.descriptionTextMessage = this.CONTENTFROMSERVER.description;
+                    this.preHeadingMessage = this.lastEditPreHeadingMessage;
                     this.headingMessage = this.lastEditHeadingMessage;
                     this.descriptionTextMessage = this.lastEditDescriptionTextMessage;
-                    this.preHeadingMessage = this.lastEditPreHeadingMessage;
 
                     this.stateWasModified = false; //выключаем состояние "в редактировании"
                 }
@@ -100,6 +104,7 @@ define(['jquery', 'vuejs'], function ($, Vue) {
                 this.vueCircleClass = '';
                 this.vueButtonClass = '';
                 this.vueClockClass = '';
+                this.vuePreHeadingClass = '';
                 this.vueHeadingClass = '';
                 this.vueDescriptionTextClass = '';
                 
@@ -112,6 +117,31 @@ define(['jquery', 'vuejs'], function ($, Vue) {
                 if (this.createTimerShow) {
                     alert('В преАльфа версии эта функция недоступна. Нажмите ок.');
                     this.vueClockClass = 'editable editing';
+                }
+            },
+
+            // Начинаем редактировать под-заголовок
+            editPreHeading: function () {
+                // alert('В преАльфа версии эта функция недоступна. Нажмите ок.');
+                // TODO: сохранять старые значения надо и возвращать
+                if (this.createTimerShow) {
+                    this.stateEditPreHeading = true;
+                    this.oldPreHeadingMessage = this.preHeadingMessage; // Запоминаем старое название
+                    this.preHeadingMessage = ''; // и меняем текст в форме на пустой
+                    // this.vueHeadingClass = 'editable';
+                }
+            },
+            // Сохроняем редактирование
+            compleateEditPreHeading: function () {
+                if (this.createTimerShow) {
+                    this.stateEditPreHeading = false;
+                    // если форма пустая и не такая же
+                    if (this.preHeadingMessage == '') {
+                        this.preHeadingMessage = this.oldPreHeadingMessage;
+                    }
+                    else {
+                        this.stateWasModified = true;
+                    }
                 }
             },
 
@@ -171,6 +201,9 @@ define(['jquery', 'vuejs'], function ($, Vue) {
                 if (this.createTimerShow && this.stateEditHeading && e.key == 'Enter') {
                     this.compleateEditHeading();
                 }
+                if (this.createTimerShow && this.stateEditPreHeading && e.key == 'Enter') {
+                    this.compleateEditPreHeading();
+                }
                 if (this.createTimerShow && this.stateEditDescriptionText && e.key == 'Enter') {
                     this.compleateEditDescriptionText();
                 }
@@ -198,4 +231,4 @@ define(['jquery', 'vuejs'], function ($, Vue) {
         // }
     })
 
-});
+// });

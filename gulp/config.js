@@ -5,7 +5,7 @@ module.exports = {
     build: build,
     base: base,
     main: {
-        requireJs: true,
+        requireJs: false,
         iconfont: true
     },
     other: {
@@ -49,7 +49,7 @@ module.exports = {
         srcInternal: [base + 'js/**/*.js', '!' + base + 'js/**/external.js'],
         srcInternalExternal: [base + 'js/external.js', base + 'js/internal.js'],
         dest: build + 'js/',
-        requireJs: true
+        requireJs: false
     },
     json: {
         src: [

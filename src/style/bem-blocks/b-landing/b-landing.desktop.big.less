@@ -60,6 +60,7 @@
 
     &__pre-heading {
         font-size: 11px;
+        font-family: @font-sans;
         text-transform: uppercase;
         margin: 0 0 15px 0;
 
@@ -244,11 +245,25 @@
     &__month {
         display: block;
         font-size: 25px;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         opacity: .6;
         padding-left: 10px;
     }
 
+    &__day {
+        position: relative;
+        display: inline-block;
+        font-size: 90px;
+        vertical-align: middle;
+        margin-right: 25px;
+
+        .title {
+            position: absolute;
+            bottom: -2px;
+            left: 6px;
+            font-size: 15px;
+        }
+    }
     &__hour {
         display: inline-block;
         font-size: 70px;

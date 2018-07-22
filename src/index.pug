@@ -126,17 +126,24 @@ block content
 
         +e.clock(:class='vueClockClass', @click='editClock')
             +e('span').month#js-clock-mounth Mounth
+            +e('span').day#js-clock-day 2 
+                i.title days 
             +e('span').hour#js-clock-hour 12
+            //- i hours 
             +e('span').slash / 
             +e('span').minutes#js-clock-minutes 45
+            //- i minutes
             +e('span').minutes :
             +e('span').minutes#js-clock-seconds 07
+            //- i seconds
 
             +icon('pen-solid').--clock-edit
 
+            <timer :time="prettyTime"></timer>
+
         +e.description
-            //- TODO: создать форму как и другие поля (js заготовлен) 
-            +e('h2').pre-heading Жди вместе с друзьями
+            +e('h2').pre-heading(:class='vuePreHeadingClass', v-if="!stateEditPreHeading", @click='editPreHeading', v-cloak) {{ preHeadingMessage }}
+            +e('input').pre-heading(id='', type='', placeholder='Ваш подзаголовок', name='', value='', autofocus='autofocus', v-else, v-model="preHeadingMessage", @blur='compleateEditPreHeading', v-cloak)
             
             //- Заголовок
             +e('h1').heading(:class='vueHeadingClass', v-if="!stateEditHeading", @click='editHeading', v-cloak) {{ headingMessage }}
