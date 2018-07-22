@@ -124,22 +124,18 @@ block content
             <circle class="st4" cx="70" cy="352.5" r="3"/>
             <circle class="st5" cx="70" cy="352.5" r="6"/>
 
-        +e.clock(:class='vueClockClass', @click='editClock')
-            +e('span').month#js-clock-mounth Mounth
-            +e('span').day#js-clock-day 2 
+        +e.clock(:class='vueClockClass', @click='editClock', v-cloak)
+            +e('span').month {{ cl_month }}
+            +e('span').day
+                span {{ cl_days }}
                 i.title days 
-            +e('span').hour#js-clock-hour 12
-            //- i hours 
+            +e('span').hour {{ cl_hours }}
             +e('span').slash / 
-            +e('span').minutes#js-clock-minutes 45
-            //- i minutes
+            +e('span').minutes {{ cl_minutes }}
             +e('span').minutes :
-            +e('span').minutes#js-clock-seconds 07
-            //- i seconds
+            +e('span').minutes {{ cl_seconds }}
 
             +icon('pen-solid').--clock-edit
-
-            <timer :time="prettyTime"></timer>
 
         +e.description
             +e('h2').pre-heading(:class='vuePreHeadingClass', v-if="!stateEditPreHeading", @click='editPreHeading', v-cloak) {{ preHeadingMessage }}
