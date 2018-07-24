@@ -21,7 +21,7 @@ block content
     include section/ui-kit/button.pug
     include section/ui-kit/icon.pug
 
-    +b.landing#landing-app(:class='vueAppClass')
+    +b.landing#landing-app(:class='vueAppClass', v-bind:style="styleApp")
         +e('img').background(src='images/content/flower.jpg', alt='', title='', :class='vueBackClass')
 
         +b('svg').svg-grid
@@ -139,6 +139,7 @@ block content
 
         +e.description
             +e('h2').pre-heading(:class='vuePreHeadingClass', v-if="!stateEditPreHeading", @click='editPreHeading', v-cloak) {{ preHeadingMessage }}
+                +icon('pen-solid').--heading-edit
             +e('input').pre-heading(id='', type='', placeholder='Ваш подзаголовок', name='', value='', autofocus='autofocus', v-else, v-model="preHeadingMessage", @blur='compleateEditPreHeading', v-cloak)
             
             //- Заголовок
@@ -148,6 +149,7 @@ block content
 
             //- Описание
             +e('p').description-text(:class='vueDescriptionTextClass', v-if='!stateEditDescriptionText', @click='editDescriptionText', v-cloak) {{ descriptionTextMessage }}
+                +icon('pen-solid').--heading-edit
             +e('input').description-text(id='', type='', placeholder='Ваше описание', name='', value='', autofocus='autofocus', v-else, v-model="descriptionTextMessage", @blur='compleateEditDescriptionText', v-cloak)
             
             +button('Добавить в календарь', true).--flower(:class='vueButtonClass')
@@ -155,3 +157,9 @@ block content
         +e.share(:class='vueShareClass')
             +icon--link('fb').--share
             +icon--link('insta').--share
+
+        +e('a').color-pick(href='javascript:void(0)', title='', @click='colorPick')
+            +icon('paint')
+
+        +e('a').wallpaper-pick(href='javascript:void(0)', title='')
+            +icon('image')

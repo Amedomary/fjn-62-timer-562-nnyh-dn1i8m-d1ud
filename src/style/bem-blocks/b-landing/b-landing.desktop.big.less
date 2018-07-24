@@ -4,12 +4,45 @@
     transition: opacity .5s;
 }
 
+.icon-edit-hover(@mixin-top) {
+    &.editable {
+        cursor: pointer;
+        position: relative;
+        transition: color .2s;
+
+        .b-icon--heading-edit {
+            display: block;
+            opacity: 0;
+            transition: opacity .2s;
+            top: @mixin-top;
+        }
+
+        .no-touchevents &:hover,
+        .touchevents &:active {
+            color: var(--accent-light);
+            opacity: .7;
+            
+            .b-icon--heading-edit {
+                opacity: .6;
+                color: #fff;
+            }
+        }
+    }
+}
+
 .b-landing {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
     background-color: #070707;
+
+    --theme-color: 200;
+    --accent: ~'hsl(var(--theme-color), 60%, 40%)';
+    --accent-light: ~'hsl(var(--theme-color), 71%, 57%)';
+    --accent-back: ~'hsla(var(--theme-color), 53%, 29%, .2)';
+    --accent-hover: ~'hsla(var(--theme-color), 53%, 29%, .4)';
+
 
     // &.modification {
     //     opacity: 0;
@@ -23,14 +56,15 @@
         object-fit: cover;
         .transitionModOpacity();
 
-        animation-name: back-filter, back-transform;
-        animation-duration: 54s, 72s;
+        animation-name: back-transform;
+        animation-duration: 72s;
         animation-direction: normal;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
 
         &.fade {
             opacity: .1;
+            animation-play-state: paused;
         }
     }
 
@@ -74,6 +108,8 @@
         border: none;
         padding: 0 0 0 3px;
         outline: none;
+
+        .icon-edit-hover(-22px);
     }
 
     &__heading {
@@ -86,30 +122,7 @@
         padding: 0;
         outline: none;
 
-        &.editable {
-            cursor: pointer;
-            position: relative;
-            transition: opacity .2s;
-
-            .b-icon--heading-edit {
-                display: block;
-                opacity: 0;
-                transition: opacity .2s;
-            }
-
-            .no-touchevents &:hover,
-            .touchevents &:active {
-                // color: #d5b7bd;
-                opacity: .85;
-                
-                .b-icon--heading-edit {
-                    opacity: .6;
-                    color: #fff;
-                }
-            }
-
-        }
-
+        .icon-edit-hover(-7px);
     }
 
     &__description-text {
@@ -124,11 +137,7 @@
         padding: 0 0 0 3px;
         outline: none;
 
-        &.editable {
-            cursor: pointer;
-            position: relative;
-            transition: opacity .2s;
-        }
+        .icon-edit-hover(-27px)
     }
 
     &__circle {
@@ -178,7 +187,7 @@
         .st4,
         .st5 {
             fill:none;
-            stroke: #bc2e4b;
+            stroke: var(--accent);
             stroke-width: 1px;
             transform-origin: center;
             animation-name: rotate-2;
@@ -238,7 +247,7 @@
                 }
 
                 &:after {
-                    background-color: #bc2e4b;
+                    background-color: var(--accent);
                     left: 15px;
                     right: -7px;
                     height: 2px;
@@ -307,6 +316,50 @@
             pointer-events: none;
         }
     }
+
+    &__color-pick {
+        display: block;
+        position: absolute;
+        left: 60%;
+        top: 20%;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 75%;
+        background-color: var(--accent);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .5s, color .25s;
+
+        .modification & {
+            pointer-events: all;
+            opacity: 1;
+        }
+    }
+
+    &__wallpaper-pick {
+        display: block;
+        position: absolute;
+        left: 80%;
+        top: 20%;
+        width: 40px;
+        height: 40px;
+        border-radius: 75%;
+        line-height: 40px;
+        text-align: center;
+        background-color: var(--accent);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .5s, color .25s;
+
+        .modification & {
+            pointer-events: all;
+            opacity: 1;
+        }
+    }
 }
 
 .b-svg-grid {
@@ -324,7 +377,7 @@
         fill: #fff;
 
         &--flower {
-            fill: #bc2e4b;
+            fill: var(--accent);
         }
     }
 }
@@ -371,38 +424,14 @@
     }
 }
 
-@keyframes back-filter {
-    from {
-        filter: blur(0) grayscale(0) brightness(1);
-    }
-    10% {
-        filter: blur(0) grayscale(0) brightness(1);
-    }
-    50% {
-        filter: blur(1px) grayscale(.2) brightness(.9);
-    }
-    60% {
-        filter: blur(6px) grayscale(.4) brightness(0.8);
-    }
-    70% {
-        filter: blur(5px) grayscale(.3) brightness(.5);
-    }
-    to {
-        filter: blur(0) grayscale(0) brightness(1);
-    }
-}
-
 @keyframes back-transform {
     from {
-        transform: scale(1) rotate();
+        transform: scale(1);
     }
-    30% {
-        transform: scale(1.3) rotate(5deg);
-    }
-    70% {
-        transform: scale(1.6) rotate(2deg);
+    50% {
+        transform: scale(1.4);
     }
     to {
-        transform: scale(1) rotate();
+        transform: scale(1);
     }
 }

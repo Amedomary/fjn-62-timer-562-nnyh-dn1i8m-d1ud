@@ -12,15 +12,10 @@
 @tablet: ~"(max-width: 1023px)";
 @mobile: ~"(max-width: 767px)";
 
-// css vars
-:root {
-    --cl-orange: #ffedb9;
-}
-
 // Colors
 @cl-theme-global: @cl-font-main;
 @cl-theme-link: @cl-font-main;
-@cl-theme-link-hover: @cl-font-orange;
+@cl-theme-link-hover: var(--accent-light);
 @cl-theme-grey: @cl-gray;
 
 // Добавлять cl-название

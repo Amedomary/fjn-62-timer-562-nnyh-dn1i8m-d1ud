@@ -21,6 +21,9 @@
             vueHeadingClass: '',
             vueDescriptionTextClass: '',
 
+            // Стили
+            styleApp: '',
+
             // Consts
             CONTENTFROMSERVER: {
                 preHeading: 'Жди вместе с друзьями',
@@ -58,6 +61,10 @@
             cl_minutes: '45',
             cl_seconds: '07',
             // ! ======================
+
+            // Выбор цвета =======
+            color_i: 0,
+            // ! Выбор цвета =====
         },
         methods: {
             // Включаем тему редоктирования 
@@ -251,8 +258,15 @@
                 this.cl_hours = h;
                 this.cl_minutes = m;
                 this.cl_seconds = s;
-            }
+            },
             // ! Clock ==============
+
+            // Выбор цвета ==============
+            colorPick: function () {
+                this.styleApp = { '--theme-color': this.color_i };
+                this.color_i = this.color_i + 15;
+            }
+            // ! Выбор цвета ==============
 
 
         },
