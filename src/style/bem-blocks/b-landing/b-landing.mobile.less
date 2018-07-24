@@ -1,11 +1,51 @@
 /* 320 + */
 .b-landing {
+    &__header {
+        padding: 50px 50px 5px;
+    }
+
+    &__link-create {
+        font-size: 10px;
+    }
+
     &__circle {
         width: 63%;
     }
 
     &__description {
-        display: none;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+
+        background-color: rgba(0, 0, 0, .85);
+        padding: 20px;
+    }
+
+    &__pre-heading {
+        text-align: center;
+        font-size: 9px;
+        margin: 0 0 8px;
+    }
+    &__heading {
+        text-align: center;
+        font-size: 16px;
+        margin: 0 0 12px;
+    }
+    &__description-text {
+        text-align: justify;
+        font-size: 9px;
+        margin: 0 0 10px;
+    }
+    & .b-button--flower {
+        font-size: 13px;
+        padding: 12px 15px;
+        width: auto;
+        display: block;
+        position: static;
+    }
+
+    &__clock {
+        left: 40px;
     }
 
     &__month {
@@ -17,7 +57,7 @@
     }
 
     &__day {
-        font-size: 45px;
+        font-size: 60px;
         margin-right: 25px;
 
         .title {
@@ -26,13 +66,13 @@
         }
     }
     &__hour {
-        font-size: 35px;
+        font-size: 45px;
     }
     &__slash {
-        font-size: 18px;
+        font-size: 24px;
     }
     &__minutes {
-        font-size: 16px;
+        font-size: 23px;
     }
 
     &__share {
@@ -41,6 +81,21 @@
         left: auto;
         right: 40px;
         transform: none;
+
+        & .b-icon--share {
+            padding: 10px;
+            line-height: 20px;
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    &__wallpaper-pick {
+        display: none;
+    }
+
+    &__color-pick {
+        left: 80%;
     }
 }
 
