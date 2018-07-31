@@ -8,13 +8,13 @@
         line-height: 20px;
         display: inline-block;
         vertical-align: top;
-        color: #fff;
+        // color: #fff;
         opacity: .8;
-        transition: opacity .2s;
+        transition: opacity .2s, color .2s;
 
         .no-touchevents &:hover,
         .touchevents &:active {
-            color: #fff;
+            // color: #fff;
             opacity: 1;
         }
     }
@@ -38,5 +38,9 @@
         font-size: 18px;
         left: -50px;
         padding: 20px 30px 10px 10px;
+    }
+
+    &--vk {
+        font-size: 71%;
     }
 }

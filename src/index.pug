@@ -10,8 +10,12 @@ block variables
 
 //- Модифицируем head
 block head
-    - var pageTitle = 'Запусти свой таймер';
-    //- Событие которое я ожидаю
+    - var pageTitle = 'День, когда ничего не поменяется';
+    - var pageDescription = 'День, когда ничего не поменяется';
+    <meta property="og:title" content="День, когда ничего не поменяется">
+    <meta property="og:description" content="Но это не точно">
+    <meta property="og:url" content="https://amedomary-san.github.io/">
+    <meta property="og:image" content="images/inhtml/og-image.jpg">
 
 //- Выводим попапы
 block popup
@@ -155,11 +159,13 @@ block content
             +button('Добавить в календарь', true).--flower(:class='vueButtonClass')
 
         +e.share(:class='vueShareClass')
+            +icon--link('vk').--share.--vk
             +icon--link('fb').--share
-            +icon--link('insta').--share
 
         +e('a').color-pick(href='javascript:void(0)', title='', @click='colorPick')
             +icon('paint')
+            +e('span').legend Сменить цвет
 
         +e('a').wallpaper-pick(href='javascript:void(0)', title='')
             +icon('image')
+            +e('span').legend Выбрать фон
