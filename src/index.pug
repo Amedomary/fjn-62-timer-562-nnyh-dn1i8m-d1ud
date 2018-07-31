@@ -10,7 +10,7 @@ block variables
 
 //- Модифицируем head
 block head
-    - var pageTitle = "Ul'Camp 2018";
+    - var pageTitle = 'Запусти свой таймер';
     //- Событие которое я ожидаю
 
 //- Выводим попапы
@@ -158,8 +158,8 @@ block content
             +icon--link('fb').--share
             +icon--link('insta').--share
 
-        +e('a').color-pick(href='javascript:void(0)', title='Сменить цвет', @click='colorPick')
+        +e('a').color-pick(href='javascript:void(0)', title='', @click='colorPick')
             +icon('paint')
 
-        +e('a').wallpaper-pick(href='javascript:void(0)', title='Загрузить фон')
+        +e('a').wallpaper-pick(href='javascript:void(0)', title='')
             +icon('image')

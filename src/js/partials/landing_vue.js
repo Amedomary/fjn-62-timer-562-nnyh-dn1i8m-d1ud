@@ -26,12 +26,9 @@ var appLanding = new Vue({
 
         // Consts
         CONTENTFROMSERVER: {
-            // preHeading: 'Жди вместе с друзьями',
-            // heading: 'Запусти свой таймер',
-            // description: 'На этом сайте ты можешь создать таймер отсчёта до твоего события и поделиться с друзьями :)'
-            preHeading: 'It fest',
-            heading: 'UlCamp',
-            description: 'Ждёте лета? Правильно делаете, есть чего ждать. 27-29 июля состоится главное событие лета для каждого уважающего себя айтишника – самая пляжная IT-конференция ULCAMP-2018. Пропустите – будете жалеть до следующего года, точно говорим.'
+            preHeading: 'Жди вместе с друзьями',
+            heading: 'Запусти свой таймер',
+            description: 'На этом сайте ты можешь создать таймер отсчёта до твоего события и поделиться с друзьями :)'
         },
 
         stateWasModified: false, // было ло ли изменено состояние
@@ -56,7 +53,7 @@ var appLanding = new Vue({
         newPreHeadingMessage: '', // ячейка для нового пред Заголовка
 
         // Таймер =================
-        finishDate: new Date(2018, 6, 27, 20, 00, 00),  // (year, month, date, hours, minutes, seconds, ms)
+        finishDate: new Date(2018, 7, 25, 22, 56, 00),  // (year, month, date, hours, minutes, seconds, ms)
         monthName: '',
 
         interval: "",
@@ -141,7 +138,7 @@ var appLanding = new Vue({
                 let promptImputY = prompt('Введите Год вашего события', '2018');
                 promptImputY = Number(promptImputY);
                 let promptImputM = prompt('Месяц', '06');
-                promptImputM = Number(promptImputM) + 1;
+                promptImputM = Number(promptImputM);
                 let promptImputD = prompt('День', '31');
                 promptImputD = Number(promptImputD);
                 let promptImputH = prompt('Час', '00');

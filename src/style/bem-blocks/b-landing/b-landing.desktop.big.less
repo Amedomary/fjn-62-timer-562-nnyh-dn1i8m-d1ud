@@ -12,7 +12,7 @@
 
         .b-icon--heading-edit {
             display: block;
-            opacity: .2;
+            opacity: 0;
             transition: opacity .2s;
             top: @mixin-top;
         }
@@ -23,7 +23,7 @@
             opacity: .7;
             
             .b-icon--heading-edit {
-                opacity: .8;
+                opacity: .6;
                 color: #fff;
             }
         }
@@ -69,13 +69,6 @@
     // &.modification {
     //     opacity: 0;
     // }
-
-    ::selection {
-        background: var(--accent-light); /* Safari */
-    }
-    ::-moz-selection {
-        background: var(--accent-light); /* Firefox */
-    }
 
     &__background {
         position: absolute;
@@ -195,8 +188,7 @@
         .st0,
         .st1 {
             fill:none;
-            // stroke: #fff;
-            stroke: var(--accent-light);
+            stroke:#fff;
             stroke-width: 1px;
             stroke-dasharray:5,20;
             transform-origin: center;
@@ -207,7 +199,6 @@
             animation-timing-function: linear;
         }
         .st1{
-            stroke: var(--accent-light);
             stroke-width: 2px;
             stroke-miterlimit:10;
             stroke-dasharray:2,8;
@@ -218,7 +209,7 @@
         .st4,
         .st5 {
             fill:none;
-            stroke: var(--accent-light);
+            stroke: var(--accent);
             stroke-width: 1px;
             transform-origin: center;
             animation-name: rotate-2;
@@ -263,7 +254,7 @@
 
             .b-icon--clock-edit {
                 display: block;
-                opacity: .2;
+                opacity: 0;
                 transition: opacity .2s;
             }
 
@@ -274,7 +265,7 @@
             .no-touchevents &:hover,
             .touchevents &:active {
                 .b-icon--clock-edit {
-                    opacity: .8;
+                    opacity: .5;
                 }
 
                 &:after {
