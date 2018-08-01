@@ -17,6 +17,8 @@ block head
     <meta property="og:url" content="https://amedomary-san.github.io/">
     <meta property="og:image" content="images/inhtml/og-image.jpg">
 
+    <script type="text/javascript" src="js/partials/addtocalendar.js" async defer></script>
+
 //- Выводим попапы
 block popup
 
@@ -156,7 +158,16 @@ block content
                 +icon('pen-solid').--heading-edit
             +e('input').description-text(id='', type='', placeholder='Ваше описание', name='', value='', autofocus='autofocus', v-else, v-model="descriptionTextMessage", @blur='compleateEditDescriptionText', v-cloak)
             
-            +button('Добавить в календарь', true).--flower(:class='vueButtonClass')
+            //- +button('Добавить в календарь', true).--flower(:class='vueButtonClass')
+            
+            div(title="Add to Calendar", class="addeventatc b-button b-button--flower", :class='vueButtonClass')
+                span Добавить в календарь
+                <span class="start">08/14/2018 04:00 AM</span>
+                <span class="end">08/14/2018 4:30 AM</span>
+                <span class="timezone">Europe/Moscow</span>
+                <span class="title">День, когда ничего не поменяется</span>
+                <span class="description">Description of the event</span>
+                <span class="location">Location of the event</span>
 
         +e.share(:class='vueShareClass')
             +icon--link('vk').--share.--vk

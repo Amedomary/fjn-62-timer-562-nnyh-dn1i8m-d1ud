@@ -14,6 +14,13 @@
 }
 
 .b-landing {
+    &__background {
+        transition: .3s;
+        &.fade {
+            filter: blur(0);
+            opacity: 0;
+        }
+    }
     &__header {
         padding: 50px 50px 5px;
     }

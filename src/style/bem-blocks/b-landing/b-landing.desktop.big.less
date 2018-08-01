@@ -12,7 +12,7 @@
 
         .b-icon--heading-edit {
             display: block;
-            opacity: .06;
+            opacity: .1;
             transition: opacity .2s;
             top: @mixin-top;
         }
@@ -64,6 +64,8 @@
     --accent-light: ~'hsl(var(--theme-color), 71%, 57%)';
     --accent-back: ~'hsla(var(--theme-color), 53%, 29%, .2)';
     --accent-hover: ~'hsla(var(--theme-color), 53%, 29%, .4)';
+    --accent-dark: ~'hsl(var(--theme-color), 80%, 6%)';
+
 
 
     // &.modification {
@@ -92,8 +94,11 @@
         // animation-timing-function: linear;
 
         &.fade {
-            opacity: .1;
+            // opacity: .1;
             // animation-play-state: paused;
+            opacity: 0.2;
+            filter: blur(10px);
+            transition: 1s;
         }
     }
 
