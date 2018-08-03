@@ -8,7 +8,9 @@ var $app = $('#landing-app');
 var appLanding = new Vue({
     el: '#landing-app',
     data: {
-        createTimerShow: false, //состояние редактирования
+        createTimerShow: false, // состояние редактирования
+        weHaveModificateTimer: false, // состояние с новыми данными
+        weAlreadyHaveChanges: false, // состояние когда хотя бы раз применяли изменения
 
         // Классы
         vueAppClass: '',
@@ -20,13 +22,14 @@ var appLanding = new Vue({
         vuePreHeadingClass: '',
         vueHeadingClass: '',
         vueDescriptionTextClass: '',
+        descriptionPanel: 'hide',
 
         // Стили
         styleApp: '',
 
         // Consts
         CONTENTFROMSERVER: {
-            preHeading: 'в ожидании',
+            preHeading: 'Ульяновск',
             heading: 'День, когда ничего не поменяется',
             description: 'но это не точно'
         },
@@ -84,10 +87,13 @@ var appLanding = new Vue({
                 this.vuePreHeadingClass = 'editable'; // "editable edited"
                 this.vueHeadingClass = 'editable'; // "editable edited"
                 this.vueDescriptionTextClass = 'editable';
+                this.descriptionPanel = '';
 
                 this.lastEditHeadingMessage = this.headingMessage;
                 this.lastEditDescriptionTextMessage = this.descriptionTextMessage;
                 this.lastEditPreHeadingMessage = this.preHeadingMessage;
+
+                this.weHaveModificateTimer = false; // Включаем состояние модифицированного приложения
 
             }
             // Клик по Отмене редактирования
@@ -101,6 +107,7 @@ var appLanding = new Vue({
                 this.vuePreHeadingClass = '';
                 this.vueHeadingClass = '';
                 this.vueDescriptionTextClass = '';
+                this.descriptionPanel = 'hide';
                 // присваеваем переменным значения с сервера
                 // this.preHeadingMessage = this.CONTENTFROMSERVER.preHeading;
                 // this.headingMessage = this.CONTENTFROMSERVER.heading;
@@ -110,6 +117,9 @@ var appLanding = new Vue({
                 this.descriptionTextMessage = this.lastEditDescriptionTextMessage;
 
                 this.stateWasModified = false; //выключаем состояние "в редактировании"
+                if (this.weAlreadyHaveChanges) {
+                    this.weHaveModificateTimer = true; // Включаем состояние модифицированного приложения
+                }
             }
         },
 
@@ -127,7 +137,9 @@ var appLanding = new Vue({
             this.vueHeadingClass = '';
             this.vueDescriptionTextClass = '';
 
-            this.stateWasModified = false; //выключаем состояние "в редактировании"
+            this.stateWasModified = false; // Выключаем состояние "в редактировании"
+            this.weHaveModificateTimer = true; // Включаем состояние модифицированного приложения
+            this.weAlreadyHaveChanges = true;
         },
 
 
@@ -243,6 +255,15 @@ var appLanding = new Vue({
             //     this.compleateEditPreHeading();
             // }
 
+        },
+
+        // Скрываем панельку описания на мобиле
+        hideDescriptionPanel: function () {
+            if (this.descriptionPanel === 'hide') {
+                this.descriptionPanel = '';
+            } else {
+                this.descriptionPanel = 'hide';
+            }
         },
 
         // Clock ================

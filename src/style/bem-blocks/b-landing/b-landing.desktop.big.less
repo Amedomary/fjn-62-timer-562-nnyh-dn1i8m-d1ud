@@ -86,6 +86,7 @@
         height: 100%;
         object-fit: cover;
         .transitionModOpacity();
+        will-change: filter;
 
         // animation-name: back-transform;
         // animation-duration: 72s;
@@ -122,6 +123,24 @@
         display: inline-block;
         vertical-align: top;
         margin-right: 15px;
+
+        &--release {
+            font-family: @font-base;
+            border-radius: 0;
+            border-color: var(--accent);
+            border-width: 1px;
+            border-style: solid;
+            background-color: var(--accent-back);
+            font-size: 15px;
+            padding: 12px 18px;
+            margin-top: -7px;
+            margin-left: 25px;
+
+            animation-name: release-link;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
     }
 
     &__description {
@@ -172,6 +191,10 @@
         outline: none;
 
         .icon-edit-hover(-27px)
+    }
+
+    &__hide-icon {
+        display: none;
     }
 
     &__circle {
@@ -444,5 +467,20 @@
     }
     to {
         transform: scale(1);
+    }
+}
+
+@keyframes release-link {
+    from {
+        color: #fff;
+        border-color: var(--accent);
+    }
+    50% {
+        color: var(--accent-light);
+        border-color: var(--accent-light);
+    }
+    to {
+        color: #fff;
+        border-color: var(--accent);
     }
 }

@@ -115,12 +115,20 @@ block content
             +e('a').link-create(@click="createTimer" href='javascript:void(0)', title='')
                 span(v-if='createTimerShow', v-cloak)
                     span Отмена  
-                span(v-else)
+                span(v-else-if='weHaveModificateTimer', v-cloak)
+                    span Редактировать
+                    //- b свой 
+                span(v-else, v-cloak)
                     span Создать    
                     b свой 
-            +e.link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='').--accept
+
+            +e.link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='')
                 span(v-cloak) ✔ Применить  
                 b(v-cloak) изменения  
+            
+            +e.link-create(@click="", v-if='weHaveModificateTimer', href='javascript:void(0)', title='').--release
+                span(v-cloak) Опубликовать 
+                //- b(v-cloak) таймер
 
         +e('svg')(x="0px" y="0px" viewBox="0 0 705 705", :class='vueCircleClass').circle
             <circle class="st0" cx="352.5" cy="352.5" r="350.5"/>
@@ -143,10 +151,10 @@ block content
 
             +icon('pen-solid').--clock-edit
 
-        +e.description
+        +e.description(:class='descriptionPanel')
             +e('h2').pre-heading(:class='vuePreHeadingClass', v-if="!stateEditPreHeading", @click='editPreHeading', v-cloak) {{ preHeadingMessage }}
                 +icon('pen-solid').--heading-edit
-            +e('input').pre-heading(id='', type='', placeholder='Ваш подзаголовок', name='', value='', autofocus='autofocus', v-else, v-model="preHeadingMessage", @blur='compleateEditPreHeading', v-cloak)
+            +e('input').pre-heading(id='', type='', placeholder='Ваша локация', name='', value='', autofocus='autofocus', v-else, v-model="preHeadingMessage", @blur='compleateEditPreHeading', v-cloak)
             
             //- Заголовок
             +e('h1').heading(:class='vueHeadingClass', v-if="!stateEditHeading", @click='editHeading', v-cloak) {{ headingMessage }}
@@ -158,16 +166,17 @@ block content
                 +icon('pen-solid').--heading-edit
             +e('input').description-text(id='', type='', placeholder='Ваше описание', name='', value='', autofocus='autofocus', v-else, v-model="descriptionTextMessage", @blur='compleateEditDescriptionText', v-cloak)
             
-            //- +button('Добавить в календарь', true).--flower(:class='vueButtonClass')
+            //- иконка сокрытия
+            +e('a').hide-icon(@click='hideDescriptionPanel')
             
             div(title="Add to Calendar", class="addeventatc b-button b-button--flower", :class='vueButtonClass')
                 span Добавить в календарь
-                <span class="start">08/14/2018 04:00 AM</span>
-                <span class="end">08/14/2018 4:30 AM</span>
-                <span class="timezone">Europe/Moscow</span>
-                <span class="title">День, когда ничего не поменяется</span>
-                <span class="description">Description of the event</span>
-                <span class="location">Location of the event</span>
+                span(class="info start") 08/14/2018 03:00 AM
+                span(class="info end") 08/14/2018 3:30 AM
+                span(class="info timezone") Europe/Moscow
+                span(class="info title") {{ headingMessage }}
+                span(class="info description") {{ descriptionTextMessage }}
+                span(class="info location") Location of the event
 
         +e.share(:class='vueShareClass')
             +icon--link('vk').--share.--vk

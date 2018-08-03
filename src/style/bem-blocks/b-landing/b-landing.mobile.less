@@ -1,4 +1,6 @@
 /* 320 + */
+@animationHideDescription: 1s;
+
 .icon-edit-mobile() {
     &.editable {
         .b-icon--heading-edit {
@@ -42,6 +44,15 @@
 
     &__link-create {
         font-size: 10px;
+
+        &--release {
+            display: block;
+            width: 60%;
+            text-align: center;
+            margin: 0;
+            margin-top: 12px;
+            background-color: black;
+        }
     }
 
     &__circle {
@@ -58,24 +69,52 @@
         bottom: 20px;
         background-color: rgba(0, 0, 0, .85);
         padding: 20px;
-        .icon-edit-mobile()
+        .icon-edit-mobile();
+        transition: @animationHideDescription;
+
+        &.hide {
+            transform: ~"translateY(calc(100% + 30px))";
+
+            .b-landing__heading {
+                transform: translateY(-134px);
+            }
+
+            .b-landing__hide-icon {
+                transform: translate(11px, -37px);
+
+                &:before,
+                &:after {
+                    transform: translateX(-5px) rotate(-45deg);
+                }
+                &:after {
+                    transform: translateX(5px) rotate(45deg);
+
+                }
+            }
+        }
     }
 
     &__pre-heading {
         text-align: center;
-        font-size: 10px;
+        font-size: 14px;
         margin: 0 0 8px;
-        .icon-edit-mobile()
+        .icon-edit-mobile();
     }
     &__heading {
         text-align: center;
-        font-size: 16px;
+        font-size: 22px;
         margin: 0 0 12px;
-        .icon-edit-mobile()
+        .icon-edit-mobile();
+        transition: @animationHideDescription;
+
+        &.editable {
+            transition: @animationHideDescription;
+        }
+
     }
     &__description-text {
         text-align: justify;
-        font-size: 10px;
+        font-size: 14px;
         margin: 0 0 10px;
         display: -webkit-box;
         -webkit-line-clamp: 3;
@@ -89,6 +128,34 @@
         width: auto;
         display: block;
         position: static;
+    }
+    &__hide-icon {
+        display: block;
+        position: absolute;
+        top: -17px;
+        right: -5px;
+        width: 40px;
+        height: 40px;
+        z-index: 240;
+        background-color: var(--accent-hover);
+        transition: @animationHideDescription;
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 15px;
+            background-color: #fff;
+            left: 32%;
+            transform: translateX(5px) rotate(-45deg);
+            top: 45%;
+            transition: @animationHideDescription;
+        }
+        &:after {
+            transform: translateX(-5px) rotate(45deg);
+
+        }
     }
 
     &__clock {
