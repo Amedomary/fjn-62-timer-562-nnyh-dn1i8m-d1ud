@@ -66,12 +66,6 @@
     --accent-hover: ~'hsla(var(--theme-color), 53%, 29%, .4)';
     --accent-dark: ~'hsl(var(--theme-color), 80%, 6%)';
 
-
-
-    // &.modification {
-    //     opacity: 0;
-    // }
-
     ::selection {
         background: var(--accent-light); /* Safari */
     }
@@ -269,6 +263,7 @@
         }
     }
 
+    // Часы ====================
     &__clock {
         position: absolute;
         bottom: 50%;
@@ -315,7 +310,6 @@
 
         }
     }
-
     &__month {
         display: block;
         font-size: 25px;
@@ -323,7 +317,6 @@
         opacity: .6;
         padding-left: 10px;
     }
-
     &__day {
         position: relative;
         display: inline-block;
@@ -354,11 +347,60 @@
     }
     &__minutes {
         display: inline-block;
-        font-size: 32px;
+        font-size: 40px;
         vertical-align: middle;
-        opacity: .6;
+        opacity: .75;
         margin-right: 5px;
     }
+    &__clock-form-back {
+        cursor: default;
+        position: absolute;
+        z-index: 560;
+        top: 59px;
+        left: 41px;
+        width: 350px;
+        background-color: var(--accent-back);
+        padding: 12px;
+    }
+    &__clock-form {
+        padding: 24px;
+        background-color: var(--accent-dark);
+    }
+    &__clock-label {
+        font-size: 14px;
+        color: var(--accent);
+    }
+    &__clock-input {
+        font-family: @font-sans;
+        text-transform: uppercase;
+        font-size: 25px;
+        border: none;
+        border-bottom: 1px solid var(--accent);
+        padding: 0 0 5px 0;
+        margin-bottom: 15px;
+        background-color: transparent;
+    }
+    &__clock-form-link-wrap {
+        text-align: right;
+        margin-top: 35px;
+    }
+    &__clock-form-link {
+        margin-left: 15px;
+        font-family: @font-sans;
+        text-transform: uppercase;
+        opacity: .6;
+
+        &--done {
+            opacity: 1;
+        }
+    }
+    &__clock-title {
+        margin: 0 0 25px 0;
+        font-size: 12px;
+        font-family: @font-sans;
+        text-transform: uppercase;
+    }
+    // !Часы ====================
 
     &__share {
         position: absolute;
@@ -393,6 +435,20 @@
         font-size: 14px;
         opacity: .8;
         white-space: nowrap;
+    }
+
+    &__clock-legend {
+        position: absolute;
+        bottom: -25px;
+        left: 40px;
+        color: var(--accent-light);
+        opacity: 0;
+        transition: opacity .2s, transform .5s;
+
+        .b-landing__clock.editable:not(.editing):hover & {
+            opacity: 1;
+            transform: translateX(-25px);
+        }
     }
 }
 

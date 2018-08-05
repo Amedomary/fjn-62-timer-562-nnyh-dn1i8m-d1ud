@@ -19,6 +19,8 @@ block head
 
     <script type="text/javascript" src="js/partials/addtocalendar.js" async defer></script>
 
+    //- <meta property="og:description" content="Add events.com, timer online, create your event">
+
 //- Выводим попапы
 block popup
 
@@ -143,27 +145,25 @@ block content
                 span {{ cl_days }}
                 i.title {{ cl_days_title }} 
             +e('span').hour {{ cl_hours }}
-            +e('span').slash / 
+            +e('span').slash :  
             +e('span').minutes {{ cl_minutes }}
             +e('span').minutes :
             +e('span').minutes {{ cl_seconds }}
 
             +icon('pen-solid').--clock-edit
-            //- TODO: +e('span').legend Изменить дату
+            +e('span').clock-legend Изменить дату
 
-        +e('form').clock-form(v-if='stateEditClock')
-            +e('label').clock-label(for='') Год
-            +e('input').clock-input(id='', name='', type="text", value='', placeholder='')
-            +e('label').clock-label(for='') Месяц
-            +e('input').clock-input(id='', name='', type="text", value='', placeholder='')
-            +e('label').clock-label(for='') День
-            +e('input').clock-input(id='', name='', type="text", value='', placeholder='')
-            +e('label').clock-label(for='') Час
-            +e('input').clock-input(id='', name='', type="text", value='', placeholder='')
-            +e('label').clock-label(for='') Минута
-            +e('input').clock-input(id='', name='', type="text", value='', placeholder='')
-            a(href="") Выбрать в календаре
-            a(href="") Готово
+            +e.clock-form-back(v-if='stateEditClock')
+                +e('form').clock-form
+                    +e('p').clock-title Когда мне остоновить отсчёт?
+                    +e('label').clock-label(for='clock_input_date') Дата:
+                    +e('input').clock-input(ref='elClockInputDate', id='clock_input_date', type='date', tabindex='43')
+                    +e('label').clock-label(for='clock_input_time') Время:
+                    +e('input').clock-input(ref='elClockInputTime', id='clock_input_time', type='time', tabindex='44')
+
+                    +e.clock-form-link-wrap
+                        +e('a').clock-form-link(href='javascript:void(0)', title='', @click='cancelEditClock') Отмена
+                        +e('a').clock-form-link--done(href='javascript:void(0)', title='', @click='acceptEditClock') Готово
 
         +e.description(:class='descriptionPanel')
             //- TODO: +e('span').legend Изменить описание

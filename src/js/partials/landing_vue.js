@@ -65,11 +65,9 @@ var appLanding = new Vue({
         cl_minutes: '45',
         cl_seconds: '07',
         cl_days_title: 'days',
-        // ! ======================
 
         // Выбор цвета =======
         color_i: 0,
-        // ! Выбор цвета =====
     },
     methods: {
         // Включаем тему редоктирования 
@@ -115,6 +113,8 @@ var appLanding = new Vue({
                 this.headingMessage = this.lastEditHeadingMessage;
                 this.descriptionTextMessage = this.lastEditDescriptionTextMessage;
 
+                this.stateEditClock = false; // off состояние редактирования даты
+
                 this.stateWasModified = false; //выключаем состояние "в редактировании"
                 if (this.weAlreadyHaveChanges) {
                     this.weHaveModificateTimer = true; // Включаем состояние модифицированного приложения
@@ -145,23 +145,37 @@ var appLanding = new Vue({
         // Изменяем часы (ставим новую дату)
         editClock: function () {
             if (this.createTimerShow) {
-                this.stateEditClock = true; // включаем состояние редактирования
-                
-                let clockDateImputYear = 2018;
-                let clockDateImputMouth = 08;
-                let clockDateImputDay = 25;
-                let clockDateImputHour = 12;
-                let clockDateImputMinutes = 30;
-
-                // clockDateImputYear = Number(clockDateImputYear);
-                // clockDateImputDay = Number(clockDateImputDay);
-                // clockDateImputHour = Number(clockDateImputHour);
-                // clockDateImputMouth = Number(clockDateImputMouth);
-                // clockDateImputMinutes = Number(clockDateImputMinutes);
-                
-                this.finishDate = new Date(clockDateImputYear, clockDateImputMouth + 1, clockDateImputDay, clockDateImputHour, clockDateImputMinutes, 00);
-
+                this.stateEditClock = true; // включаем состояние редактирования даты
                 this.vueClockClass = 'editable editing';
+            }
+        },
+        cancelEditClock: function () {
+            setTimeout(() => { // таймаут для удаления самого себя
+                this.stateEditClock = false; // off состояние редактирования даты
+                this.vueClockClass = 'editable';
+            }, 100);
+        },
+        acceptEditClock: function () {
+            let $clockInputDate = this.$refs.elClockInputDate;
+            let $clockInputTime = this.$refs.elClockInputTime;
+
+            // Проверка. Ввели-ли мы значения?
+            if ($clockInputDate.value == '' || $clockInputTime.value == '') {
+                // console.log('пустота');
+            } else {
+                let clockDateImputYear = Number($clockInputDate.value.split('-')[0]);
+                let clockDateImputMouth = Number($clockInputDate.value.split('-')[1]) - 1;
+                let clockDateImputDay = Number($clockInputDate.value.split('-')[2]);
+                let clockDateImputHour = Number($clockInputTime.value.split(':')[0]);
+                let clockDateImputMinutes = Number($clockInputTime.value.split(':')[1]);
+        
+                this.finishDate = new Date(clockDateImputYear, clockDateImputMouth, clockDateImputDay, clockDateImputHour, clockDateImputMinutes, 00);
+                this.createNameOfFinishDate();
+                
+                this.stateWasModified = true;
+                this.vueClockClass = 'editable';
+                // таймаут для удаления самого себя
+                setTimeout(() => { this.stateEditClock = false; }, 100); // off состояние редактирования даты
             }
         },
 
@@ -172,7 +186,7 @@ var appLanding = new Vue({
                 this.oldPreHeadingMessage = this.preHeadingMessage; // Запоминаем старое название
                 this.preHeadingMessage = ''; // и меняем текст в форме на пустой
 
-                // ищем вновь созданый инпут и добавляем в него курсор
+                // ищем вновь созданый инпут и добавляем в него курсор, // таймаут ждёт создание элемента
                 setTimeout(() => {
                     this.$refs.elInputPreHeading.focus();
                 }, 100);
@@ -307,24 +321,21 @@ var appLanding = new Vue({
                     this.cl_days_title = 'day';
                 }
             }
-
         },
-        // clockCreateFinishDate
-        // ! Clock ==============
+        createNameOfFinishDate: function () {
+            this.monthName = this.finishDate.toLocaleString('ru-RU', { month: "long", day: 'numeric', hour: 'numeric', minute: 'numeric' });
+        },
 
         // Выбор цвета ==============
         colorPick: function () {
             this.styleApp = { '--theme-color': this.color_i };
             this.color_i = this.color_i + Math.floor(Math.random() * (30 - 4)) + 4; // Добавляем рандомный цвет от 40 - 4
         },
-        // ! Выбор цвета ==============
 
         // Выбор фонового изображения
         wallpaperPick: function () {
             console.log('На данный момент фунция не доступна');
-            
         },
-        // !Выбор фонового изображения
 
         // share
         shareCreateLink: function () {
@@ -403,8 +414,8 @@ var appLanding = new Vue({
 
     // Вызывается сразу после того как экземпляр был смонтирован
     mounted() {
-        // получаем конечную дату
-        this.monthName = this.finishDate.toLocaleString('ru-RU', { month: "long", day: 'numeric', hour: 'numeric', minute: 'numeric' })
+        // получаем конечную дату (Заголовок Даты)
+        this.createNameOfFinishDate();
         // запускаем таймер
         this.intervalInit = this.clockFunc();
         this.interval = setInterval(() => {

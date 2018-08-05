@@ -26,22 +26,6 @@
     &__header {
         padding: 50px 50px 5px;
     }
-    input {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
-        background-color: var(--accent);
-        margin: 0;
-        height: auto;
-        transform: none;
-        z-index: 123123012993921;
-        width: 100%;
-        padding: 50px;
-        font-size: 25px;
-    }
-
     &__link-create {
         font-size: 10px;
 
@@ -91,6 +75,22 @@
 
                 }
             }
+        }
+
+        input {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background-color: var(--accent);
+            margin: 0;
+            height: auto;
+            transform: none;
+            z-index: 123123012993921;
+            width: 100%;
+            padding: 50px;
+            font-size: 25px;
         }
     }
 
@@ -200,6 +200,21 @@
     &__minutes {
         font-size: 23px;
     }
+    &__clock-form-back {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0;
+        // right: 0;
+        width: auto;
+        height: auto;
+        padding: 12px;
+    }
+    &__clock-form {
+        height: 100%;
+        padding: 55px 25px 25px 25px;
+    }
 
     &__share {
         width: auto;
@@ -225,6 +240,10 @@
     }
 
     &__legend {
+        display: none;
+    }
+
+    &__clock-legend {
         display: none;
     }
 }
