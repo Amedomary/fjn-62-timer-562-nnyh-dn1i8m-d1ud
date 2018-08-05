@@ -1,9 +1,6 @@
 // ====================
+// VUE приложение
 // ====================
-
-// define(['jquery', 'vuejs'], function ($, Vue) {
-
-var $app = $('#landing-app');
 
 var appLanding = new Vue({
     el: '#landing-app',
@@ -39,6 +36,7 @@ var appLanding = new Vue({
         stateEditPreHeading: false, // изменяется ли под-Заголовок
         stateEditHeading: false, // изменяется ли Заголовок
         stateEditDescriptionText: false, // изменяется ли Описание
+        stateEditClock: false, // изменяются ли часы
 
         headingMessage: '', // текст заголовка
         lastEditHeadingMessage: '',
@@ -66,6 +64,7 @@ var appLanding = new Vue({
         cl_hours: '12',
         cl_minutes: '45',
         cl_seconds: '07',
+        cl_days_title: 'days',
         // ! ======================
 
         // Выбор цвета =======
@@ -146,19 +145,21 @@ var appLanding = new Vue({
         // Изменяем часы (ставим новую дату)
         editClock: function () {
             if (this.createTimerShow) {
-                // alert('В преАльфа версии эта функция недоступна. Нажмите ок.');
-                let promptImputY = prompt('Введите Год вашего события', '2018');
-                promptImputY = Number(promptImputY);
-                let promptImputM = prompt('Месяц', '06');
-                promptImputM = Number(promptImputM + 1);
-                let promptImputD = prompt('День', '31');
-                promptImputD = Number(promptImputD);
-                let promptImputH = prompt('Час', '00');
-                promptImputH = Number(promptImputH);
-                let promptImputMin = prompt('Минуту', '00');
-                promptImputMin = Number(promptImputMin);
+                this.stateEditClock = true; // включаем состояние редактирования
+                
+                let clockDateImputYear = 2018;
+                let clockDateImputMouth = 08;
+                let clockDateImputDay = 25;
+                let clockDateImputHour = 12;
+                let clockDateImputMinutes = 30;
 
-                this.finishDate = new Date(promptImputY, promptImputM, promptImputD, promptImputH, promptImputMin, 00);
+                // clockDateImputYear = Number(clockDateImputYear);
+                // clockDateImputDay = Number(clockDateImputDay);
+                // clockDateImputHour = Number(clockDateImputHour);
+                // clockDateImputMouth = Number(clockDateImputMouth);
+                // clockDateImputMinutes = Number(clockDateImputMinutes);
+                
+                this.finishDate = new Date(clockDateImputYear, clockDateImputMouth + 1, clockDateImputDay, clockDateImputHour, clockDateImputMinutes, 00);
 
                 this.vueClockClass = 'editable editing';
             }
@@ -166,13 +167,15 @@ var appLanding = new Vue({
 
         // Начинаем редактировать под-заголовок
         editPreHeading: function () {
-            // alert('В преАльфа версии эта функция недоступна. Нажмите ок.');
-            // TODO: сохранять старые значения надо и возвращать
             if (this.createTimerShow) {
                 this.stateEditPreHeading = true;
                 this.oldPreHeadingMessage = this.preHeadingMessage; // Запоминаем старое название
                 this.preHeadingMessage = ''; // и меняем текст в форме на пустой
-                // this.vueHeadingClass = 'editable';
+
+                // ищем вновь созданый инпут и добавляем в него курсор
+                setTimeout(() => {
+                    this.$refs.elInputPreHeading.focus();
+                }, 100);
             }
         },
         // Сохроняем редактирование
@@ -191,13 +194,15 @@ var appLanding = new Vue({
 
         // Начинаем редактировать заголовок
         editHeading: function () {
-            // alert('В преАльфа версии эта функция недоступна. Нажмите ок.');
-            // TODO: сохранять старые значения надо и возвращать
             if (this.createTimerShow) {
                 this.stateEditHeading = true;
                 this.oldHeadingMessage = this.headingMessage; // Запоминаем старое название
                 this.headingMessage = ''; // и меняем текст в форме на пустой
-                // this.vueHeadingClass = 'editable';
+
+                // ищем вновь созданый инпут и добавляем в него курсор
+                setTimeout(() => {
+                    this.$refs.elInputHeading.focus();
+                }, 100);
             }
         },
         // Сохроняем редактирование
@@ -216,13 +221,15 @@ var appLanding = new Vue({
 
         // Начинаем редактировать DescriptionText
         editDescriptionText: function () {
-            // alert('В преАльфа версии эта функция недоступна. Нажмите ок.');
-            // TODO: сохранять старые значения надо и возвращать
             if (this.createTimerShow) {
                 this.stateEditDescriptionText = true;
                 this.oldDescriptionTextMessage = this.descriptionTextMessage; // Запоминаем старое название
                 this.descriptionTextMessage = ''; // и меняем текст в форме на пустой
-                // this.vueDescriptionTextClass = 'editable';
+
+                // ищем вновь созданый инпут и добавляем в него курсор
+                setTimeout(() => {
+                    this.$refs.elInputDescriptionText.focus();
+                }, 100);
             }
         },
         // Сохроняем редактирование DescriptionText
@@ -279,6 +286,7 @@ var appLanding = new Vue({
                 this.cl_hours = '00';
                 this.cl_minutes = '00';
                 this.cl_seconds = '00';
+                this.cl_days_title = 'day';
             } else {
                 var seconds = Math.floor((result / 1000) % 60);
                 var minutes = Math.floor((result / 1000 / 60) % 60);
@@ -294,6 +302,10 @@ var appLanding = new Vue({
                 this.cl_hours = hours;
                 this.cl_minutes = minutes;
                 this.cl_seconds = seconds;
+
+                if (this.cl_days <= 1) {
+                    this.cl_days_title = 'day';
+                }
             }
 
         },
@@ -303,9 +315,16 @@ var appLanding = new Vue({
         // Выбор цвета ==============
         colorPick: function () {
             this.styleApp = { '--theme-color': this.color_i };
-            this.color_i = this.color_i + 15;
+            this.color_i = this.color_i + Math.floor(Math.random() * (30 - 4)) + 4; // Добавляем рандомный цвет от 40 - 4
         },
         // ! Выбор цвета ==============
+
+        // Выбор фонового изображения
+        wallpaperPick: function () {
+            console.log('На данный момент фунция не доступна');
+            
+        },
+        // !Выбор фонового изображения
 
         // share
         shareCreateLink: function () {
@@ -372,7 +391,7 @@ var appLanding = new Vue({
 
                         for (j = 0; j < s.length; j++) {
                             var qq = ['b-icon b-icon--share b-icon--vk icon-vk', 'b-icon b-icon--share icon-fb']
-                        l += '<a class="' + qq[j] + '" rel="nofollow" style="display:inline-block;" href=' + s[j] + ' target="_blank"></a>';
+                            l += '<a class="' + qq[j] + '" rel="nofollow" style="display:inline-block;" href=' + s[j] + ' target="_blank"></a>';
                         }
 
                         e[k].innerHTML = l;
@@ -410,113 +429,3 @@ var appLanding = new Vue({
     // created() {
     // }
 })
-
-// });
-
-/*
-* Created by Negar Jamalifard at Yasna Team
-* On 2018-03-11
-* Codepen: https://codepen.io/negarjf
-* Github: https://github.com/negarjf
-* Email: n.jamalifatd@gmail.com
-* 
-*/
-
-// Vue.component('Timer', {
-//     template: `
-//   	<div>
-//       <div v-show ="statusType !== 'expired'">
-//         <div class="day">
-//           <span class="number">{{ days }}</span>
-//           <div class="format">{{ wordString.day }}</div>
-//         </div>
-//         <div class="hour">
-//           <span class="number">{{ hours }}</span>
-//           <div class="format">{{ wordString.hours }}</div>
-//         </div>
-//         <div class="min">
-//           <span class="number">{{ minutes }}</span>
-//           <div class="format">{{ wordString.minutes }}</div>
-//         </div>
-//         <div class="sec">
-//           <span class="number">{{ seconds }}</span>
-//           <div class="format">{{ wordString.seconds }}</div>
-//         </div>
-//       </div>
-//       <div class="message">{{ message }}</div>
-//       <div class="status-tag" :class="statusType">{{ statusText }}</div>
-//     </div>
-//   `,
-//     props: ['starttime', 'endtime', 'trans'],
-//     data: function () {
-//         return {
-//             timer: "",
-//             wordString: {},
-//             start: "",
-//             end: "",
-//             interval: "",
-//             days: "",
-//             minutes: "",
-//             hours: "",
-//             seconds: "",
-//             message: "",
-//             statusType: "",
-//             statusText: "",
-
-//         };
-//     },
-//     created: function () {
-//         this.wordString = JSON.parse(this.trans);
-//     },
-//     mounted() {
-//         this.start = new Date(this.starttime).getTime();
-//         this.end = new Date(this.endtime).getTime();
-//         // Update the count down every 1 second
-//         this.timerCount(this.start, this.end);
-//         this.interval = setInterval(() => {
-//             this.timerCount(this.start, this.end);
-//         }, 1000);
-//     },
-//     methods: {
-//         timerCount: function (start, end) {
-//             // Get todays date and time
-//             var now = new Date().getTime();
-
-//             // Find the distance between now an the count down date
-//             var distance = start - now;
-//             var passTime = end - now;
-
-//             if (distance < 0 && passTime < 0) {
-//                 this.message = this.wordString.expired;
-//                 this.statusType = "expired";
-//                 this.statusText = this.wordString.status.expired;
-//                 clearInterval(this.interval);
-//                 return;
-
-//             } else if (distance < 0 && passTime > 0) {
-//                 this.calcTime(passTime);
-//                 this.message = this.wordString.running;
-//                 this.statusType = "running";
-//                 this.statusText = this.wordString.status.running;
-
-//             } else if (distance > 0 && passTime > 0) {
-//                 this.calcTime(distance);
-//                 this.message = this.wordString.upcoming;
-//                 this.statusType = "upcoming";
-//                 this.statusText = this.wordString.status.upcoming;
-//             }
-//         },
-//         calcTime: function (dist) {
-//             // Time calculations for days, hours, minutes and seconds
-//             this.days = Math.floor(dist / (1000 * 60 * 60 * 24));
-//             this.hours = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//             this.minutes = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-//             this.seconds = Math.floor((dist % (1000 * 60)) / 1000);
-//         }
-
-//     }
-// });
-
-// new Vue({
-//     el: "#timer",
-// });
