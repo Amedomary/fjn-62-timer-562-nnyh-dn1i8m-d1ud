@@ -31,12 +31,17 @@ var appLanding = new Vue({
             description: 'но это не точно'
         },
 
+        // Фото
+        imageSrcBackground: 'images/content/flower.jpg',
+
         stateWasModified: false, // было ло ли изменено состояние
 
         stateEditPreHeading: false, // изменяется ли под-Заголовок
         stateEditHeading: false, // изменяется ли Заголовок
         stateEditDescriptionText: false, // изменяется ли Описание
         stateEditClock: false, // изменяются ли часы
+
+        wallpaperSideBarOpen: false, // Открыт ли сайд бар для фона
 
         headingMessage: '', // текст заголовка
         lastEditHeadingMessage: '',
@@ -53,6 +58,7 @@ var appLanding = new Vue({
         oldPreHeadingMessage: '', // ячейка для сохранения предыдущего пред Заголовка
         newPreHeadingMessage: '', // ячейка для нового пред Заголовка
 
+
         // Таймер =================
         finishDate: new Date(2018, 7, 14, 4, 00, 00),  // (year, month, date, hours, minutes, seconds, ms)
         monthName: '',
@@ -65,6 +71,9 @@ var appLanding = new Vue({
         cl_minutes: '45',
         cl_seconds: '07',
         cl_days_title: 'days',
+
+        clockDateInputError: false,
+        clockTimeInputError: false,
 
         // Выбор цвета =======
         color_i: 0,
@@ -114,7 +123,7 @@ var appLanding = new Vue({
                 this.descriptionTextMessage = this.lastEditDescriptionTextMessage;
 
                 this.stateEditClock = false; // off состояние редактирования даты
-
+                this.wallpaperSideBarOpen = false;
                 this.stateWasModified = false; //выключаем состояние "в редактировании"
                 if (this.weAlreadyHaveChanges) {
                     this.weHaveModificateTimer = true; // Включаем состояние модифицированного приложения
@@ -139,6 +148,8 @@ var appLanding = new Vue({
             this.stateWasModified = false; // Выключаем состояние "в редактировании"
             this.weHaveModificateTimer = true; // Включаем состояние модифицированного приложения
             this.weAlreadyHaveChanges = true;
+
+            this.wallpaperSideBarOpen = false;
         },
 
 
@@ -153,6 +164,8 @@ var appLanding = new Vue({
             setTimeout(() => { // таймаут для удаления самого себя
                 this.stateEditClock = false; // off состояние редактирования даты
                 this.vueClockClass = 'editable';
+                this.clockDateInputError = false;
+                this.clockTimeInputError = false;
             }, 100);
         },
         acceptEditClock: function () {
@@ -160,9 +173,19 @@ var appLanding = new Vue({
             let $clockInputTime = this.$refs.elClockInputTime;
 
             // Проверка. Ввели-ли мы значения?
-            if ($clockInputDate.value == '' || $clockInputTime.value == '') {
-                // console.log('пустота');
+            if ($clockInputDate.value == '' && $clockInputTime.value == '') {
+                this.clockDateInputError = true;
+                this.clockTimeInputError = true;
+            } else if ($clockInputDate.value == '') {
+                this.clockDateInputError = true;
+                this.clockTimeInputError = false;
+            } else if ($clockInputTime.value == '') {
+                this.clockTimeInputError = true;
+                this.clockDateInputError = false;
             } else {
+                this.clockDateInputError = false;
+                this.clockTimeInputError = false;
+
                 let clockDateImputYear = Number($clockInputDate.value.split('-')[0]);
                 let clockDateImputMouth = Number($clockInputDate.value.split('-')[1]) - 1;
                 let clockDateImputDay = Number($clockInputDate.value.split('-')[2]);
@@ -330,11 +353,30 @@ var appLanding = new Vue({
         colorPick: function () {
             this.styleApp = { '--theme-color': this.color_i };
             this.color_i = this.color_i + Math.floor(Math.random() * (30 - 4)) + 4; // Добавляем рандомный цвет от 40 - 4
+            this.stateWasModified = true;
         },
 
         // Выбор фонового изображения
         wallpaperPick: function () {
-            console.log('На данный момент фунция не доступна');
+            this.wallpaperSideBarOpen = true;
+        },
+        changeImageBackground: function (event) {
+            let $input = event.target;
+            if ($input.files && $input.files[0]) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = function (e) {
+                    vm.imageSrcBackground = e.target.result;
+                }
+                reader.readAsDataURL($input.files[0]);
+            }
+        },
+        swapImageBackground: function (event) {
+            let srcOfNewBackground = event.target.parentNode.parentNode.getAttribute('data-wallpaper');
+            if (srcOfNewBackground !== '') {
+                this.imageSrcBackground = srcOfNewBackground;
+                this.stateWasModified = true; // Включаем состояние модифицированного приложения
+            }
         },
 
         // share

@@ -73,6 +73,7 @@
         background: var(--accent-light); /* Firefox */
     }
 
+    // Фон и его смена
     &__background {
         position: absolute;
         display: block;
@@ -95,6 +96,65 @@
             filter: blur(10px);
             transition: 1s;
         }
+    }
+    &__wallpaper-side-bar {
+        position: fixed;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        flex-flow: column nowrap;
+        width: 20%;
+        min-width: 325px;
+        background: var(--accent-dark);
+        z-index: 450;
+        padding: 25px 0 0 25px;
+    }
+    &__wallpaper-label {
+        display: block;
+        width: auto;
+        margin-right: 25px;
+        margin-bottom: 25px;
+        flex: 0 0 auto;
+        font-family: @font-base;
+        color: #fff;
+        background: none;
+        border-radius: 0;
+        border: 1px solid var(--accent);
+        background-color: var(--accent-back);
+        font-size: 15px;
+        padding: 16px 22px;
+    }
+    &__wallpaper-input {
+        display: none;
+    }
+    &__wallpaper-list {
+        padding: 0;
+        flex: 1 1 auto;
+        overflow-x: auto;
+        padding: 0 25px 25px 0;
+    }
+    &__wallpaper-item {
+        list-style: none;
+        margin-bottom: 25px;
+        cursor: pointer;
+
+        .no-touchevents &:hover,
+        .touchevents &:active {
+            text-decoration: underline;
+        }
+    }
+    &__walpaper-figure {
+        margin: 0;
+    }
+    &__wallpaper-title {
+        padding-bottom: 10px;
+        font-family: @font-sans;
+    }
+    &__wallpaper-preview {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
     }
 
     &__header {
@@ -366,10 +426,6 @@
         padding: 24px;
         background-color: var(--accent-dark);
     }
-    &__clock-label {
-        font-size: 14px;
-        color: var(--accent);
-    }
     &__clock-input {
         font-family: @font-sans;
         text-transform: uppercase;
@@ -377,7 +433,7 @@
         border: none;
         border-bottom: 1px solid var(--accent);
         padding: 0 0 5px 0;
-        margin-bottom: 15px;
+        margin: 0;
         background-color: transparent;
     }
     &__clock-form-link-wrap {
@@ -399,6 +455,18 @@
         font-size: 12px;
         font-family: @font-sans;
         text-transform: uppercase;
+    }
+    &__clock-label {
+        font-size: 14px;
+        color: var(--accent);
+        margin-top: 25px;
+    }
+    &__clock-error {
+        padding: 5px;
+        font-size: 12px;
+        font-family: @font-sans;
+        text-transform: uppercase;
+        color: @cl-red;
     }
     // !Часы ====================
 

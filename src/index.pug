@@ -30,7 +30,7 @@ block content
     include section/ui-kit/icon.pug
 
     +b.landing#landing-app(:class='vueAppClass', v-bind:style="styleApp", v-cloak)
-        +e('img').background(src='images/content/flower.jpg', alt='', title='', :class='vueBackClass')
+        +e('img').background(src='', alt='', title='', :class='vueBackClass', :src="imageSrcBackground")
 
         +b('svg').svg-grid
             //- фоновая сетка
@@ -124,7 +124,7 @@ block content
                     b свой 
 
             +e.link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='')
-                span ✔ Применить  
+                span Применить  
                 b изменения  
             
             +e.link-create(@click="", v-if='weHaveModificateTimer', href='javascript:void(0)', title='').--release
@@ -155,11 +155,13 @@ block content
 
             +e.clock-form-back(v-if='stateEditClock')
                 +e('form').clock-form
-                    +e('p').clock-title Когда мне остоновить отсчёт?
+                    +e('p').clock-title Когда мне остановить отсчёт?
                     +e('label').clock-label(for='clock_input_date') Дата:
                     +e('input').clock-input(ref='elClockInputDate', id='clock_input_date', type='date', tabindex='43')
+                    +e('label').clock-error(for='clock_input_date' v-if='clockDateInputError') Выберите день
                     +e('label').clock-label(for='clock_input_time') Время:
                     +e('input').clock-input(ref='elClockInputTime', id='clock_input_time', type='time', tabindex='44')
+                    +e('label').clock-error(for='clock_input_time' v-if='clockTimeInputError') Выберите время
 
                     +e.clock-form-link-wrap
                         +e('a').clock-form-link(href='javascript:void(0)', title='', @click='cancelEditClock') Отмена
@@ -193,6 +195,38 @@ block content
                 span(class="info title") {{ headingMessage }}
                 span(class="info description") {{ descriptionTextMessage }}
                 span(class="info location") Location of the event
+
+        +e.wallpaper-side-bar(v-if='wallpaperSideBarOpen')
+            +e('label').wallpaper-label(for="input_File_Background") Добавить своё изображение
+            +e('input').wallpaper-input(id='input_File_Background', type="file", name="background", @change="changeImageBackground")
+            +e('ul').wallpaper-list
+                +e('li').wallpaper-item(data-wallpaper='images/content/11flower.jpg', @click='swapImageBackground')
+                    +e('figure').walpaper-figure
+                        +e('figcaption').wallpaper-title Кровавый цветок
+                        +e('img').wallpaper-preview(src='images/content/11flower.jpg')
+                +e('li').wallpaper-item(data-wallpaper='images/content/flo22wer.jpg', @click='swapImageBackground')
+                    +e('figure').walpaper-figure
+                        +e('figcaption').wallpaper-title Рассвет галактики
+                        +e('img').wallpaper-preview(src='images/content/flo22wer.jpg')
+                +e('li').wallpaper-item(data-wallpaper='images/content/flower.jpg', @click='swapImageBackground')
+                    +e('figure').walpaper-figure
+                        +e('figcaption').wallpaper-title Звёздное дыханье
+                        +e('img').wallpaper-preview(src='images/content/flower.jpg')
+                +e('li').wallpaper-item(data-wallpaper='' ,@click='swapImageBackground')
+                    +e('figure').walpaper-figure
+                        +e('figcaption').wallpaper-title Звёздное небо
+                        +e('img').wallpaper-preview(src='https://im0-tub-ru.yandex.net/i?id=8249949e3beca0321aa026c1b189ab13&n=13')
+                +e('li').wallpaper-item(data-wallpaper='' ,@click='swapImageBackground')
+                    +e('figure').walpaper-figure
+                        +e('figcaption').wallpaper-title Красивая вода
+                        +e('img').wallpaper-preview(src='https://im0-tub-ru.yandex.net/i?id=7dc76ef41500d083ac6a41beffb40cb8&n=13')
+                +e('li').wallpaper-item(data-wallpaper='' ,@click='swapImageBackground')
+                    +e('figure').walpaper-figure
+                        +e('figcaption').wallpaper-title На рубеже
+                        +e('img').wallpaper-preview(src='https://im0-tub-ru.yandex.net/i?id=1756fe86407e197d44ea54d646095ecc&n=13')
+            //- TODO: кнопочка закрытия
+            //- превью для фонов, новые фоны
+            //- плейсхолдеры с автором мб
 
         +e.share(:class='vueShareClass')
             +icon--link('vk').--share.--vk
