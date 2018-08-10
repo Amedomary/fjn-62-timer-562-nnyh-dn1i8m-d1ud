@@ -10,8 +10,16 @@ block variables
 
 //- Модифицируем head
 block head
-    - var pageTitle = "Ul'Camp 2018";
-    //- Событие которое я ожидаю
+    - var pageTitle = 'День, когда ничего не поменяется';
+    - var pageDescription = 'День, когда ничего не поменяется';
+    <meta property="og:title" content="День, когда ничего не поменяется">
+    <meta property="og:description" content="Но это не точно">
+    <meta property="og:url" content="https://amedomary-san.github.io/">
+    <meta property="og:image" content="images/inhtml/og-image.jpg">
+
+    <script type="text/javascript" src="js/partials/addtocalendar.js" async defer></script>
+
+    //- <meta property="og:description" content="Add events.com, timer online, create your event">
 
 //- Выводим попапы
 block popup
@@ -21,7 +29,7 @@ block content
     include section/ui-kit/button.pug
     include section/ui-kit/icon.pug
 
-    +b.landing#landing-app(:class='vueAppClass', v-bind:style="styleApp")
+    +b.landing#landing-app(:class='vueAppClass', v-bind:style="styleApp", v-cloak)
         +e('img').background(src='images/content/flower.jpg', alt='', title='', :class='vueBackClass')
 
         +b('svg').svg-grid
@@ -105,16 +113,23 @@ block content
                 +e('rect').plus(x="calc(80% - 5px)" y="80%" width="11px" height="1px")
 
         +e.header
-
             +e('a').link-create(@click="createTimer" href='javascript:void(0)', title='')
-                span(v-if='createTimerShow', v-cloak)
+                span(v-if='createTimerShow')
                     span Отмена  
+                span(v-else-if='weHaveModificateTimer')
+                    span Редактировать
+                    //- b свой 
                 span(v-else)
                     span Создать    
                     b свой 
-            +e.link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='').--accept
-                span(v-cloak) ✔ Применить  
-                b(v-cloak) изменения  
+
+            +e.link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='')
+                span ✔ Применить  
+                b изменения  
+            
+            +e.link-create(@click="", v-if='weHaveModificateTimer', href='javascript:void(0)', title='').--release
+                span Опубликовать 
+                //- b таймер
 
         +e('svg')(x="0px" y="0px" viewBox="0 0 705 705", :class='vueCircleClass').circle
             <circle class="st0" cx="352.5" cy="352.5" r="350.5"/>
@@ -124,42 +139,69 @@ block content
             <circle class="st4" cx="70" cy="352.5" r="3"/>
             <circle class="st5" cx="70" cy="352.5" r="6"/>
 
-        +e.clock(:class='vueClockClass', @click='editClock', v-cloak)
+        +e.clock(:class='vueClockClass', @click='editClock')
             +e('span').month {{ cl_month }}
             +e('span').day
                 span {{ cl_days }}
-                i.title days 
+                i.title {{ cl_days_title }} 
             +e('span').hour {{ cl_hours }}
-            +e('span').slash / 
+            +e('span').slash :  
             +e('span').minutes {{ cl_minutes }}
             +e('span').minutes :
             +e('span').minutes {{ cl_seconds }}
 
             +icon('pen-solid').--clock-edit
+            +e('span').clock-legend Изменить дату
 
-        +e.description
-            +e('h2').pre-heading(:class='vuePreHeadingClass', v-if="!stateEditPreHeading", @click='editPreHeading', v-cloak) {{ preHeadingMessage }}
+            +e.clock-form-back(v-if='stateEditClock')
+                +e('form').clock-form
+                    +e('p').clock-title Когда мне остоновить отсчёт?
+                    +e('label').clock-label(for='clock_input_date') Дата:
+                    +e('input').clock-input(ref='elClockInputDate', id='clock_input_date', type='date', tabindex='43')
+                    +e('label').clock-label(for='clock_input_time') Время:
+                    +e('input').clock-input(ref='elClockInputTime', id='clock_input_time', type='time', tabindex='44')
+
+                    +e.clock-form-link-wrap
+                        +e('a').clock-form-link(href='javascript:void(0)', title='', @click='cancelEditClock') Отмена
+                        +e('a').clock-form-link--done(href='javascript:void(0)', title='', @click='acceptEditClock') Готово
+
+        +e.description(:class='descriptionPanel')
+            //- TODO: +e('span').legend Изменить описание
+
+            +e('h2').pre-heading(:class='vuePreHeadingClass', v-if="!stateEditPreHeading", @click='editPreHeading') {{ preHeadingMessage }}
                 +icon('pen-solid').--heading-edit
-            +e('input').pre-heading(id='', type='', placeholder='Ваш подзаголовок', name='', value='', autofocus='autofocus', v-else, v-model="preHeadingMessage", @blur='compleateEditPreHeading', v-cloak)
+            +e('input').pre-heading(ref='elInputPreHeading', id='elInputPreHeading', type='text', placeholder='Ваша локация', name='', value='', v-else, v-model="preHeadingMessage", @blur='compleateEditPreHeading')
             
             //- Заголовок
-            +e('h1').heading(:class='vueHeadingClass', v-if="!stateEditHeading", @click='editHeading', v-cloak) {{ headingMessage }}
+            +e('h1').heading(:class='vueHeadingClass', v-if="!stateEditHeading", @click='editHeading') {{ headingMessage }}
                 +icon('pen-solid').--heading-edit
-            +e('input').heading(id='', type='', placeholder='Ваш заголовок', name='', value='', autofocus='autofocus', v-else, v-model="headingMessage", @blur='compleateEditHeading', v-cloak)
+            +e('input').heading(ref='elInputHeading', id='elInputHeading', type='text', placeholder='Ваш заголовок', name='', value='', v-else, v-model="headingMessage", @blur='compleateEditHeading')
 
             //- Описание
-            +e('p').description-text(:class='vueDescriptionTextClass', v-if='!stateEditDescriptionText', @click='editDescriptionText', v-cloak) {{ descriptionTextMessage }}
+            +e('p').description-text(:class='vueDescriptionTextClass', v-if='!stateEditDescriptionText', @click='editDescriptionText') {{ descriptionTextMessage }}
                 +icon('pen-solid').--heading-edit
-            +e('input').description-text(id='', type='', placeholder='Ваше описание', name='', value='', autofocus='autofocus', v-else, v-model="descriptionTextMessage", @blur='compleateEditDescriptionText', v-cloak)
+            +e('input').description-text(ref='elInputDescriptionText', id='elInputDescriptionText', type='text', placeholder='Ваше описание', name='', value='', v-else, v-model="descriptionTextMessage", @blur='compleateEditDescriptionText')
             
-            +button('Добавить в календарь', true).--flower(:class='vueButtonClass')
+            //- иконка сокрытия
+            +e('a').hide-icon(@click='hideDescriptionPanel')
+            
+            div(title="Add to Calendar", class="addeventatc b-button b-button--flower", :class='vueButtonClass')
+                span Добавить в календарь
+                span(class="info start") 08/14/2018 03:00 AM
+                span(class="info end") 08/14/2018 3:30 AM
+                span(class="info timezone") Europe/Moscow
+                span(class="info title") {{ headingMessage }}
+                span(class="info description") {{ descriptionTextMessage }}
+                span(class="info location") Location of the event
 
         +e.share(:class='vueShareClass')
+            +icon--link('vk').--share.--vk
             +icon--link('fb').--share
-            +icon--link('insta').--share
 
-        +e('a').color-pick(href='javascript:void(0)', title='Сменить цвет', @click='colorPick')
+        +e('a').color-pick(href='javascript:void(0)', title='', @click='colorPick')
             +icon('paint')
+            +e('span').legend Сменить цвет
 
-        +e('a').wallpaper-pick(href='javascript:void(0)', title='Загрузить фон')
+        +e('a').wallpaper-pick(href='javascript:void(0)', title='', @click='wallpaperPick')
             +icon('image')
+            +e('span').legend Выбрать фон

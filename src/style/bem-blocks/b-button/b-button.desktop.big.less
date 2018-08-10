@@ -25,7 +25,10 @@
         pointer-events: none;
     }
 
-    &--flower {
+    &--flower.addeventatc {
+        font-family: @font-base;
+        color: #fff!important;
+        background: none;
         position: absolute;
         bottom: 0;
         border-radius: 0;
@@ -34,6 +37,99 @@
         background-color: var(--accent-back);
         font-size: 15px;
         padding: 16px 22px;
+
+        .addeventatc, .copyx, .start, .arrow, .addeventatc .end, .addeventatc .timezone, .addeventatc .title, .addeventatc .description, .addeventatc .location, .addeventatc .organizer, .addeventatc .organizer_email, .addeventatc .facebook_event, .addeventatc .all_day_event, .addeventatc .date_format, .addeventatc .alarm_reminder, .addeventatc .recurring, .addeventatc .attendees, .addeventatc .calname, .addeventatc .uid, .addeventatc .status, .addeventatc .method, .addeventatc .client, .addeventatc .transp, .addeventatc_icon {
+            display:none!important;
+        }
+
+        .info {
+            display: none;
+        }
+
+        &.addeventatc-selected {
+            border-radius: 0;
+            border-color: var(--accent);
+            border-width: 1px;
+        }
+
+        /* The drop down */
+        .addeventatc_dropdown {
+            display: none;
+            width: auto;
+            position: absolute;
+            top: auto!important;
+            bottom: 60px;
+            left: -25px!important;
+            right: -25px!important;
+            z-index: 9999;
+            padding: 0;
+            margin: 0;
+            background: var(--accent-dark);
+            text-align: left;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+        }
+        .addeventatc_dropdown span {
+            font-family: @font-base;
+            display: block;
+            line-height: 100%;
+            text-decoration: none;
+            font-size: 16px;
+            color: #fff;
+            padding: 15px 15px 15px 45px;
+            background-color: transparent;
+        }
+        .addeventatc_dropdown span:hover {
+            background-color: var(--accent-hover);
+        }
+        .addeventatc_dropdown em {
+            color: var(--accent)!important;
+            font-size: 12px!important;
+        }
+        .addeventatc_dropdown .frs:hover {
+            color: #999!important;
+        }
+        .addeventatc_dropdown .copyx {
+            height: 21px;
+            display: block;
+            position: relative;
+            cursor: default;
+        }
+        .addeventatc_dropdown .brx {
+            height: 1px;
+            overflow: hidden;
+            background: none;
+            position: absolute;
+            z-index: 100;
+            left: 10px;
+            right: 10px;
+            top: 9px;
+        }
+        .ateappleical 	{background:url(../images/gfx/icon-apple-t1.svg) 13px 50% no-repeat;background-size:14px auto;}
+        .ategoogle 		{background:url(../images/gfx/icon-google-t1.svg) 13px 50% no-repeat;background-size:16px auto;}
+        .ateoutlook 		{background:url(../images/gfx/icon-outlook-t1.svg) 12px 50% no-repeat;background-size:16px auto;}
+        .ateoutlookcom 	{background:url(../images/gfx/icon-outlook-t1.svg) 12px 50% no-repeat;background-size:16px auto;}
+        .ateyahoo 		{background:url(../images/gfx/icon-yahoo-t1.svg) 12px 50% no-repeat;background-size:16px auto;}
+        .atefacebook 		{background:url(../images/gfx/icon-facebook-t1.svg) 13px 50% no-repeat;background-size:14px auto;}
+
+        
+        .no-touchevents &:hover,
+        .touchevents &:active {
+            background-color: var(--accent-hover);
+            font-size: 15px;
+            border-color: var(--accent);
+        }
+
+        &:active {
+            top: auto;
+        }
+
+        &:focus {
+            border-radius: 0;
+            border-color: var(--accent);
+            border-width: 1px;
+        }
 
         &:after,
         &:before {
@@ -52,11 +148,6 @@
             height: 11px;
             top: -5px;
             right: -1px;
-        }
-
-        .no-touchevents &:hover,
-        .touchevents &:active {
-            background-color: var(--accent-hover);
         }
     }
 }
