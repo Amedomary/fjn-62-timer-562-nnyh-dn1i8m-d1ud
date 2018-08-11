@@ -40,8 +40,6 @@ module.exports = {
     js: {
         srcJquery: 'src/js/bower_components/jquery/dist/*.*',
         destJquery: build + 'js/jquery/',
-        srcHtml5shiv: 'src/js/bower_components/html5shiv/dist/*.*',
-        destHtml5shiv: build + 'js/html5shiv/',
         srcNormalize: 'src/js/bower_components/normalize-css/normalize.css',
         destNormalize: build + 'css/normalize/',
         src: base + 'js/**/*.js',

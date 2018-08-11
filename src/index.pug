@@ -117,15 +117,12 @@ block content
                 span(v-if='createTimerShow')
                     span Отмена  
                 span(v-else-if='weHaveModificateTimer')
-                    span Редактировать
-                    //- b свой 
+                    span Редактировать 
                 span(v-else)
-                    span Создать    
-                    b свой 
+                    span Создать свой 
 
             +e.link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='')
-                span Применить  
-                b изменения  
+                span Применить изменения  
             
             +e.link-create(@click="", v-if='weHaveModificateTimer', href='javascript:void(0)', title='').--release
                 span Опубликовать 

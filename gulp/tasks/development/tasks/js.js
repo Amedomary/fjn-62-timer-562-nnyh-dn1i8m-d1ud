@@ -16,8 +16,6 @@ module.exports = function(options) {
             .pipe(gulp.dest(config.js.destJquery));
 
         // html5shiv for head
-        gulp.src(config.js.srcHtml5shiv)
-            .pipe(gulp.dest(config.js.destHtml5shiv));
 
         // Normalize for head
         // gulp.src(config.js.srcNormalize)
