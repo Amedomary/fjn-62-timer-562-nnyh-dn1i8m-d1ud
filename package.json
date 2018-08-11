@@ -27,7 +27,7 @@
     "bluebird": "^3.1.1",
     "bower": "^1.8.4",
     "bower-requirejs": "^1.2.0",
-    "browser-sync": "^2.24.5",
+    "browser-sync": "^2.24.6",
     "emitty": "^1.4.1",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.3",
