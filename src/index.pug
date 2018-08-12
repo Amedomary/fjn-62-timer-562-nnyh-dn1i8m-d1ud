@@ -10,10 +10,10 @@ block variables
 
 //- Модифицируем head
 block head
-    - var pageTitle = 'День, когда ничего не поменяется';
-    - var pageDescription = 'День, когда ничего не поменяется';
-    <meta property="og:title" content="День, когда ничего не поменяется">
-    <meta property="og:description" content="Но это не точно">
+    - var pageTitle = 'Spider-man';
+    - var pageDescription = 'Spider-man';
+    <meta property="og:title" content="Spider-man">
+    <meta property="og:description" content="Новая игра про Человека-паука от Marvel. Only on playstation.">
     <meta property="og:url" content="https://amedomary-san.github.io/">
     <meta property="og:image" content="images/inhtml/og-image.jpg">
 
@@ -169,18 +169,24 @@ block content
 
             +e('h2').pre-heading(:class='vuePreHeadingClass', v-if="!stateEditPreHeading", @click='editPreHeading') {{ preHeadingMessage }}
                 +icon('pen-solid').--heading-edit
-            +e('input').pre-heading(ref='elInputPreHeading', id='elInputPreHeading', type='text', placeholder='Ваша локация', name='', value='', v-else, v-model="preHeadingMessage", @blur='compleateEditPreHeading')
-            
+            +e('div').description-input-wrapper(v-else)
+                +e('input').pre-heading(ref='elInputPreHeading', id='elInputPreHeading', type='text', placeholder='Ваша локация', name='', v-model="preHeadingMessage", @blur='compleateEditPreHeading')
+                +e('i').accept-edit-description.--pre-heading(:class='vueAcceptEditDescription')
+
             //- Заголовок
             +e('h1').heading(:class='vueHeadingClass', v-if="!stateEditHeading", @click='editHeading') {{ headingMessage }}
                 +icon('pen-solid').--heading-edit
-            +e('input').heading(ref='elInputHeading', id='elInputHeading', type='text', placeholder='Ваш заголовок', name='', value='', v-else, v-model="headingMessage", @blur='compleateEditHeading')
+            +e('div').description-input-wrapper(v-else)
+                +e('input').heading(ref='elInputHeading', id='elInputHeading', type='text', placeholder='Ваш заголовок', name='', v-model="headingMessage", @blur='compleateEditHeading')
+                +e('i').accept-edit-description.--heading(:class='vueAcceptEditDescription')
 
             //- Описание
             +e('p').description-text(:class='vueDescriptionTextClass', v-if='!stateEditDescriptionText', @click='editDescriptionText') {{ descriptionTextMessage }}
                 +icon('pen-solid').--heading-edit
-            +e('input').description-text(ref='elInputDescriptionText', id='elInputDescriptionText', type='text', placeholder='Ваше описание', name='', value='', v-else, v-model="descriptionTextMessage", @blur='compleateEditDescriptionText')
-            
+            +e('div').description-input-wrapper(v-else)
+                +e('input').description-text(ref='elInputDescriptionText', id='elInputDescriptionText', type='text', placeholder='Ваше описание', name='', v-model="descriptionTextMessage", @blur='compleateEditDescriptionText')
+                +e('i').accept-edit-description.--description(:class='vueAcceptEditDescription')
+
             //- иконка сокрытия
             +e('a').hide-icon(@click='hideDescriptionPanel')
             
@@ -194,8 +200,12 @@ block content
                 span(class="info location") Location of the event
 
         +e.wallpaper-side-bar(v-if='wallpaperSideBarOpen')
+            +e('a').wallpaper-close(href='javascript:void(0)', @click='wallpaperPickClose')
+            
             +e('label').wallpaper-label(for="input_File_Background") Добавить своё изображение
             +e('input').wallpaper-input(id='input_File_Background', type="file", name="background", @change="changeImageBackground")
+            
+            h5 Галерея:
             +e('ul').wallpaper-list
                 +e('li').wallpaper-item(data-wallpaper='images/content/11flower.jpg', @click='swapImageBackground')
                     +e('figure').walpaper-figure
@@ -209,19 +219,7 @@ block content
                     +e('figure').walpaper-figure
                         +e('figcaption').wallpaper-title Звёздное дыханье
                         +e('img').wallpaper-preview(src='images/content/flower.jpg')
-                +e('li').wallpaper-item(data-wallpaper='' ,@click='swapImageBackground')
-                    +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Звёздное небо
-                        +e('img').wallpaper-preview(src='https://im0-tub-ru.yandex.net/i?id=8249949e3beca0321aa026c1b189ab13&n=13')
-                +e('li').wallpaper-item(data-wallpaper='' ,@click='swapImageBackground')
-                    +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Красивая вода
-                        +e('img').wallpaper-preview(src='https://im0-tub-ru.yandex.net/i?id=7dc76ef41500d083ac6a41beffb40cb8&n=13')
-                +e('li').wallpaper-item(data-wallpaper='' ,@click='swapImageBackground')
-                    +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title На рубеже
-                        +e('img').wallpaper-preview(src='https://im0-tub-ru.yandex.net/i?id=1756fe86407e197d44ea54d646095ecc&n=13')
-            //- TODO: кнопочка закрытия
+
             //- превью для фонов, новые фоны
             //- плейсхолдеры с автором мб
 

@@ -203,3 +203,35 @@ select {
 [v-cloak] {
   display: none;
 }
+
+// Условный для ие10-11
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+   body {
+        font-size: 30px;
+        line-height: 1.6;
+        font-family: @font-sans;
+        letter-spacing: 2px;
+
+        &:before {
+            content: 'Пожалуйста не используйте IE-11 на своём компьютере.';
+            display: block;
+            max-width: 740px;
+            margin: auto;
+            padding-top: 100px;
+            padding: 100px 50px 0;
+            color: rgb(255, 139, 104);
+        }
+        &:after {
+            content: 'Для просмотра данного сайта воспользуйтесь последнийми версиями браузеров Google Chrome, Mozilla Firefox, Microsoft Edge, Safari, Opera ...';
+            display: block;
+            max-width: 740px;
+            margin: auto;
+            padding-top: 15px;
+            padding: 15px 50px 0;
+        }
+   }
+
+   .b-landing {
+       display: none;
+   }
+}

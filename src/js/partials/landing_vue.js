@@ -20,19 +20,20 @@ var appLanding = new Vue({
         vueHeadingClass: '',
         vueDescriptionTextClass: '',
         descriptionPanel: 'hide',
+        vueAcceptEditDescription: 'class',
 
         // Стили
         styleApp: '',
 
         // Consts
         CONTENTFROMSERVER: {
-            preHeading: 'Ульяновск',
-            heading: 'День, когда ничего не поменяется',
-            description: 'но это не точно'
+            preHeading: 'Insomniac Games',
+            heading: 'Spider-man',
+            description: 'Новая игра про Человека-паука от Marvel.  Only on playstation.'
         },
 
         // Фото
-        imageSrcBackground: 'images/content/flower.jpg',
+        imageSrcBackground: 'images/content/spiderman.jpg',
 
         stateWasModified: false, // было ло ли изменено состояние
 
@@ -60,7 +61,7 @@ var appLanding = new Vue({
 
 
         // Таймер =================
-        finishDate: new Date(2018, 7, 14, 4, 00, 00),  // (year, month, date, hours, minutes, seconds, ms)
+        finishDate: new Date(2018, 8, 7, 13, 00, 00), // (year, month, date, hours, minutes, seconds, ms)
         monthName: '',
 
         interval: "",
@@ -152,7 +153,6 @@ var appLanding = new Vue({
             this.wallpaperSideBarOpen = false;
         },
 
-
         // Изменяем часы (ставим новую дату)
         editClock: function () {
             if (this.createTimerShow) {
@@ -191,10 +191,10 @@ var appLanding = new Vue({
                 let clockDateImputDay = Number($clockInputDate.value.split('-')[2]);
                 let clockDateImputHour = Number($clockInputTime.value.split(':')[0]);
                 let clockDateImputMinutes = Number($clockInputTime.value.split(':')[1]);
-        
+
                 this.finishDate = new Date(clockDateImputYear, clockDateImputMouth, clockDateImputDay, clockDateImputHour, clockDateImputMinutes, 00);
                 this.createNameOfFinishDate();
-                
+
                 this.stateWasModified = true;
                 this.vueClockClass = 'editable';
                 // таймаут для удаления самого себя
@@ -212,6 +212,14 @@ var appLanding = new Vue({
                 // ищем вновь созданый инпут и добавляем в него курсор, // таймаут ждёт создание элемента
                 setTimeout(() => {
                     this.$refs.elInputPreHeading.focus();
+                    const thisVue = this;
+                    this.$refs.elInputPreHeading.oninput = function () {
+                        if (thisVue.preHeadingMessage === '') {
+                            thisVue.vueAcceptEditDescription = '';
+                        } else {
+                            thisVue.vueAcceptEditDescription = 'accept';
+                        }
+                    }
                 }, 100);
             }
         },
@@ -219,6 +227,7 @@ var appLanding = new Vue({
         compleateEditPreHeading: function () {
             if (this.createTimerShow) {
                 this.stateEditPreHeading = false;
+                this.vueAcceptEditDescription = '';
                 // если форма пустая и не такая же
                 if (this.preHeadingMessage == '') {
                     this.preHeadingMessage = this.oldPreHeadingMessage;
@@ -239,6 +248,14 @@ var appLanding = new Vue({
                 // ищем вновь созданый инпут и добавляем в него курсор
                 setTimeout(() => {
                     this.$refs.elInputHeading.focus();
+                    const thisVue = this;
+                    this.$refs.elInputHeading.oninput = function () {
+                        if (thisVue.headingMessage === '') {
+                            thisVue.vueAcceptEditDescription = '';
+                        } else {
+                            thisVue.vueAcceptEditDescription = 'accept';
+                        }
+                    }
                 }, 100);
             }
         },
@@ -246,6 +263,8 @@ var appLanding = new Vue({
         compleateEditHeading: function () {
             if (this.createTimerShow) {
                 this.stateEditHeading = false;
+                this.vueAcceptEditDescription = '';
+
                 // если форма пустая и не такая же
                 if (this.headingMessage == '') {
                     this.headingMessage = this.oldHeadingMessage;
@@ -266,6 +285,14 @@ var appLanding = new Vue({
                 // ищем вновь созданый инпут и добавляем в него курсор
                 setTimeout(() => {
                     this.$refs.elInputDescriptionText.focus();
+                    const thisVue = this;
+                    this.$refs.elInputDescriptionText.oninput = function () {
+                        if (thisVue.descriptionTextMessage === '') {
+                            thisVue.vueAcceptEditDescription = '';
+                        } else {
+                            thisVue.vueAcceptEditDescription = 'accept';
+                        }
+                    }
                 }, 100);
             }
         },
@@ -273,6 +300,7 @@ var appLanding = new Vue({
         compleateEditDescriptionText: function () {
             if (this.createTimerShow) {
                 this.stateEditDescriptionText = false;
+                this.vueAcceptEditDescription = '';
                 // если форма пустая
                 if (this.descriptionTextMessage == '') {
                     this.descriptionTextMessage = this.oldDescriptionTextMessage;
@@ -360,6 +388,10 @@ var appLanding = new Vue({
         wallpaperPick: function () {
             this.wallpaperSideBarOpen = true;
         },
+        wallpaperPickClose() {
+            this.wallpaperSideBarOpen = false;
+            this.vueBackClass = 'fade';
+        },
         changeImageBackground: function (event) {
             let $input = event.target;
             if ($input.files && $input.files[0]) {
@@ -369,13 +401,17 @@ var appLanding = new Vue({
                     vm.imageSrcBackground = e.target.result;
                 }
                 reader.readAsDataURL($input.files[0]);
+                this.vueBackClass = '';
+                this.stateWasModified = true; // Включаем состояние модифицированного приложения
             }
         },
+        // смена фото из коллекции
         swapImageBackground: function (event) {
             let srcOfNewBackground = event.target.parentNode.parentNode.getAttribute('data-wallpaper');
             if (srcOfNewBackground !== '') {
                 this.imageSrcBackground = srcOfNewBackground;
                 this.stateWasModified = true; // Включаем состояние модифицированного приложения
+                this.vueBackClass = '';
             }
         },
 
