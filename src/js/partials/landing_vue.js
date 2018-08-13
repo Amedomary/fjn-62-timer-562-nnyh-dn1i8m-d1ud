@@ -392,7 +392,7 @@ var appLanding = new Vue({
             this.wallpaperSideBarOpen = false;
             this.vueBackClass = 'fade';
         },
-        changeImageBackground: function (event) {
+        changeImageBackground(event) {
             let $input = event.target;
             if ($input.files && $input.files[0]) {
                 let reader = new FileReader();
@@ -406,7 +406,7 @@ var appLanding = new Vue({
             }
         },
         // смена фото из коллекции
-        swapImageBackground: function (event) {
+        swapImageBackground(event) {
             let srcOfNewBackground = event.target.parentNode.parentNode.getAttribute('data-wallpaper');
             if (srcOfNewBackground !== '') {
                 this.imageSrcBackground = srcOfNewBackground;
@@ -487,6 +487,10 @@ var appLanding = new Vue({
                     }
                 };
             }, false);
+        },
+
+        publishNewTimer() {
+            alert('К сожалению в данной версии(v0.6.47_beta) функция создания таймера недоступна. Пожалуйста дождитесь релиза ;)');
         }
     },
 
@@ -502,7 +506,6 @@ var appLanding = new Vue({
         // меняем шейры
         this.shareCreateLink();
     },
-
 
     // Вызывается синхронно сразу после создания экземпляра
     created() {

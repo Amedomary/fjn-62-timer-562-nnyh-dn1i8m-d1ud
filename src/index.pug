@@ -124,7 +124,7 @@ block content
             +e.link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='')
                 span Применить изменения  
             
-            +e.link-create(@click="", v-if='weHaveModificateTimer', href='javascript:void(0)', title='').--release
+            +e.link-create(@click="publishNewTimer", v-if='weHaveModificateTimer', href='javascript:void(0)', title='').--release
                 span Опубликовать 
                 //- b таймер
 

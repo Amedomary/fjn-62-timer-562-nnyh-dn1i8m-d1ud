@@ -59,7 +59,7 @@
     overflow: hidden;
     background-color: #000;
 
-    --theme-color: 10;
+    --theme-color: -5;
     --accent: ~'hsl(var(--theme-color), 60%, 40%)';
     --accent-light: ~'hsl(var(--theme-color), 71%, 57%)';
     --accent-back: ~'hsla(var(--theme-color), 53%, 29%, .2)';
@@ -158,11 +158,13 @@
         padding: 0;
         flex: 1 1 auto;
         overflow-x: auto;
-        padding: 0 25px 25px 0;
+        padding: 0 5px 25px 0;
+        width: auto;
+        margin-left: -20px;
     }
     &__wallpaper-item {
         list-style: none;
-        margin-bottom: 25px;
+        margin-bottom: 5px;
         cursor: pointer;
 
         .no-touchevents &:hover,
@@ -171,6 +173,7 @@
         }
     }
     &__walpaper-figure {
+        position: relative;
         margin: 0;
         &:hover {
             & .b-landing__wallpaper-preview {
@@ -181,6 +184,13 @@
     &__wallpaper-title {
         padding-bottom: 10px;
         font-family: @font-sans;
+        position: absolute;
+        z-index: 800;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background-color: var(--accent-hover);
     }
     &__wallpaper-preview {
         width: 100%;
