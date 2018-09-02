@@ -61,7 +61,7 @@ var appLanding = new Vue({
 
 
         // Таймер =================
-        finishDate: new Date(2018, 8, 7, 13, 00, 00), // (year, month, date, hours, minutes, seconds, ms)
+        finishDate: new Date(2018, 8, 7, 00, 00, 00), // (year, month, date, hours, minutes, seconds, ms)
         monthName: '',
 
         interval: "",
