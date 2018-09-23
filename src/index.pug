@@ -10,10 +10,10 @@ block variables
 
 //- Модифицируем head
 block head
-    - var pageTitle = 'Spider-man';
-    - var pageDescription = 'Spider-man';
-    <meta property="og:title" content="Spider-man">
-    <meta property="og:description" content="Новая игра про Человека-паука от Marvel. Only on playstation.">
+    - var pageTitle = '';
+    - var pageDescription = '';
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
     <meta property="og:url" content="https://amedomary-san.github.io/">
     <meta property="og:image" content="images/inhtml/og-image.jpg">
 
@@ -207,18 +207,35 @@ block content
             
             h5 Галерея:
             +e('ul').wallpaper-list
-                +e('li').wallpaper-item(data-wallpaper='images/content/11flower.jpg', @click='swapImageBackground')
+                +e('li').wallpaper-item(data-wallpaper='images/content/spiderman.jpg', @click='swapImageBackground')
                     +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Кровавый цветок
-                        +e('img').wallpaper-preview(src='images/content/11flower.jpg')
-                +e('li').wallpaper-item(data-wallpaper='images/content/flo22wer.jpg', @click='swapImageBackground')
+                        +e('figcaption').wallpaper-title Человек паук
+                        +e('img').wallpaper-preview(src='images/content/spiderman.jpg')
+
+                +e('li').wallpaper-item(data-wallpaper='images/content/winter.jpg', @click='swapImageBackground')
                     +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Рассвет галактики
-                        +e('img').wallpaper-preview(src='images/content/flo22wer.jpg')
+                        +e('figcaption').wallpaper-title Зима
+                        +e('img').wallpaper-preview(src='images/content/winter.jpg')
+
+                +e('li').wallpaper-item(data-wallpaper='images/content/forest.jpg', @click='swapImageBackground')
+                    +e('figure').walpaper-figure
+                        +e('figcaption').wallpaper-title Лес
+                        +e('img').wallpaper-preview(src='images/content/forest.jpg')
+
                 +e('li').wallpaper-item(data-wallpaper='images/content/flower.jpg', @click='swapImageBackground')
                     +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Звёздное дыханье
+                        +e('figcaption').wallpaper-title Кровавый цветок
                         +e('img').wallpaper-preview(src='images/content/flower.jpg')
+
+                +e('li').wallpaper-item(data-wallpaper='images/content/space.jpg', @click='swapImageBackground')
+                    +e('figure').walpaper-figure
+                        +e('figcaption').wallpaper-title Рассвет галактики
+                        +e('img').wallpaper-preview(src='images/content/space.jpg')
+
+                +e('li').wallpaper-item(data-wallpaper='images/content/abstract.jpg', @click='swapImageBackground')
+                    +e('figure').walpaper-figure
+                        +e('figcaption').wallpaper-title Звёздное дыханье
+                        +e('img').wallpaper-preview(src='images/content/abstract.jpg')
 
             //- превью для фонов, новые фоны
             //- плейсхолдеры с автором мб

@@ -1,0 +1,13 @@
+{
+    "pageTitle": "New Year timet",
+    "preHeading": "С наступающим!",
+    "heading": "New Year",
+    "description": "До нового года совсем не много",
+    "imageSrcBackground": "images/content/forest.jpg",
+    "color_i": 172,
+    "clockDateImputYear": "2019",
+    "clockDateImputMouth": "0",
+    "clockDateImputDay": "1",
+    "clockDateImputHour": "00",
+    "clockDateImputMinutes": "00"
+}

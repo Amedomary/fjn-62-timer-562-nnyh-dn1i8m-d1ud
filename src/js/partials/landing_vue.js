@@ -25,15 +25,8 @@ var appLanding = new Vue({
         // Стили
         styleApp: '',
 
-        // Consts
-        CONTENTFROMSERVER: {
-            preHeading: 'Insomniac Games',
-            heading: 'Spider-man',
-            description: 'Новая игра про Человека-паука от Marvel.  Only on playstation.'
-        },
-
         // Фото
-        imageSrcBackground: 'images/content/spiderman.jpg',
+        imageSrcBackground: '',
 
         stateWasModified: false, // было ло ли изменено состояние
 
@@ -61,17 +54,17 @@ var appLanding = new Vue({
 
 
         // Таймер =================
-        finishDate: new Date(2018, 8, 7, 00, 00, 00), // (year, month, date, hours, minutes, seconds, ms)
+        finishDate: '', // (year, month, date, hours, minutes, seconds, ms)
         monthName: '',
 
         interval: "",
         intervalInit: "",
-        cl_month: 'May',
-        cl_days: '2',
-        cl_hours: '12',
-        cl_minutes: '45',
-        cl_seconds: '07',
-        cl_days_title: 'days',
+        cl_month: '',
+        cl_days: '',
+        cl_hours: '',
+        cl_minutes: '',
+        cl_seconds: '',
+        cl_days_title: '',
 
         clockDateInputError: false,
         clockTimeInputError: false,
@@ -115,14 +108,9 @@ var appLanding = new Vue({
                 this.vueHeadingClass = '';
                 this.vueDescriptionTextClass = '';
                 this.descriptionPanel = 'hide';
-                // присваеваем переменным значения с сервера
-                // this.preHeadingMessage = this.CONTENTFROMSERVER.preHeading;
-                // this.headingMessage = this.CONTENTFROMSERVER.heading;
-                // this.descriptionTextMessage = this.CONTENTFROMSERVER.description;
                 this.preHeadingMessage = this.lastEditPreHeadingMessage;
                 this.headingMessage = this.lastEditHeadingMessage;
                 this.descriptionTextMessage = this.lastEditDescriptionTextMessage;
-
                 this.stateEditClock = false; // off состояние редактирования даты
                 this.wallpaperSideBarOpen = false;
                 this.stateWasModified = false; //выключаем состояние "в редактировании"
@@ -323,10 +311,6 @@ var appLanding = new Vue({
             if (this.createTimerShow && this.stateEditDescriptionText && e.key == 'Enter') {
                 this.compleateEditDescriptionText();
             }
-            // if (this.createTimerShow && this.stateEditPreHeading && e.key == 'Enter') {
-            //     this.compleateEditPreHeading();
-            // }
-
         },
 
         // Скрываем панельку описания на мобиле
@@ -494,6 +478,42 @@ var appLanding = new Vue({
         }
     },
 
+    beforeCreate() {
+    },
+
+    // Вызывается синхронно сразу после создания экземпляра
+    created() {
+        // Получаем Json с данными
+        let vueThis = this;
+        $.ajax({
+            url: 'json/new_year.json',
+            dataType: 'json',
+            data: {},
+            success: function (data) {
+                // присваеваем переменным значения с сервера
+                vueThis.preHeadingMessage = data.preHeading;
+                vueThis.headingMessage = data.heading;
+                vueThis.descriptionTextMessage = data.description;
+                // присваеваем заголовок страницы
+                document.title = data.pageTitle
+                // присваеваем фон
+                vueThis.imageSrcBackground = data.imageSrcBackground;
+                // присваеваем цвет
+                vueThis.styleApp = { '--theme-color': data.color_i };
+                // присваеваем дату
+                clockDateImputYear = data.clockDateImputYear;
+                clockDateImputMouth = data.clockDateImputMouth;
+                clockDateImputDay = data.clockDateImputDay;
+                clockDateImputHour = data.clockDateImputHour;
+                clockDateImputMinutes = data.clockDateImputMinutes;
+                vueThis.finishDate = new Date(clockDateImputYear, clockDateImputMouth, clockDateImputDay, clockDateImputHour, clockDateImputMinutes, 00);
+                vueThis.createNameOfFinishDate();
+            }
+        });
+
+        document.addEventListener('keypress', this.acceptEditText);
+    },
+
     // Вызывается сразу после того как экземпляр был смонтирован
     mounted() {
         // получаем конечную дату (Заголовок Даты)
@@ -505,19 +525,5 @@ var appLanding = new Vue({
         }, 1000);
         // меняем шейры
         this.shareCreateLink();
-    },
-
-    // Вызывается синхронно сразу после создания экземпляра
-    created() {
-        // присваеваем переменным значения с сервера
-        this.preHeadingMessage = this.CONTENTFROMSERVER.preHeading;
-        this.headingMessage = this.CONTENTFROMSERVER.heading;
-        this.descriptionTextMessage = this.CONTENTFROMSERVER.description;
-
-        document.addEventListener('keypress', this.acceptEditText)
     }
-
-    // Вызывается синхронно сразу после инициализации экземпляра, до настройки наблюдения за данными, механизмов слежения и событий.
-    // created() {
-    // }
 })
