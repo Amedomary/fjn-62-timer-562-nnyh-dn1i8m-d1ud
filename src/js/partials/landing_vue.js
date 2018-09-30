@@ -483,33 +483,37 @@ var appLanding = new Vue({
 
     // Вызывается синхронно сразу после создания экземпляра
     created() {
+        const data = data_json;
+
         // Получаем Json с данными
-        let vueThis = this;
-        $.ajax({
-            url: 'json/new_year.json',
-            dataType: 'json',
-            data: {},
-            success: function (data) {
-                // присваеваем переменным значения с сервера
-                vueThis.preHeadingMessage = data.preHeading;
-                vueThis.headingMessage = data.heading;
-                vueThis.descriptionTextMessage = data.description;
-                // присваеваем заголовок страницы
-                document.title = data.pageTitle
-                // присваеваем фон
-                vueThis.imageSrcBackground = data.imageSrcBackground;
-                // присваеваем цвет
-                vueThis.styleApp = { '--theme-color': data.color_i };
-                // присваеваем дату
-                clockDateImputYear = data.clockDateImputYear;
-                clockDateImputMouth = data.clockDateImputMouth;
-                clockDateImputDay = data.clockDateImputDay;
-                clockDateImputHour = data.clockDateImputHour;
-                clockDateImputMinutes = data.clockDateImputMinutes;
-                vueThis.finishDate = new Date(clockDateImputYear, clockDateImputMouth, clockDateImputDay, clockDateImputHour, clockDateImputMinutes, 00);
-                vueThis.createNameOfFinishDate();
-            }
-        });
+        // let this = this;
+        // $.ajax({
+        //     url: 'json/new_year.json',
+        //     dataType: 'json',
+        //     data: {},
+        //     success: function (data) {
+
+        // присваеваем переменным значения с сервера
+        this.preHeadingMessage = data.preHeading;
+        this.headingMessage = data.heading;
+        this.descriptionTextMessage = data.description;
+        // присваеваем заголовок страницы
+        document.title = data.pageTitle
+        // присваеваем фон
+        this.imageSrcBackground = data.imageSrcBackground;
+        // присваеваем цвет
+        this.styleApp = { '--theme-color': data.color_i };
+        // присваеваем дату
+        clockDateImputYear = data.clockDateImputYear;
+        clockDateImputMouth = data.clockDateImputMouth;
+        clockDateImputDay = data.clockDateImputDay;
+        clockDateImputHour = data.clockDateImputHour;
+        clockDateImputMinutes = data.clockDateImputMinutes;
+        this.finishDate = new Date(clockDateImputYear, clockDateImputMouth, clockDateImputDay, clockDateImputHour, clockDateImputMinutes, 00);
+        this.createNameOfFinishDate();
+
+        //     }
+        // });
 
         document.addEventListener('keypress', this.acceptEditText);
     },
