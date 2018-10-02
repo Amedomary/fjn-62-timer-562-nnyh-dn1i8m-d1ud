@@ -26,18 +26,20 @@
         justify-content: space-between;
     }
     &__link-create {
-        font-size: 10px;
+        font-size: 11px;
         margin: 0;
 
         &--release {
             width: 60%;
             margin-right: 600px;
-            margin-top: 4px;
+            margin-top: 7px;
             border: none;
             padding: 5px;
+            font-size: 12px;
             color: var(--accent-light);
             background: transparent;
             animation: none;
+            background-color: rgba(0,0,0,.5);
         }
     }
 
@@ -56,11 +58,11 @@
         bottom: 20px;
         background-color: rgba(0, 0, 0, .85);
         padding: 20px;
-        .icon-edit-mobile();
         transition: @animationHideDescription;
 
         &.hide {
-            transform: ~"translateY(calc(100% + 30px))";
+            transform: translateY(244px);
+            will-change: transform;
 
             .b-landing__heading {
                 transform: translateY(-134px);
@@ -90,7 +92,7 @@
             margin: 0;
             height: auto;
             transform: none;
-            z-index: 123123012993921;
+            z-index: 25000;
             width: 100%;
             padding: 50px;
             font-size: 25px;
@@ -102,13 +104,22 @@
         font-size: 14px;
         margin: 0 0 8px;
         .icon-edit-mobile();
+        height: 19px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     &__heading {
         text-align: center;
         font-size: 22px;
         margin: 0 0 12px;
         .icon-edit-mobile();
+        height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         transition: @animationHideDescription;
+        will-change: transform;
 
         &.editable {
             transition: @animationHideDescription;
@@ -116,7 +127,8 @@
 
     }
     &__description-text {
-        text-align: justify;
+        height: 60px;
+        text-align: center;
         font-size: 14px;
         margin: 0 0 10px;
         display: -webkit-box;
@@ -124,6 +136,7 @@
         -webkit-box-orient: vertical;
         text-overflow: ellipsis;
         overflow: hidden;
+        .icon-edit-mobile();
     }
     & .b-button--flower {
         font-size: 13px;
@@ -253,6 +266,46 @@
 
     &__clock-legend {
         display: none;
+    }
+
+    &__accept-edit-description {
+        position: fixed;
+        top: 12px;
+        left: auto;
+        right: 8px;
+        z-index: 35000;
+        background-color: var(--accent);
+        border: 1px solid #ddd;
+        &:after,
+        &:before {
+            background-color: #ddd;
+        }
+
+        &--pre-heading {
+            top: -10px;
+        }
+        &--heading {
+            top: 6px;
+        }
+        &--description {
+            top: -10px;
+        }
+
+        &.accept {
+            &:before {
+                width: 11px;
+                top: 19px;
+                left: 6px;
+            }
+            &:after {
+                left: 12px;
+                width: 19px;
+            }
+        }
+    }
+
+    &__alert {
+        font-size: 27px;
     }
 }
 

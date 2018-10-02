@@ -79,20 +79,11 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        opacity: .9;
         .transitionModOpacity();
-        // will-change: filter;
-        // animation-name: back-transform;
-        // animation-duration: 72s;
-        // animation-direction: normal;
-        // animation-iteration-count: infinite;
-        // animation-timing-function: linear;
 
         &.fade {
-            // opacity: .1;
-            // animation-play-state: paused;
             opacity: 0.2;
-            // filter: blur(10px);
-            // transition: 1s;
         }
     }
     &__wallpaper-side-bar {
@@ -602,6 +593,32 @@
         .b-landing__clock.editable:not(.editing):hover & {
             opacity: 1;
             transform: translateX(-25px);
+        }
+    }
+
+    &__alert {
+        display: flex;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 55000;
+        background-color: rgba(0,0,0,0.95);
+        text-align: center;
+        font-size: 40px;
+        padding: 15px;
+        font-family: @font-sans;
+
+        &-text {
+            margin: auto;
+            max-width: 700px;
+        }
+
+        &-link {
+            margin-top: 15px;
+            display: block;
+            color: #ed1c8a;
         }
     }
 }

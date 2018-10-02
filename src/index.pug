@@ -251,3 +251,8 @@ block content
         +e('a').wallpaper-pick(href='javascript:void(0)', title='', @click='wallpaperPick')
             +icon('image')
             +e('span').legend Выбрать фон
+        
+        +e.alert(v-show='alertIsOpen')
+            +e.alert-text
+                span Готово! Теперь ваша страница доступна по адресу: 
+                +e('a').alert-link(href='', title='', ref="alertLink") amedomary.tmweb.ru/1

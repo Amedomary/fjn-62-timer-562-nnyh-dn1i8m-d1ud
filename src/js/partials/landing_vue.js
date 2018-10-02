@@ -71,6 +71,9 @@ var appLanding = new Vue({
 
         // Выбор цвета =======
         color_i: 0,
+
+        // оповещение публикации
+        alertIsOpen: false,
     },
     methods: {
         // Включаем тему редоктирования 
@@ -351,6 +354,7 @@ var appLanding = new Vue({
                 this.cl_hours = hours;
                 this.cl_minutes = minutes;
                 this.cl_seconds = seconds;
+                this.cl_days_title = 'days';
 
                 if (this.cl_days <= 1) {
                     this.cl_days_title = 'day';
@@ -473,38 +477,15 @@ var appLanding = new Vue({
             }, false);
         },
 
+        // После публикации страницы и отправки аякса
         createdNewPage(ajax_answer) {
-            var div = document.createElement('div');
-            div.className = "alert alert-success";
-            div.innerHTML = `
-                <div class="alert alert-success" style="
-                     position: fixed;
-                     z-index: 5000;
-                     width: 100%;
-                     height: 100%;
-                     background-color: rgba(0,0,0,.8);
-                     padding: 20% 20%;
-                     text-align: center;
-                     font-size: 40px;
-                ">
-                    Готово! Теперь ваша страница доступна по адресу <a style="color: #ffc300;" href="/${ajax_answer}">amedomary.tmweb.ru/${ajax_answer}</a>
-                </div>
-            `;
-            document.body.insertBefore(div, document.getElementById('landing-app'));
+            this.$refs.alertLink.textContent = `amedomary.tmweb.ru/${ajax_answer}`;
+            this.$refs.alertLink.href = `/${ajax_answer}`            
+            this.alertIsOpen = true;
         },
 
         publishNewTimer() {
             vue_this = this;
-
-            console.log({
-                "pageTitle": vue_this.headingMessage,
-                "preHeading": vue_this.preHeadingMessage,
-                "heading": vue_this.headingMessage,
-                "description": vue_this.descriptionTextMessage,
-                "imageSrcBackground": vue_this.imageSrcBackground,
-                "color_i": vue_this.color_i,
-                "finishDate": vue_this.finishDate
-            });
             
             $.ajax({
                 url: '../include/for_db.php',
@@ -520,7 +501,6 @@ var appLanding = new Vue({
                 },
                 dataType: 'json',
                 success: function (result) {
-                    console.log(result);
                     vue_this.createdNewPage(result);
                 }
             });
