@@ -473,8 +473,57 @@ var appLanding = new Vue({
             }, false);
         },
 
+        createdNewPage(ajax_answer) {
+            var div = document.createElement('div');
+            div.className = "alert alert-success";
+            div.innerHTML = `
+                <div class="alert alert-success" style="
+                     position: fixed;
+                     z-index: 5000;
+                     width: 100%;
+                     height: 100%;
+                     background-color: rgba(0,0,0,.8);
+                     padding: 20% 20%;
+                     text-align: center;
+                     font-size: 40px;
+                ">
+                    Готово! Теперь ваша страница доступна по адресу <a style="color: #ffc300;" href="/${ajax_answer}">amedomary.tmweb.ru/${ajax_answer}</a>
+                </div>
+            `;
+            document.body.insertBefore(div, document.getElementById('landing-app'));
+        },
+
         publishNewTimer() {
-            alert('К сожалению в данной версии(v0.6.47_beta) функция создания таймера недоступна. Пожалуйста дождитесь релиза ;)');
+            vue_this = this;
+
+            console.log({
+                "pageTitle": vue_this.headingMessage,
+                "preHeading": vue_this.preHeadingMessage,
+                "heading": vue_this.headingMessage,
+                "description": vue_this.descriptionTextMessage,
+                "imageSrcBackground": vue_this.imageSrcBackground,
+                "color_i": vue_this.color_i,
+                "finishDate": vue_this.finishDate
+            });
+            
+            $.ajax({
+                url: '../include/for_db.php',
+                type: 'POST',
+                data: {
+                    "pageTitle": vue_this.headingMessage,
+                    "preHeading": vue_this.preHeadingMessage,
+                    "heading": vue_this.headingMessage,
+                    "description": vue_this.descriptionTextMessage,
+                    "imageSrcBackground": vue_this.imageSrcBackground,
+                    "color_i": vue_this.color_i,
+                    "finishDate": vue_this.finishDate
+                },
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+                    vue_this.createdNewPage(result);
+                }
+            });
         }
     },
 
@@ -484,15 +533,6 @@ var appLanding = new Vue({
     // Вызывается синхронно сразу после создания экземпляра
     created() {
         const data = data_json;
-
-        // Получаем Json с данными
-        // let this = this;
-        // $.ajax({
-        //     url: 'json/new_year.json',
-        //     dataType: 'json',
-        //     data: {},
-        //     success: function (data) {
-
         // присваеваем переменным значения с сервера
         this.preHeadingMessage = data.preHeading;
         this.headingMessage = data.heading;
@@ -504,18 +544,7 @@ var appLanding = new Vue({
         // присваеваем цвет
         this.styleApp = { '--theme-color': data.color_i };
         // присваеваем дату
-        clockDateImputYear = data.clockDateImputYear;
-        clockDateImputMouth = data.clockDateImputMouth;
-        clockDateImputDay = data.clockDateImputDay;
-        clockDateImputHour = data.clockDateImputHour;
-        clockDateImputMinutes = data.clockDateImputMinutes;
-        this.finishDate = new Date(clockDateImputYear, clockDateImputMouth, clockDateImputDay, clockDateImputHour, clockDateImputMinutes, 00);
-        this.createNameOfFinishDate();
-
-        //     }
-        // });
-
-        document.addEventListener('keypress', this.acceptEditText);
+        this.finishDate = new Date(data.finishDate);
     },
 
     // Вызывается сразу после того как экземпляр был смонтирован
@@ -529,5 +558,6 @@ var appLanding = new Vue({
         }, 1000);
         // меняем шейры
         this.shareCreateLink();
+        document.addEventListener('keypress', this.acceptEditText);
     }
 })
