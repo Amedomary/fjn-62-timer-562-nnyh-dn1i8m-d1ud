@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme-color="1" data-theme-style="normal">
+  <head>
+    <script>
+      const data_json = {
+          "pageTitle": "New Year timer",
+          "preHeading": "С наступающим!",
+          "heading": "New Year",
+          "description": "До нового года совсем не много",
+          "imageSrcBackground": "images/content/forest.jpg",
+          "color_i": 172,
+          "finishDate": "Tue Jan 01 2019 00:00:00 GMT+0400"
+      }
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui, user-scalable=no">
+    <meta name="skype_toolbar" content="skype_toolbar_parser_compatible">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#111011">
+    <meta name="msapplication-navbutton-color" content="#111011">
+    <meta name="apple-mobile-web-app-status-bar-style" content="dark">
+    <meta name="msapplication-TileColor" content="#ff7a20">
+    <meta name="theme-color" content="#ffffff"><meta property="og:image:width" content="1351">
+<meta property="og:image:height" content="707">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#000000">
+    <link href="css/main.css?1540151149220" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Didact+Gothic&amp;subset=cyrillic-ext" rel="stylesheet">
+    <!-- page settings--><meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://amedomary-san.github.io/">
+<meta property="og:image" content="images/inhtml/og-image.jpg">
+<script type="text/javascript" src="js/partials/addtocalendar.js" async defer></script>
+    <title></title>
+    <meta name="description" content="">
+    <meta name="Keywords" content="timer, alert me, event, online clock, таймер онлайн, ждём событие вместе, часы, оповещение"><script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter49939486 = new Ya.Metrika2({ id:49939486, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/tag.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks2"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/49939486" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  </head>
+  <body>
+    <div class="b-landing" id="landing-app" :class="vueAppClass" v-bind:style="styleApp" v-cloak="v-cloak"><img class="b-landing__background" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" title="" :class="vueBackClass" :src="imageSrcBackground" role="presentation"/>
+      <svg class="b-svg-grid">
+        <g>
+          <line class="b-svg-grid__line b-svg-grid__line--mobile-hide" x1="20%" y1="0" x2="20%" y2="100%">
+          </line>
+          <line class="b-svg-grid__line" x1="40%" y1="0" x2="40%" y2="100%">
+          </line>
+          <line class="b-svg-grid__line b-svg-grid__line--mobile-hide" x1="60%" y1="0" x2="60%" y2="100%">
+          </line>
+          <line class="b-svg-grid__line" x1="80%" y1="0" x2="80%" y2="100%">
+          </line>
+          <line class="b-svg-grid__line" x1="0" y1="20%" x2="100%" y2="20%">
+          </line>
+          <line class="b-svg-grid__line" x1="0" y1="50%" x2="100%" y2="50%">
+          </line>
+          <line class="b-svg-grid__line" x1="0" y1="80%" x2="100%" y2="80%">
+          </line>
+        </g>
+        <g>
+          <line class="b-svg-grid__line" x1="40px" y1="40px" x2="40px" y2="100px">
+          </line>
+          <line class="b-svg-grid__line" x1="40px" y1="40px" x2="100px" y2="40px">
+          </line>
+          <line class="b-svg-grid__line" x1="calc(100% - 40px)" y1="40px" x2="calc(100% - 40px)" y2="100px">
+          </line>
+          <line class="b-svg-grid__line" x1="calc(100% - 100px)" y1="40px" x2="calc(100% - 40px)" y2="40px">
+          </line>
+          <line class="b-svg-grid__line" x1="40px" y1="calc(100% - 40px)" x2="40px" y2="calc(100% - 100px)">
+          </line>
+          <line class="b-svg-grid__line" x1="40px" y1="calc(100% - 40px)" x2="100px" y2="calc(100% - 40px)">
+          </line>
+          <line class="b-svg-grid__line" x1="calc(100% - 40px)" y1="calc(100% - 40px)" x2="calc(100% - 40px)" y2="calc(100% - 100px)">
+          </line>
+          <line class="b-svg-grid__line" x1="calc(100% - 100px)" y1="calc(100% - 40px)" x2="calc(100% - 40px)" y2="calc(100% - 40px)">
+          </line>
+        </g>
+        <g>
+          <rect class="b-svg-grid__plus" x="40px" y="35px" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="35px" y="40px" width="11px" height="1px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(100% - 40px)" y="35px" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(100% - 45px)" y="40px" width="11px" height="1px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(100% - 40px)" y="calc(100% - 45px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(100% - 45px)" y="calc(100% - 40px)" width="11px" height="1px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="40px" y="calc(100% - 45px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="35px" y="calc(100% - 40px)" width="11px" height="1px">
+          </rect>
+          <!-- 1-->
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="20%" y="calc(20% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="calc(20% - 5px)" y="20%" width="11px" height="1px">
+          </rect>
+          <!-- 2-->
+          <rect class="b-svg-grid__plus" x="40%" y="calc(20% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(40% - 5px)" y="20%" width="11px" height="1px">
+          </rect>
+          <!-- 3-->
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="60%" y="calc(20% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="calc(60% - 5px)" y="20%" width="11px" height="1px">
+          </rect>
+          <!-- 4-->
+          <rect class="b-svg-grid__plus" x="80%" y="calc(20% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(80% - 5px)" y="20%" width="11px" height="1px">
+          </rect>
+          <!-- 5-->
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="20%" y="calc(50% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="calc(20% - 5px)" y="50%" width="11px" height="1px">
+          </rect>
+          <!-- 6-->
+          <rect class="b-svg-grid__plus" x="40%" y="calc(50% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(40% - 5px)" y="50%" width="11px" height="1px">
+          </rect>
+          <!-- 7-->
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="60%" y="calc(50% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="calc(60% - 5px)" y="50%" width="11px" height="1px">
+          </rect>
+          <!-- 8-->
+          <rect class="b-svg-grid__plus" x="80%" y="calc(50% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(80% - 5px)" y="50%" width="11px" height="1px">
+          </rect>
+          <!-- 9-->
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="20%" y="calc(80% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus b-svg-grid__plus--mobile-hide" x="calc(20% - 5px)" y="80%" width="11px" height="1px">
+          </rect>
+          <!-- 10-->
+          <rect class="b-svg-grid__plus" x="40%" y="calc(80% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(40% - 5px)" y="80%" width="11px" height="1px">
+          </rect>
+          <!-- 11-->
+          <rect class="b-svg-grid__plus b-svg-grid__plus--flower b-svg-grid__plus--mobile-hide" x="60%" y="calc(80% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus b-svg-grid__plus--flower b-svg-grid__plus--mobile-hide" x="calc(60% - 5px)" y="80%" width="11px" height="1px">
+          </rect>
+          <!-- 12-->
+          <rect class="b-svg-grid__plus" x="80%" y="calc(80% - 5px)" width="1px" height="11px">
+          </rect>
+          <rect class="b-svg-grid__plus" x="calc(80% - 5px)" y="80%" width="11px" height="1px">
+          </rect>
+        </g>
+      </svg>
+      <div class="b-landing__header"><a class="b-landing__link-create" @click="createTimer" href="javascript:void(0)" title=""><span v-if="createTimerShow"><span>Отмена  </span></span><span v-else-if="weHaveModificateTimer"><span>Редактировать </span></span><span v-else><span>Создать свой </span></span></a><a class="b-landing__link-create" @click="acceptCreateTimer" v-if="stateWasModified" href="javascript:void(0)" title=""><span>Применить изменения  </span></a><a class="b-landing__link-create b-landing__link-create--release" @click="publishNewTimer" v-if="weHaveModificateTimer" href="javascript:void(0)" title=""><span>Опубликовать </span></a>
+      </div>
+      <svg class="b-landing__circle" x="0px" y="0px" viewBox="0 0 705 705" :class="vueCircleClass"><circle class="st0" cx="352.5" cy="352.5" r="350.5"/>
+<circle class="st1" cx="352.5" cy="352.5" r="225.5"/>
+<circle class="st2" cx="70" cy="352.5" r="4"/>
+<circle class="st3" cx="70" cy="352.5" r="5"/>
+<circle class="st4" cx="70" cy="352.5" r="3"/>
+<circle class="st5" cx="70" cy="352.5" r="6"/>
+      </svg>
+      <div class="b-landing__clock" :class="vueClockClass" @click="editClock"><span class="b-landing__month">{{ cl_month }}</span><span class="b-landing__day"><span>{{ cl_days }}</span><i class="title">{{ cl_days_title }} </i></span><span class="b-landing__hour">{{ cl_hours }}</span><span class="b-landing__slash">:  </span><span class="b-landing__minutes">{{ cl_minutes }}</span><span class="b-landing__minutes">:</span><span class="b-landing__minutes">{{ cl_seconds }}</span><i class="b-icon b-icon--clock-edit icon-pen-solid"></i><span class="b-landing__clock-legend">Изменить дату</span>
+        <div class="b-landing__clock-form-back" v-if="stateEditClock">
+          <form class="b-landing__clock-form">
+            <p class="b-landing__clock-title">Когда мне остановить отсчёт?
+            </p>
+            <label class="b-landing__clock-label" for="clock_input_date">Дата:
+            </label><input class="b-landing__clock-input" ref="elClockInputDate" id="clock_input_date" type="date" tabindex="43"/>
+            <label class="b-landing__clock-error" for="clock_input_date" v-if="clockDateInputError">Выберите день
+            </label>
+            <label class="b-landing__clock-label" for="clock_input_time">Время:
+            </label><input class="b-landing__clock-input" ref="elClockInputTime" id="clock_input_time" type="time" tabindex="44"/>
+            <label class="b-landing__clock-error" for="clock_input_time" v-if="clockTimeInputError">Выберите время
+            </label>
+            <div class="b-landing__clock-form-link-wrap"><a class="b-landing__clock-form-link" href="javascript:void(0)" title="" @click="cancelEditClock">Отмена</a><a class="b-landing__clock-form-link b-landing__clock-form-link--done" href="javascript:void(0)" title="" @click="acceptEditClock">Готово</a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="b-landing__description" :class="descriptionPanel">
+        <h2 class="b-landing__pre-heading" :class="vuePreHeadingClass" v-if="!stateEditPreHeading" @click="editPreHeading">{{ preHeadingMessage }}<i class="b-icon b-icon--heading-edit icon-pen-solid"></i>
+        </h2>
+        <div class="b-landing__description-input-wrapper" v-else="v-else"><input class="b-landing__pre-heading" ref="elInputPreHeading" id="elInputPreHeading" type="text" placeholder="Ваша локация" name="" v-model="preHeadingMessage" @blur="compleateEditPreHeading"/><i class="b-landing__accept-edit-description b-landing__accept-edit-description--pre-heading" :class="vueAcceptEditDescription"></i>
+        </div>
+        <h1 class="b-landing__heading" :class="vueHeadingClass" v-if="!stateEditHeading" @click="editHeading">{{ headingMessage }}<i class="b-icon b-icon--heading-edit icon-pen-solid"></i>
+        </h1>
+        <div class="b-landing__description-input-wrapper" v-else="v-else"><input class="b-landing__heading" ref="elInputHeading" id="elInputHeading" type="text" placeholder="Ваш заголовок" name="" v-model="headingMessage" @blur="compleateEditHeading"/><i class="b-landing__accept-edit-description b-landing__accept-edit-description--heading" :class="vueAcceptEditDescription"></i>
+        </div>
+        <p class="b-landing__description-text" :class="vueDescriptionTextClass" v-if="!stateEditDescriptionText" @click="editDescriptionText">{{ descriptionTextMessage }}<i class="b-icon b-icon--heading-edit icon-pen-solid"></i>
+        </p>
+        <div class="b-landing__description-input-wrapper" v-else="v-else"><input class="b-landing__description-text" ref="elInputDescriptionText" id="elInputDescriptionText" type="text" placeholder="Ваше описание" name="" v-model="descriptionTextMessage" @blur="compleateEditDescriptionText"/><i class="b-landing__accept-edit-description b-landing__accept-edit-description--description" :class="vueAcceptEditDescription"></i>
+        </div><a class="b-landing__hide-icon" @click="hideDescriptionPanel"></a>
+        <div class="addeventatc b-button b-button--flower" title="Add to Calendar" :class="vueButtonClass"><span>Добавить в календарь</span><span class="info start">08/14/2018 03:00 AM</span><span class="info end">08/14/2018 3:30 AM</span><span class="info timezone">Europe/Moscow</span><span class="info title">{{ headingMessage }}</span><span class="info description">{{ descriptionTextMessage }}</span><span class="info location">Location of the event</span></div>
+      </div>
+      <div class="b-landing__wallpaper-side-bar" v-if="wallpaperSideBarOpen"><a class="b-landing__wallpaper-close" href="javascript:void(0)" @click="wallpaperPickClose"></a>
+        <label class="b-landing__wallpaper-label" for="input_File_Background">Добавить своё изображение
+        </label><input class="b-landing__wallpaper-input" id="input_File_Background" type="file" name="background" @change="changeImageBackground"/>
+        <h5>Галерея:</h5>
+        <ul class="b-landing__wallpaper-list">
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/spiderman.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Человек паук
+              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/spiderman.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/winter.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Зима
+              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/winter.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/forest.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Лес
+              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/forest.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/flower.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Кровавый цветок
+              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/flower.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/space.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Рассвет галактики
+              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/space.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/abstract.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Звёздное дыханье
+              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/abstract.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+        </ul>
+      </div>
+      <div class="b-landing__share" :class="vueShareClass"><a class="b-icon b-icon--share b-icon--vk icon-vk" href="javascript:void(0)" title=""></a><a class="b-icon b-icon--share icon-fb" href="javascript:void(0)" title=""></a>
+      </div><a class="b-landing__color-pick" href="javascript:void(0)" title="" @click="colorPick"><i class="b-icon icon-paint"></i><span class="b-landing__legend">Сменить цвет</span></a><a class="b-landing__wallpaper-pick" href="javascript:void(0)" title="" @click="wallpaperPick"><i class="b-icon icon-image"></i><span class="b-landing__legend">Выбрать фон</span></a>
+      <div class="b-landing__alert" v-show="alertIsOpen">
+        <div class="b-landing__alert-text"><span>Готово! Теперь ваша страница доступна по адресу: </span><a class="b-landing__alert-link" href="" title="" ref="alertLink">amedomary.tmweb.ru/1</a>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/external.js"></script>
+    <script src="js/internal.js"></script>
+  </body>
+</html>
