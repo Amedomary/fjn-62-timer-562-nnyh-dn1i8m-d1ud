@@ -2,6 +2,33 @@
 // VUE приложение
 // ====================
 
+const data_json_default = {
+    pageTitle: "New Year timer",
+    preHeading: "С наступающим!",
+    heading: "New Year",
+    description: "До нового года совсем не много",
+    imageSrcBackground: "images/content/forest.jpg",
+    color_i: 172,
+    finishDate: "Tue Jan 01 2020 00:00:00 GMT+0400"
+}
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAPq6A0sDX_unr33Qy8aqrAbvo2ErIRHDs",
+    authDomain: "timer-ba52d.firebaseapp.com",
+    databaseURL: "https://timer-ba52d.firebaseio.com",
+    projectId: "timer-ba52d",
+    storageBucket: "timer-ba52d.appspot.com",
+    messagingSenderId: "448597589119",
+    appId: "1:448597589119:web:1bb480c0904707ea"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+
+// VUE app
 var appLanding = new Vue({
     el: '#landing-app',
     data: {
@@ -76,7 +103,7 @@ var appLanding = new Vue({
         alertIsOpen: false,
     },
     methods: {
-        // Включаем тему редоктирования 
+        // Включаем тему редоктирования
         createTimer: function () {
             this.createTimerShow = !this.createTimerShow;
 
@@ -478,32 +505,50 @@ var appLanding = new Vue({
         },
 
         // После публикации страницы и отправки аякса
-        createdNewPage(ajax_answer) {
-            this.$refs.alertLink.textContent = `amedomary.tmweb.ru/${ajax_answer}`;
-            this.$refs.alertLink.href = `/${ajax_answer}`            
+        createdNewPage(page) {
+            this.$refs.alertLink.textContent = `amedomary.tmweb.ru/${page}`;
+            this.$refs.alertLink.href = `/${page}`
             this.alertIsOpen = true;
         },
 
+        // Отправляем данные в фб
         publishNewTimer() {
             vue_this = this;
-            
-            $.ajax({
-                url: '../include/for_db.php',
-                type: 'POST',
-                data: {
-                    "pageTitle": vue_this.headingMessage,
-                    "preHeading": vue_this.preHeadingMessage,
-                    "heading": vue_this.headingMessage,
-                    "description": vue_this.descriptionTextMessage,
-                    "imageSrcBackground": vue_this.imageSrcBackground,
-                    "color_i": vue_this.color_i,
-                    "finishDate": vue_this.finishDate
-                },
-                dataType: 'json',
-                success: function (result) {
-                    vue_this.createdNewPage(result);
-                }
-            });
+            const idPage = (Math.floor(Math.random() * 100000));
+            database.ref('pages/' + idPage).set({
+                pageTitle: vue_this.headingMessage,
+                preHeading: vue_this.preHeadingMessage,
+                heading: vue_this.headingMessage,
+                description: vue_this.descriptionTextMessage,
+                imageSrcBackground: vue_this.imageSrcBackground,
+                color_i: vue_this.color_i,
+                finishDate: vue_this.finishDate
+            })
+                .then(function () {
+                    console.log('Synchronization succeeded');
+                    vue_this.createdNewPage(idPage);
+                })
+                .catch(function (error) {
+                    console.log('Synchronization failed');
+                });
+
+            this.weHaveModificateTimer = false; // Выключаем состояние модифицированного приложения
+        },
+
+        // Применяем новые данные к таймеру
+        acceptData(data) {
+            // присваеваем переменным значения с сервера
+            this.preHeadingMessage = data.preHeading;
+            this.headingMessage = data.heading;
+            this.descriptionTextMessage = data.description;
+            // присваеваем заголовок страницы
+            document.title = data.pageTitle
+            // присваеваем фон
+            this.imageSrcBackground = data.imageSrcBackground;
+            // присваеваем цвет
+            this.styleApp = { '--theme-color': data.color_i };
+            // присваеваем дату
+            this.finishDate = new Date(data.finishDate);
         }
     },
 
@@ -512,19 +557,13 @@ var appLanding = new Vue({
 
     // Вызывается синхронно сразу после создания экземпляра
     created() {
-        const data = data_json;
-        // присваеваем переменным значения с сервера
-        this.preHeadingMessage = data.preHeading;
-        this.headingMessage = data.heading;
-        this.descriptionTextMessage = data.description;
-        // присваеваем заголовок страницы
-        document.title = data.pageTitle
-        // присваеваем фон
-        this.imageSrcBackground = data.imageSrcBackground;
-        // присваеваем цвет
-        this.styleApp = { '--theme-color': data.color_i };
-        // присваеваем дату
-        this.finishDate = new Date(data.finishDate);
+        const data = data_json_default;
+        this.acceptData(data);
+
+        // Получаем данные
+        database.ref('pages/' + '49212').once('value').then((e) => {
+            this.acceptData(e.val());
+        });
     },
 
     // Вызывается сразу после того как экземпляр был смонтирован

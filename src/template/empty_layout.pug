@@ -8,16 +8,6 @@ block variables
 doctype html
 html(lang="ru", class=htmlClass, data-theme-color='1', data-theme-style='normal')
     head
-        script.
-            const data_json = {
-                "pageTitle": "New Year timer",
-                "preHeading": "С наступающим!",
-                "heading": "New Year",
-                "description": "До нового года совсем не много",
-                "imageSrcBackground": "images/content/forest.jpg",
-                "color_i": 172,
-                "finishDate": "Tue Jan 01 2019 00:00:00 GMT+0400"
-            }
         meta(charset="utf-8")
         meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui, user-scalable=no")
         meta(name="skype_toolbar", content="skype_toolbar_parser_compatible")
@@ -51,14 +41,20 @@ html(lang="ru", class=htmlClass, data-theme-color='1', data-theme-style='normal'
         <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter49939486 = new Ya.Metrika2({ id:49939486, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/tag.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks2"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/49939486" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
         <!-- update the version number as needed -->
-        <script defer src="/__/firebase/6.3.1/firebase-app.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
         <!-- include only the Firebase features as you need -->
-        <script defer src="/__/firebase/6.3.1/firebase-auth.js"></script>
-        <script defer src="/__/firebase/6.3.1/firebase-database.js"></script>
-        <script defer src="/__/firebase/6.3.1/firebase-messaging.js"></script>
-        <script defer src="/__/firebase/6.3.1/firebase-storage.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-auth.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-messaging.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-storage.js"></script>
         <!-- initialize the SDK after all desired features are loaded -->
+        //- <script defer src="https:///firebasejs/init.js"></script>
         <script defer src="/__/firebase/init.js"></script>
+
+        //- <!-- The core Firebase JS SDK is always required and must be listed first -->
+        //- <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+
+        //- <!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#config-web-app -->
 
     body
         block content
