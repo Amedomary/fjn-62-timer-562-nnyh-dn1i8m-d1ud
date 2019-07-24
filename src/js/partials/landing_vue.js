@@ -4,15 +4,16 @@
 
 let currentURL = window.location.search;
 let currentIdPage = qs.parse(currentURL, { ignoreQueryPrefix: true });
+const currentOriginOrl = window.location.origin;
 
 const data_json_default = {
-    pageTitle: "New Year timer",
-    preHeading: "С наступающим!",
-    heading: "New Year",
-    description: "До нового года совсем не много",
-    imageSrcBackground: "images/content/forest.jpg",
+    pageTitle: "Timer",
+    preHeading: "",
+    heading: "Loading...",
+    description: "",
+    imageSrcBackground: "",
     color_i: 172,
-    finishDate: "Tue Jan 01 2020 00:00:00 GMT+0400"
+    finishDate: "0"
 }
 
 // Your web app's Firebase configuration
@@ -509,8 +510,8 @@ var appLanding = new Vue({
 
         // После публикации страницы и отправки аякса
         createdNewPage(page) {
-            this.$refs.alertLink.textContent = `http://localhost:3000?id=${page}`;
-            this.$refs.alertLink.href = `http://localhost:3000?id=${page}`
+            this.$refs.alertLink.textContent = `${currentOriginOrl}?id=${page}`;
+            this.$refs.alertLink.href = `${currentOriginOrl}?id=${page}`
             this.alertIsOpen = true;
         },
 
@@ -518,15 +519,16 @@ var appLanding = new Vue({
         publishNewTimer() {
             vue_this = this;
             const idPage = (Math.floor(Math.random() * 100000));
-            database.ref('pages/' + idPage).set({
+            const dataJSON = {
                 pageTitle: vue_this.headingMessage,
                 preHeading: vue_this.preHeadingMessage,
                 heading: vue_this.headingMessage,
                 description: vue_this.descriptionTextMessage,
+                finishDate: vue_this.finishDate.toString(),
                 imageSrcBackground: vue_this.imageSrcBackground,
                 color_i: vue_this.color_i,
-                finishDate: vue_this.finishDate
-            })
+            };
+            database.ref('pages/' + idPage).set(dataJSON)
                 .then(function () {
                     console.log('Synchronization succeeded');
                     vue_this.createdNewPage(idPage);
