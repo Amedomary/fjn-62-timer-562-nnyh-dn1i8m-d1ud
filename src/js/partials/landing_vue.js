@@ -2,6 +2,9 @@
 // VUE приложение
 // ====================
 
+let currentURL = window.location.search;
+let currentIdPage = qs.parse(currentURL, { ignoreQueryPrefix: true });
+
 const data_json_default = {
     pageTitle: "New Year timer",
     preHeading: "С наступающим!",
@@ -506,8 +509,8 @@ var appLanding = new Vue({
 
         // После публикации страницы и отправки аякса
         createdNewPage(page) {
-            this.$refs.alertLink.textContent = `amedomary.tmweb.ru/${page}`;
-            this.$refs.alertLink.href = `/${page}`
+            this.$refs.alertLink.textContent = `http://localhost:3000?id=${page}`;
+            this.$refs.alertLink.href = `http://localhost:3000?id=${page}`
             this.alertIsOpen = true;
         },
 
@@ -561,7 +564,7 @@ var appLanding = new Vue({
         this.acceptData(data);
 
         // Получаем данные
-        database.ref('pages/' + '49212').once('value').then((e) => {
+        database.ref('pages/' + currentIdPage.id).once('value').then((e) => {
             this.acceptData(e.val());
         });
     },

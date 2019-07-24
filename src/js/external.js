@@ -8,3 +8,6 @@
 
 @@include('external/modernizr-custom.js')
 @@include('external/ofi.min.js')
+
+@@include('bower_components/qs/dist/qs.js')
+const qs = Qs;

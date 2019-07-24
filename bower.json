@@ -13,7 +13,8 @@
     "jquery": ">=1.8.3"
   },
   "dependencies": {
-    "jquery": "^3.0.0"
+    "jquery": "^3.0.0",
+    "qs": "hapi-qs#^6.7.0"
   },
   "devDependencies": {
     "normalize-css": "^4.1.1"
