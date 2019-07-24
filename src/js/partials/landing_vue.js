@@ -4,14 +4,19 @@
 
 let currentURL = window.location.search;
 let currentIdPage = qs.parse(currentURL, { ignoreQueryPrefix: true });
+
+if (!currentURL.match(/^\?id=/ig)) {
+    window.location.search = '?id=0';
+}
+
 const currentOriginOrl = window.location.origin;
 
 const data_json_default = {
     pageTitle: "Timer",
-    preHeading: "",
+    preHeading: "тест",
     heading: "Loading...",
-    description: "",
-    imageSrcBackground: "",
+    description: "тест",
+    imageSrcBackground: "0",
     color_i: 172,
     finishDate: "0"
 }
@@ -30,7 +35,6 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
-
 
 // VUE app
 var appLanding = new Vue({
@@ -563,12 +567,21 @@ var appLanding = new Vue({
     // Вызывается синхронно сразу после создания экземпляра
     created() {
         const data = data_json_default;
+        const this_vue = this;
         this.acceptData(data);
 
         // Получаем данные
-        database.ref('pages/' + currentIdPage.id).once('value').then((e) => {
-            this.acceptData(e.val());
-        });
+        database.ref('pages/' + currentIdPage.id).once('value')
+            .then(function (e) {
+                console.log(e.val());
+                console.log('Complite');
+                console.log(currentIdPage.id);
+                this_vue.acceptData(e.val());
+            })
+            .catch(function (error) {
+                console.log(error);
+                console.log('failed');
+            });
     },
 
     // Вызывается сразу после того как экземпляр был смонтирован
