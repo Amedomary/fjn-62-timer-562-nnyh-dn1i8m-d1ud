@@ -8,7 +8,7 @@ block variables
 doctype html
 html(lang="ru", class=htmlClass, data-theme-color='1', data-theme-style='normal')
     head
-        script. 
+        script.
             const data_json = {
                 "pageTitle": "New Year timer",
                 "preHeading": "С наступающим!",
@@ -36,7 +36,7 @@ html(lang="ru", class=htmlClass, data-theme-color='1', data-theme-style='normal'
         link(rel="icon", type="image/png", sizes="16x16", href="images/favicon/favicon-16x16.png")
         link(rel="manifest", href="images/favicon/site.webmanifest")
         link(rel="mask-icon", href="images/favicon/safari-pinned-tab.svg", color="#000000")
-        
+
         block styles
             link(href="css/main.css?" + new Date().getTime() rel="stylesheet")
         <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Didact+Gothic&amp;subset=cyrillic-ext" rel="stylesheet">
@@ -57,3 +57,9 @@ html(lang="ru", class=htmlClass, data-theme-color='1', data-theme-style='normal'
         script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
         script(src="js/external.js")
         script(src="js/internal.js")
+        //- <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="/__/firebase/6.3.1/firebase-app.js"></script>
+        //- <!-- TODO: Add SDKs for Firebase products that you want to use
+        //- https://firebase.google.com/docs/web/setup#reserved-urls -->
+        //- <!-- Initialize Firebase -->
+        <script src="/__/firebase/init.js"></script>
