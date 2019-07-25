@@ -13,12 +13,12 @@ const currentOriginOrl = window.location.origin;
 
 const data_json_default = {
     pageTitle: "Timer",
-    preHeading: "тест",
     heading: "Loading...",
-    description: "тест",
+    preHeading: "",
+    description: "",
+    finishDate: "0",
     imageSrcBackground: "0",
     color_i: 172,
-    finishDate: "0"
 }
 
 // Your web app's Firebase configuration
