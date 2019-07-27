@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
     <link rel="manifest" href="images/favicon/site.webmanifest">
     <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#000000">
-    <link href="css/main.css?1564032748767" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Didact+Gothic&amp;subset=cyrillic-ext" rel="stylesheet">
+    <link href="css/main.css?1564229868144" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Didact+Gothic&amp;subset=cyrillic-ext" rel="stylesheet">
     <!-- page settings--><meta property="og:title" content="">
 <meta property="og:description" content="">
 <meta property="og:url" content="https://amedomary-san.github.io/">
@@ -150,7 +150,7 @@
           </rect>
         </g>
       </svg>
-      <div class="b-landing__header"><a class="b-landing__link-create" @click="createTimer" href="javascript:void(0)" title=""><span v-if="createTimerShow"><span>Отмена  </span></span><span v-else-if="weHaveModificateTimer"><span>Редактировать </span></span><span v-else><span>Создать свой </span></span></a><a class="b-landing__link-create" @click="acceptCreateTimer" v-if="stateWasModified" href="javascript:void(0)" title=""><span>Применить изменения  </span></a><a class="b-landing__link-create b-landing__link-create--release" @click="publishNewTimer" v-if="weHaveModificateTimer" href="javascript:void(0)" title=""><span>Опубликовать </span></a>
+      <div class="b-landing__header"><a class="b-landing__link-create" @click="createTimer" href="javascript:void(0)" title=""><span v-if="createTimerShow"><span>Отмена</span></span><span v-else-if="weHaveModificateTimer"><span>Редактировать</span></span><span v-else><span>Создать свой</span></span></a><a class="b-landing__link-create" @click="acceptCreateTimer" v-if="stateWasModified" href="javascript:void(0)" title=""><span>Применить изменения</span></a><a class="b-landing__link-create b-landing__link-create--release" @click="publishNewTimer" v-if="weHaveModificateTimer" href="javascript:void(0)" title=""><span>Опубликовать</span></a>
       </div>
       <svg class="b-landing__circle" x="0px" y="0px" viewBox="0 0 705 705" :class="vueCircleClass"><circle class="st0" cx="352.5" cy="352.5" r="350.5"/>
 <circle class="st1" cx="352.5" cy="352.5" r="225.5"/>
@@ -159,7 +159,7 @@
 <circle class="st4" cx="70" cy="352.5" r="3"/>
 <circle class="st5" cx="70" cy="352.5" r="6"/>
       </svg>
-      <div class="b-landing__clock" :class="vueClockClass" @click="editClock"><span class="b-landing__month">{{ cl_month }}</span><span class="b-landing__day"><span>{{ cl_days }}</span><i class="title">{{ cl_days_title }} </i></span><span class="b-landing__hour">{{ cl_hours }}</span><span class="b-landing__slash">:  </span><span class="b-landing__minutes">{{ cl_minutes }}</span><span class="b-landing__minutes">:</span><span class="b-landing__minutes">{{ cl_seconds }}</span><i class="b-icon b-icon--clock-edit icon-pen-solid"></i><span class="b-landing__clock-legend">Изменить дату</span>
+      <div class="b-landing__clock" :class="vueClockClass" @click="editClock"><span class="b-landing__month">{{ cl_month }}</span><span class="b-landing__day"><span>{{ cl_days }}</span><i class="title">{{ cl_days_title }}</i></span><span class="b-landing__hour">{{ cl_hours }}</span><span class="b-landing__slash" v-if="!stateApp.preLoadingApp">:</span><span class="b-landing__minutes">{{ cl_minutes }}</span><span class="b-landing__minutes" v-if="!stateApp.preLoadingApp">:</span><span class="b-landing__minutes">{{ cl_seconds }}</span><i class="b-icon b-icon--clock-edit icon-pen-solid"></i><span class="b-landing__clock-legend">Изменить дату</span>
         <div class="b-landing__clock-form-back" v-if="stateEditClock">
           <form class="b-landing__clock-form">
             <p class="b-landing__clock-title">Когда мне остановить отсчёт?
@@ -238,7 +238,7 @@
       <div class="b-landing__share" :class="vueShareClass"><a class="b-icon b-icon--share b-icon--vk icon-vk" href="javascript:void(0)" title=""></a><a class="b-icon b-icon--share icon-fb" href="javascript:void(0)" title=""></a>
       </div><a class="b-landing__color-pick" href="javascript:void(0)" title="" @click="colorPick"><i class="b-icon icon-paint"></i><span class="b-landing__legend">Сменить цвет</span></a><a class="b-landing__wallpaper-pick" href="javascript:void(0)" title="" @click="wallpaperPick"><i class="b-icon icon-image"></i><span class="b-landing__legend">Выбрать фон</span></a>
       <div class="b-landing__alert" v-show="alertIsOpen">
-        <div class="b-landing__alert-text"><span>Готово! Теперь ваша страница доступна по адресу: </span><a class="b-landing__alert-link" href="" title="" ref="alertLink">amedomary.tmweb.ru/1</a>
+        <div class="b-landing__alert-text"><span>Готово! Теперь ваша страница доступна по адресу:</span><a class="b-landing__alert-link" href="" title="" ref="alertLink">amedomary.tmweb.ru/1</a>
         </div>
       </div>
     </div>
