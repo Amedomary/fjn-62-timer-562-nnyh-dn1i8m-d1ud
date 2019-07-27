@@ -16,7 +16,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
     <link rel="manifest" href="images/favicon/site.webmanifest">
     <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#000000">
-    <link href="css/main.css?1564229868144" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Didact+Gothic&amp;subset=cyrillic-ext" rel="stylesheet">
+    <link href="css/main.css?1564251684606" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Didact+Gothic&amp;subset=cyrillic-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
     <!-- page settings--><meta property="og:title" content="">
 <meta property="og:description" content="">
 <meta property="og:url" content="https://amedomary-san.github.io/">
@@ -165,14 +166,14 @@
             <p class="b-landing__clock-title">Когда мне остановить отсчёт?
             </p>
             <label class="b-landing__clock-label" for="clock_input_date">Дата:
-            </label><input class="b-landing__clock-input" ref="elClockInputDate" id="clock_input_date" type="date" tabindex="43"/>
+            </label><input class="b-landing__clock-input" ref="elClockInputDate" id="clock_input_date" type="date" tabindex="0"/>
             <label class="b-landing__clock-error" for="clock_input_date" v-if="clockDateInputError">Выберите день
             </label>
             <label class="b-landing__clock-label" for="clock_input_time">Время:
-            </label><input class="b-landing__clock-input" ref="elClockInputTime" id="clock_input_time" type="time" tabindex="44"/>
+            </label><input class="b-landing__clock-input" ref="elClockInputTime" id="clock_input_time" type="time" tabindex="0"/>
             <label class="b-landing__clock-error" for="clock_input_time" v-if="clockTimeInputError">Выберите время
             </label>
-            <div class="b-landing__clock-form-link-wrap"><a class="b-landing__clock-form-link" href="javascript:void(0)" title="" @click="cancelEditClock">Отмена</a><a class="b-landing__clock-form-link b-landing__clock-form-link--done" href="javascript:void(0)" title="" @click="acceptEditClock">Готово</a>
+            <div class="b-landing__clock-form-link-wrap"><a class="b-landing__clock-form-link" href="javascript:void(0)" title="" @click="cancelEditClock" tabindex="0">Отмена</a><a class="b-landing__clock-form-link b-landing__clock-form-link--done" href="javascript:void(0)" title="" @click="acceptEditClock" tabindex="0">Готово</a>
             </div>
           </form>
         </div>
@@ -190,47 +191,89 @@
         </p>
         <div class="b-landing__description-input-wrapper" v-else="v-else"><input class="b-landing__description-text" ref="elInputDescriptionText" id="elInputDescriptionText" type="text" placeholder="Ваше описание" name="" v-model="descriptionTextMessage" @blur="compleateEditDescriptionText"/><i class="b-landing__accept-edit-description b-landing__accept-edit-description--description" :class="vueAcceptEditDescription"></i>
         </div><a class="b-landing__hide-icon" @click="hideDescriptionPanel"></a>
-        <div class="addeventatc b-button b-button--flower" title="Add to Calendar" :class="vueButtonClass"><span>Добавить в календарь</span><span class="info start">08/14/2018 03:00 AM</span><span class="info end">08/14/2018 3:30 AM</span><span class="info timezone">Europe/Moscow</span><span class="info title">{{ headingMessage }}</span><span class="info description">{{ descriptionTextMessage }}</span><span class="info location">Location of the event</span></div>
+        <div class="b-landing__button-wrapper" :class="vueButtonClass" @click="editButton"><i class="b-icon b-icon--heading-edit icon-pen-solid"></i>
+          <div class="addeventatc b-button b-button--flower" title="Add to Calendar"><span>Добавить в календарь</span><span class="info start">08/14/2018 03:00 AM</span><span class="info end">08/14/2018 3:30 AM</span><span class="info timezone">Europe/Moscow</span><span class="info title">{{ headingMessage }}</span><span class="info description">{{ descriptionTextMessage }}</span><span class="info location">Location of the event</span></div>
+        </div>
+        <div class="b-landing__clock-form-back b-landing__clock-form-back--btn" v-if="stateEditButton">
+          <form class="b-landing__clock-form">
+            <p class="b-landing__clock-title">Что будет делать главная кнопка?
+            </p>
+            <label class="b-landing__clock-label" for="btn-input-title-description">Текст кнопки:
+            </label><input class="b-landing__clock-input" ref="elClockInputDate" id="btn-input-title-description" type="text" tabindex="0"/>
+            <label class="b-landing__clock-error" for="btn-input-title-description" v-if="clockDateInputError">Поле не заполнено
+            </label>
+            <label class="b-landing__clock-label" for="btn-input-url-description">Ссылка:
+            </label><input class="b-landing__clock-input" ref="elClockInputTime" id="btn-input-url-description" type="text" tabindex="0"/>
+            <label class="b-landing__clock-error" for="btn-input-url-description" v-if="clockTimeInputError">Поле не заполнено
+            </label>
+            <div class="b-landing__clock-form-link-wrap"><a class="b-landing__clock-form-link" href="javascript:void(0)" title="" @click="cancelEditButton" tabindex="0">Отмена</a><a class="b-landing__clock-form-link b-landing__clock-form-link--done" href="javascript:void(0)" title="" @click="acceptEditButton" tabindex="0">Готово</a>
+            </div>
+          </form>
+        </div>
       </div>
       <div class="b-landing__wallpaper-side-bar" v-if="wallpaperSideBarOpen"><a class="b-landing__wallpaper-close" href="javascript:void(0)" @click="wallpaperPickClose"></a>
         <label class="b-landing__wallpaper-label" for="input_File_Background">Добавить своё изображение
         </label><input class="b-landing__wallpaper-input" id="input_File_Background" type="file" name="background" @change="changeImageBackground"/>
         <h5>Галерея:</h5>
         <ul class="b-landing__wallpaper-list">
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/road-sun.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Солнечная дорога
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/road-sun.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/trava.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Батанический сад
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/trava.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/spiderman.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Человек паук
-              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/spiderman.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/spiderman.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/botanik.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Божья коровка
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/botanik.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/man.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Смотрящий вдаль
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/man.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/winter.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Зима
-              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/winter.jpg" alt="" role="presentation"/>
-            </figure>
-          </li>
-          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/forest.jpg" @click="swapImageBackground">
-            <figure class="b-landing__walpaper-figure">
-              <figcaption class="b-landing__wallpaper-title">Лес
-              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/forest.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/winter.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/flower.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Кровавый цветок
-              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/flower.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/flower.jpg" alt="" role="presentation"/>
+            </figure>
+          </li>
+          <li class="b-landing__wallpaper-item" data-wallpaper="images/content/forest.jpg" @click="swapImageBackground">
+            <figure class="b-landing__walpaper-figure">
+              <figcaption class="b-landing__wallpaper-title">Лес
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/forest.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/space.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Рассвет галактики
-              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/space.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/space.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/abstract.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Звёздное дыханье
-              </figcaption><img class="b-landing__wallpaper-preview" src="images/content/abstract.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/abstract.jpg" alt="" role="presentation"/>
             </figure>
           </li>
         </ul>

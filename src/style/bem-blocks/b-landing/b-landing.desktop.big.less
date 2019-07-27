@@ -1,9 +1,13 @@
 /* 1440 + */
 .transitionModOpacity() {
-    transition: opacity .5s;
+    transition: opacity .7s;
 }
 
 .icon-edit-hover(@mixin-top) {
+    .b-icon--heading-edit {
+        opacity: .1;
+    }
+
     &.editable {
         cursor: pointer;
         position: relative;
@@ -82,7 +86,7 @@
         .transitionModOpacity();
 
         &.fade {
-            opacity: 0.2;
+            opacity: 0.1;
         }
 
         &.hide {
@@ -327,6 +331,11 @@
         }
     }
 
+    &__button-wrapper {
+        position: relative;
+        .icon-edit-hover(-51px);
+    }
+
     &__hide-icon {
         display: none;
     }
@@ -506,6 +515,12 @@
         width: 350px;
         background-color: var(--accent-back);
         padding: 12px;
+
+        &--btn {
+            left: -14px;
+            top: auto;
+            bottom: -14px;
+        }
     }
     &__clock-form {
         padding: 24px;
@@ -517,7 +532,7 @@
         font-size: 25px;
         border: none;
         border-bottom: 1px solid var(--accent);
-        padding: 0 0 5px 0;
+        padding: 0 4px 4px 4px;
         margin: 0;
         background-color: transparent;
     }
@@ -582,6 +597,7 @@
     &__legend {
         position: absolute;
         bottom: -24px;
+        padding: 64px 12px 0;
         line-height: 1;
         left: 50%;
         transform: translateX(-50%);

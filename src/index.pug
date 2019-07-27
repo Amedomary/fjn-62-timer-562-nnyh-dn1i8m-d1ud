@@ -24,6 +24,12 @@ block head
 //- Выводим попапы
 block popup
 
+mixin bg-item(photo, title)
+    +e('li').wallpaper-item(data-wallpaper=`images/content/${photo}`, @click='swapImageBackground')
+        +e('figure').walpaper-figure
+            +e('figcaption').wallpaper-title= title
+            +e('img').wallpaper-preview(loading="lazy" src=`images/content/${photo}`)
+
 //- Выводим content
 block content
     include section/ui-kit/button.pug
@@ -154,15 +160,15 @@ block content
                 +e('form').clock-form
                     +e('p').clock-title Когда мне остановить отсчёт?
                     +e('label').clock-label(for='clock_input_date') Дата:
-                    +e('input').clock-input(ref='elClockInputDate', id='clock_input_date', type='date', tabindex='43')
+                    +e('input').clock-input(ref='elClockInputDate', id='clock_input_date', type='date', tabindex='0')
                     +e('label').clock-error(for='clock_input_date' v-if='clockDateInputError') Выберите день
                     +e('label').clock-label(for='clock_input_time') Время:
-                    +e('input').clock-input(ref='elClockInputTime', id='clock_input_time', type='time', tabindex='44')
+                    +e('input').clock-input(ref='elClockInputTime', id='clock_input_time', type='time', tabindex='0')
                     +e('label').clock-error(for='clock_input_time' v-if='clockTimeInputError') Выберите время
 
                     +e.clock-form-link-wrap
-                        +e('a').clock-form-link(href='javascript:void(0)', title='', @click='cancelEditClock') Отмена
-                        +e('a').clock-form-link--done(href='javascript:void(0)', title='', @click='acceptEditClock') Готово
+                        +e('a').clock-form-link(href='javascript:void(0)', title='', @click='cancelEditClock' tabindex="0") Отмена
+                        +e('a').clock-form-link--done(href='javascript:void(0)', title='', @click='acceptEditClock' tabindex="0") Готово
 
         +e.description(:class='descriptionPanel')
             //- TODO: +e('span').legend Изменить описание
@@ -190,14 +196,31 @@ block content
             //- иконка сокрытия
             +e('a').hide-icon(@click='hideDescriptionPanel')
 
-            div(title="Add to Calendar", class="addeventatc b-button b-button--flower", :class='vueButtonClass')
-                span Добавить в календарь
-                span(class="info start") 08/14/2018 03:00 AM
-                span(class="info end") 08/14/2018 3:30 AM
-                span(class="info timezone") Europe/Moscow
-                span(class="info title") {{ headingMessage }}
-                span(class="info description") {{ descriptionTextMessage }}
-                span(class="info location") Location of the event
+            +e.button-wrapper(:class='vueButtonClass' @click='editButton')
+                +icon('pen-solid').--heading-edit
+                div(title="Add to Calendar", class="addeventatc b-button b-button--flower")
+                    //- TODO: вынести в кнопку
+                    span Добавить в календарь
+                    span(class="info start") 08/14/2018 03:00 AM
+                    span(class="info end") 08/14/2018 3:30 AM
+                    span(class="info timezone") Europe/Moscow
+                    span(class="info title") {{ headingMessage }}
+                    span(class="info description") {{ descriptionTextMessage }}
+                    span(class="info location") Location of the event
+
+            +e.clock-form-back(v-if='stateEditButton').--btn
+                +e('form').clock-form
+                    +e('p').clock-title Что будет делать главная кнопка?
+                    +e('label').clock-label(for='btn-input-title-description') Текст кнопки:
+                    +e('input').clock-input(ref='elClockInputDate', id='btn-input-title-description', type='text', tabindex='0')
+                    +e('label').clock-error(for='btn-input-title-description' v-if='clockDateInputError') Поле не заполнено
+                    +e('label').clock-label(for='btn-input-url-description') Ссылка:
+                    +e('input').clock-input(ref='elClockInputTime', id='btn-input-url-description', type='text', tabindex='0')
+                    +e('label').clock-error(for='btn-input-url-description' v-if='clockTimeInputError') Поле не заполнено
+
+                    +e.clock-form-link-wrap
+                        +e('a').clock-form-link(href='javascript:void(0)', title='', @click='cancelEditButton' tabindex="0") Отмена
+                        +e('a').clock-form-link--done(href='javascript:void(0)', title='', @click='acceptEditButton' tabindex="0") Готово
 
         +e.wallpaper-side-bar(v-if='wallpaperSideBarOpen')
             +e('a').wallpaper-close(href='javascript:void(0)', @click='wallpaperPickClose')
@@ -207,35 +230,16 @@ block content
 
             h5 Галерея:
             +e('ul').wallpaper-list
-                +e('li').wallpaper-item(data-wallpaper='images/content/spiderman.jpg', @click='swapImageBackground')
-                    +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Человек паук
-                        +e('img').wallpaper-preview(src='images/content/spiderman.jpg')
-
-                +e('li').wallpaper-item(data-wallpaper='images/content/winter.jpg', @click='swapImageBackground')
-                    +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Зима
-                        +e('img').wallpaper-preview(src='images/content/winter.jpg')
-
-                +e('li').wallpaper-item(data-wallpaper='images/content/forest.jpg', @click='swapImageBackground')
-                    +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Лес
-                        +e('img').wallpaper-preview(src='images/content/forest.jpg')
-
-                +e('li').wallpaper-item(data-wallpaper='images/content/flower.jpg', @click='swapImageBackground')
-                    +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Кровавый цветок
-                        +e('img').wallpaper-preview(src='images/content/flower.jpg')
-
-                +e('li').wallpaper-item(data-wallpaper='images/content/space.jpg', @click='swapImageBackground')
-                    +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Рассвет галактики
-                        +e('img').wallpaper-preview(src='images/content/space.jpg')
-
-                +e('li').wallpaper-item(data-wallpaper='images/content/abstract.jpg', @click='swapImageBackground')
-                    +e('figure').walpaper-figure
-                        +e('figcaption').wallpaper-title Звёздное дыханье
-                        +e('img').wallpaper-preview(src='images/content/abstract.jpg')
+                +bg-item('road-sun.jpg', 'Солнечная дорога')
+                +bg-item('trava.jpg', 'Батанический сад')
+                +bg-item('spiderman.jpg', 'Человек паук')
+                +bg-item('botanik.jpg', 'Божья коровка')
+                +bg-item('man.jpg', 'Смотрящий вдаль')
+                +bg-item('winter.jpg', 'Зима')
+                +bg-item('flower.jpg', 'Кровавый цветок')
+                +bg-item('forest.jpg', 'Лес')
+                +bg-item('space.jpg', 'Рассвет галактики')
+                +bg-item('abstract.jpg', 'Звёздное дыханье')
 
             //- превью для фонов, новые фоны
             //- плейсхолдеры с автором мб

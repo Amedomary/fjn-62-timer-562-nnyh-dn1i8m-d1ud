@@ -12,8 +12,8 @@ if (!currentURL.match(/^\?id=/ig)) {
 const currentOriginOrl = window.location.origin;
 
 const data_json_default = {
-    pageTitle: "Timer",
-    heading: "Loading...",
+    pageTitle: "Таймер",
+    heading: "Загрузка...",
     preHeading: "",
     description: "",
     finishDate: "",
@@ -79,6 +79,7 @@ var appLanding = new Vue({
         stateEditHeading: false, // изменяется ли Заголовок
         stateEditDescriptionText: false, // изменяется ли Описание
         stateEditClock: false, // изменяются ли часы
+        stateEditButton: false, // изменяют ли кнопку?
 
         wallpaperSideBarOpen: false, // Открыт ли сайд бар для фона
 
@@ -137,7 +138,7 @@ var appLanding = new Vue({
                 this.vueBackClass = 'fade';
                 this.vueShareClass = 'hide';
                 this.vueCircleClass = 'fade';
-                this.vueButtonClass = 'fade';
+                this.vueButtonClass = 'editable'; // "editable edited"
                 this.vueClockClass = 'editable'; // "editable edited"
                 this.vuePreHeadingClass = 'editable'; // "editable edited"
                 this.vueHeadingClass = 'editable'; // "editable edited"
@@ -167,6 +168,7 @@ var appLanding = new Vue({
                 this.headingMessage = this.lastEditHeadingMessage;
                 this.descriptionTextMessage = this.lastEditDescriptionTextMessage;
                 this.stateEditClock = false; // off состояние редактирования даты
+                this.stateEditButton = false;
                 this.wallpaperSideBarOpen = false;
                 this.stateWasModified = false; //выключаем состояние "в редактировании"
                 if (this.weAlreadyHaveChanges) {
@@ -243,6 +245,18 @@ var appLanding = new Vue({
                 // таймаут для удаления самого себя
                 setTimeout(() => { this.stateEditClock = false; }, 100); // off состояние редактирования даты
             }
+        },
+
+        editButton() {
+            if (this.createTimerShow) {
+                this.stateEditButton = true;
+            }
+        },
+        cancelEditButton() {
+            this.stateEditButton = false;
+        },
+        acceptEditButton() {
+            this.stateEditButton = false;
         },
 
         // Начинаем редактировать под-заголовок
@@ -384,17 +398,14 @@ var appLanding = new Vue({
             let result = (this.finishDate - nowDate); // получаем разницу
             this.finishDate instanceof Date && !isNaN(this.finishDate)
 
-            // Если прелоадинг
-            if (this.stateApp.preLoadingApp) {
-                this.monthName = 'Loading';
             // Если таймер прошёл
-            } else if (result < 0) {
+            if (result < 0) {
                 this.cl_month = "It's over";
                 this.cl_days = '0';
                 this.cl_hours = '00';
                 this.cl_minutes = '00';
                 this.cl_seconds = '00';
-                this.cl_days_title = 'day';
+                this.cl_days_title = 'день';
             } else {
                 let seconds = Math.floor((result / 1000) % 60);
                 let minutes = Math.floor((result / 1000 / 60) % 60);
@@ -410,10 +421,10 @@ var appLanding = new Vue({
                 this.cl_hours = hours;
                 this.cl_minutes = minutes;
                 this.cl_seconds = seconds;
-                this.cl_days_title = 'days';
+                this.cl_days_title = 'дней';
 
                 if (this.cl_days <= 1) {
-                    this.cl_days_title = 'day';
+                    this.cl_days_title = 'день';
                 }
             }
         },
@@ -424,7 +435,7 @@ var appLanding = new Vue({
         // Выбор цвета ==============
         colorPick() {
             this.styleApp = { '--theme-color': this.color_i };
-            this.color_i = this.color_i + Math.floor(Math.random() * (30 - 4)) + 4; // Добавляем рандомный цвет от 40 - 4
+            this.color_i = this.color_i + Math.floor(Math.random() * 17) + 9; // Добавляем рандомный цвет от 9 - 28
             this.stateWasModified = true;
         },
 
@@ -543,7 +554,7 @@ var appLanding = new Vue({
         // Отправляем данные в фаирбэйз
         publishNewTimer() {
             vue_this = this;
-            const idPage = (Math.floor(Math.random() * 100000));
+            const idPage = (Math.floor(Math.random() * 1000000));
             const dataJSON = {
                 pageTitle: vue_this.headingMessage,
                 preHeading: vue_this.preHeadingMessage,
@@ -599,7 +610,7 @@ var appLanding = new Vue({
         },
         failedLoad() {
             this.headingMessage = '404 :(';
-            this.descriptionTextMessage ='An error occurred while loading the data, check the id and make sure it exists'
+            this.descriptionTextMessage ='Произошла ошибка при попытке загрузить данную страницу, проверьте правильность ссылки и повторите попытку'
         }
     },
 
