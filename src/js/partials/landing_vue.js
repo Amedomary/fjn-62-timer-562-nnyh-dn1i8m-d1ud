@@ -16,8 +16,8 @@ const data_json_default = {
     heading: "Loading...",
     preHeading: "",
     description: "",
-    finishDate: "0",
-    imageSrcBackground: "0",
+    finishDate: "",
+    imageSrcBackground: "",
     color_i: 172,
 }
 
@@ -36,17 +36,27 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
+
+function isValidDate(date) {
+    return date instanceof Date && !isNaN(date);
+}
+
 // VUE app
 var appLanding = new Vue({
     el: '#landing-app',
     data: {
+        // Состояния приложения
+        stateApp: {
+            preLoadingApp: true,
+        },
+
         createTimerShow: false, // состояние редактирования
         weHaveModificateTimer: false, // состояние с новыми данными
         weAlreadyHaveChanges: false, // состояние когда хотя бы раз применяли изменения
 
         // Классы
         vueAppClass: '',
-        vueBackClass: '',
+        vueBackClass: 'hide',
         vueShareClass: '',
         vueCircleClass: '',
         vueButtonClass: '',
@@ -87,7 +97,6 @@ var appLanding = new Vue({
         oldPreHeadingMessage: '', // ячейка для сохранения предыдущего пред Заголовка
         newPreHeadingMessage: '', // ячейка для нового пред Заголовка
 
-
         // Таймер =================
         finishDate: '', // (year, month, date, hours, minutes, seconds, ms)
         monthName: '',
@@ -111,8 +120,16 @@ var appLanding = new Vue({
         alertIsOpen: false,
     },
     methods: {
+        // запускаем таймер
+        startTimer() {
+            this.intervalInit = this.clockFunc();
+            this.interval = setInterval(() => {
+                this.clockFunc();
+            }, 1000);
+        },
+
         // Включаем тему редоктирования
-        createTimer: function () {
+        createTimer() {
             this.createTimerShow = !this.createTimerShow;
 
             if (this.createTimerShow) {
@@ -159,7 +176,7 @@ var appLanding = new Vue({
         },
 
         // Применяем изменения Приложения
-        acceptCreateTimer: function () {
+        acceptCreateTimer() {
             this.createTimerShow = !this.createTimerShow; // меняем состояния редактирования
             // убиваем классы редактирования
             this.vueAppClass = '';
@@ -180,13 +197,13 @@ var appLanding = new Vue({
         },
 
         // Изменяем часы (ставим новую дату)
-        editClock: function () {
+        editClock() {
             if (this.createTimerShow) {
                 this.stateEditClock = true; // включаем состояние редактирования даты
                 this.vueClockClass = 'editable editing';
             }
         },
-        cancelEditClock: function () {
+        cancelEditClock() {
             setTimeout(() => { // таймаут для удаления самого себя
                 this.stateEditClock = false; // off состояние редактирования даты
                 this.vueClockClass = 'editable';
@@ -194,7 +211,7 @@ var appLanding = new Vue({
                 this.clockTimeInputError = false;
             }, 100);
         },
-        acceptEditClock: function () {
+        acceptEditClock() {
             let $clockInputDate = this.$refs.elClockInputDate;
             let $clockInputTime = this.$refs.elClockInputTime;
 
@@ -229,7 +246,7 @@ var appLanding = new Vue({
         },
 
         // Начинаем редактировать под-заголовок
-        editPreHeading: function () {
+        editPreHeading() {
             if (this.createTimerShow) {
                 this.stateEditPreHeading = true;
                 this.oldPreHeadingMessage = this.preHeadingMessage; // Запоминаем старое название
@@ -250,7 +267,7 @@ var appLanding = new Vue({
             }
         },
         // Сохроняем редактирование
-        compleateEditPreHeading: function () {
+        compleateEditPreHeading() {
             if (this.createTimerShow) {
                 this.stateEditPreHeading = false;
                 this.vueAcceptEditDescription = '';
@@ -265,7 +282,7 @@ var appLanding = new Vue({
         },
 
         // Начинаем редактировать заголовок
-        editHeading: function () {
+        editHeading() {
             if (this.createTimerShow) {
                 this.stateEditHeading = true;
                 this.oldHeadingMessage = this.headingMessage; // Запоминаем старое название
@@ -286,7 +303,7 @@ var appLanding = new Vue({
             }
         },
         // Сохроняем редактирование
-        compleateEditHeading: function () {
+        compleateEditHeading() {
             if (this.createTimerShow) {
                 this.stateEditHeading = false;
                 this.vueAcceptEditDescription = '';
@@ -302,7 +319,7 @@ var appLanding = new Vue({
         },
 
         // Начинаем редактировать DescriptionText
-        editDescriptionText: function () {
+        editDescriptionText() {
             if (this.createTimerShow) {
                 this.stateEditDescriptionText = true;
                 this.oldDescriptionTextMessage = this.descriptionTextMessage; // Запоминаем старое название
@@ -323,7 +340,7 @@ var appLanding = new Vue({
             }
         },
         // Сохроняем редактирование DescriptionText
-        compleateEditDescriptionText: function () {
+        compleateEditDescriptionText() {
             if (this.createTimerShow) {
                 this.stateEditDescriptionText = false;
                 this.vueAcceptEditDescription = '';
@@ -352,7 +369,7 @@ var appLanding = new Vue({
         },
 
         // Скрываем панельку описания на мобиле
-        hideDescriptionPanel: function () {
+        hideDescriptionPanel() {
             if (this.descriptionPanel === 'hide') {
                 this.descriptionPanel = '';
             } else {
@@ -361,13 +378,17 @@ var appLanding = new Vue({
         },
 
         // Clock ================
-        clockFunc: function () {
+        clockFunc() {
             // // создаём дату новую
-            var nowDate = new Date();
-            var result = (this.finishDate - nowDate); // получаем разницу
+            let nowDate = new Date();
+            let result = (this.finishDate - nowDate); // получаем разницу
+            this.finishDate instanceof Date && !isNaN(this.finishDate)
 
+            // Если прелоадинг
+            if (this.stateApp.preLoadingApp) {
+                this.monthName = 'Loading';
             // Если таймер прошёл
-            if (result < 0) {
+            } else if (result < 0) {
                 this.cl_month = "It's over";
                 this.cl_days = '0';
                 this.cl_hours = '00';
@@ -375,10 +396,10 @@ var appLanding = new Vue({
                 this.cl_seconds = '00';
                 this.cl_days_title = 'day';
             } else {
-                var seconds = Math.floor((result / 1000) % 60);
-                var minutes = Math.floor((result / 1000 / 60) % 60);
-                var hours = Math.floor((result / 1000 / 60 / 60) % 24);
-                var days = Math.floor(result / 1000 / 60 / 60 / 24);
+                let seconds = Math.floor((result / 1000) % 60);
+                let minutes = Math.floor((result / 1000 / 60) % 60);
+                let hours = Math.floor((result / 1000 / 60 / 60) % 24);
+                let days = Math.floor(result / 1000 / 60 / 60 / 24);
 
                 if (seconds < 10) seconds = '0' + seconds;
                 if (minutes < 10) minutes = '0' + minutes;
@@ -396,19 +417,19 @@ var appLanding = new Vue({
                 }
             }
         },
-        createNameOfFinishDate: function () {
+        createNameOfFinishDate() {
             this.monthName = this.finishDate.toLocaleString('ru-RU', { month: "long", day: 'numeric', hour: 'numeric', minute: 'numeric' });
         },
 
         // Выбор цвета ==============
-        colorPick: function () {
+        colorPick() {
             this.styleApp = { '--theme-color': this.color_i };
             this.color_i = this.color_i + Math.floor(Math.random() * (30 - 4)) + 4; // Добавляем рандомный цвет от 40 - 4
             this.stateWasModified = true;
         },
 
         // Выбор фонового изображения
-        wallpaperPick: function () {
+        wallpaperPick() {
             this.wallpaperSideBarOpen = true;
         },
         wallpaperPickClose() {
@@ -439,7 +460,7 @@ var appLanding = new Vue({
         },
 
         // share
-        shareCreateLink: function () {
+        shareCreateLink() {
             window.addEventListener('load', function () {
                 var e = document.getElementsByClassName('b-landing__share');
 
@@ -519,7 +540,7 @@ var appLanding = new Vue({
             this.alertIsOpen = true;
         },
 
-        // Отправляем данные в фб
+        // Отправляем данные в фаирбэйз
         publishNewTimer() {
             vue_this = this;
             const idPage = (Math.floor(Math.random() * 100000));
@@ -546,6 +567,15 @@ var appLanding = new Vue({
 
         // Применяем новые данные к таймеру
         acceptData(data) {
+            let newDate = new Date(data.finishDate);
+
+            if (isValidDate(newDate)) {
+                // Если дата верна
+            } else {
+                // Если дата НЕ верна
+                newDate = new Date(0);
+            }
+
             // присваеваем переменным значения с сервера
             this.preHeadingMessage = data.preHeading;
             this.headingMessage = data.heading;
@@ -557,7 +587,19 @@ var appLanding = new Vue({
             // присваеваем цвет
             this.styleApp = { '--theme-color': data.color_i };
             // присваеваем дату
-            this.finishDate = new Date(data.finishDate);
+            this.finishDate = newDate;
+            // включаем новую дату
+            this.createNameOfFinishDate();
+        },
+
+        finishPreloadingDone() {
+            this.stateApp.preLoadingApp = false;
+            this.startTimer();
+            this.vueBackClass = '';
+        },
+        failedLoad() {
+            this.headingMessage = '404 :(';
+            this.descriptionTextMessage ='An error occurred while loading the data, check the id and make sure it exists'
         }
     },
 
@@ -567,32 +609,26 @@ var appLanding = new Vue({
     // Вызывается синхронно сразу после создания экземпляра
     created() {
         const data = data_json_default;
-        const this_vue = this;
+        const _this = this;
         this.acceptData(data);
 
         // Получаем данные
         database.ref('pages/' + currentIdPage.id).once('value')
             .then(function (e) {
-                console.log(e.val());
-                console.log('Complite');
-                console.log(currentIdPage.id);
-                this_vue.acceptData(e.val());
+                _this.acceptData(e.val());
+                // Включаем приложение
+                _this.finishPreloadingDone();
             })
             .catch(function (error) {
                 console.log(error);
-                console.log('failed');
+                _this.failedLoad();
             });
     },
 
     // Вызывается сразу после того как экземпляр был смонтирован
     mounted() {
         // получаем конечную дату (Заголовок Даты)
-        this.createNameOfFinishDate();
-        // запускаем таймер
-        this.intervalInit = this.clockFunc();
-        this.interval = setInterval(() => {
-            this.clockFunc();
-        }, 1000);
+        // this.createNameOfFinishDate();
         // меняем шейры
         this.shareCreateLink();
         document.addEventListener('keypress', this.acceptEditText);

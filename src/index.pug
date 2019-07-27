@@ -57,7 +57,7 @@ block content
 
                 +e('line').line(x1="calc(100% - 40px)" y1="calc(100% - 40px)" x2="calc(100% - 40px)" y2="calc(100% - 100px)")
                 +e('line').line(x1="calc(100% - 100px)" y1="calc(100% - 40px)" x2="calc(100% - 40px)" y2="calc(100% - 40px)")
-            
+
             //- белые плюсики
             g
                 +e('rect').plus(x="40px" y="35px" width="1px" height="11px")
@@ -115,17 +115,17 @@ block content
         +e.header
             +e('a').link-create(@click="createTimer" href='javascript:void(0)', title='')
                 span(v-if='createTimerShow')
-                    span Отмена  
+                    span Отмена
                 span(v-else-if='weHaveModificateTimer')
-                    span Редактировать 
+                    span Редактировать
                 span(v-else)
-                    span Создать свой 
+                    span Создать свой
 
             +e.link-create(@click="acceptCreateTimer", v-if='stateWasModified', href='javascript:void(0)', title='')
-                span Применить изменения  
-            
+                span Применить изменения
+
             +e.link-create(@click="publishNewTimer", v-if='weHaveModificateTimer', href='javascript:void(0)', title='').--release
-                span Опубликовать 
+                span Опубликовать
                 //- b таймер
 
         +e('svg')(x="0px" y="0px" viewBox="0 0 705 705", :class='vueCircleClass').circle
@@ -140,11 +140,11 @@ block content
             +e('span').month {{ cl_month }}
             +e('span').day
                 span {{ cl_days }}
-                i.title {{ cl_days_title }} 
+                i.title {{ cl_days_title }}
             +e('span').hour {{ cl_hours }}
-            +e('span').slash :  
+            +e('span').slash(v-if="!stateApp.preLoadingApp") :
             +e('span').minutes {{ cl_minutes }}
-            +e('span').minutes :
+            +e('span').minutes(v-if="!stateApp.preLoadingApp") :
             +e('span').minutes {{ cl_seconds }}
 
             +icon('pen-solid').--clock-edit
@@ -189,7 +189,7 @@ block content
 
             //- иконка сокрытия
             +e('a').hide-icon(@click='hideDescriptionPanel')
-            
+
             div(title="Add to Calendar", class="addeventatc b-button b-button--flower", :class='vueButtonClass')
                 span Добавить в календарь
                 span(class="info start") 08/14/2018 03:00 AM
@@ -201,10 +201,10 @@ block content
 
         +e.wallpaper-side-bar(v-if='wallpaperSideBarOpen')
             +e('a').wallpaper-close(href='javascript:void(0)', @click='wallpaperPickClose')
-            
+
             +e('label').wallpaper-label(for="input_File_Background") Добавить своё изображение
             +e('input').wallpaper-input(id='input_File_Background', type="file", name="background", @change="changeImageBackground")
-            
+
             h5 Галерея:
             +e('ul').wallpaper-list
                 +e('li').wallpaper-item(data-wallpaper='images/content/spiderman.jpg', @click='swapImageBackground')
@@ -251,8 +251,8 @@ block content
         +e('a').wallpaper-pick(href='javascript:void(0)', title='', @click='wallpaperPick')
             +icon('image')
             +e('span').legend Выбрать фон
-        
+
         +e.alert(v-show='alertIsOpen')
             +e.alert-text
-                span Готово! Теперь ваша страница доступна по адресу: 
+                span Готово! Теперь ваша страница доступна по адресу:
                 +e('a').alert-link(href='', title='', ref="alertLink") amedomary.tmweb.ru/1
