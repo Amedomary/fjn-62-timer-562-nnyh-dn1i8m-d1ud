@@ -114,11 +114,11 @@
 
         &:after,
         &:before {
+            display: block;
             content: '';
             position: absolute;
             top: 19px;
             left: 6px;
-            display: block;
             width: 30px;
             height: 2px;
             background-color: var(--accent);
@@ -265,7 +265,7 @@
         font-size: 12px;
         line-height: 1.5;
         margin-bottom: 70px;
-
+        min-height: 12px;
         background: none;
         border: none;
         padding: 0 0 0 3px;
@@ -410,6 +410,7 @@
         left: 20%;
         font-weight: 100;
         padding-bottom: 10px;
+        // =Nova+Mono|Roboto+Mono|VT323&display=swap
 
         &:after {
             content: '';
@@ -463,6 +464,7 @@
         font-size: 90px;
         vertical-align: middle;
         margin-right: 25px;
+        font-family: 'Nova Mono';
 
         .title {
             position: absolute;
@@ -470,6 +472,7 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 15px;
+            font-family: @font-base;
         }
     }
     &__hour {
@@ -477,6 +480,7 @@
         font-size: 70px;
         vertical-align: middle;
         margin-right: 5px;
+        font-family: 'Nova Mono';
     }
     &__slash {
         display: inline-block;
@@ -491,6 +495,7 @@
         vertical-align: middle;
         opacity: .75;
         margin-right: 5px;
+        font-family: 'Nova Mono';
     }
     &__clock-form-back {
         cursor: default;

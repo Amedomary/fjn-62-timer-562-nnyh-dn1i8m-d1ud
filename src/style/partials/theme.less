@@ -27,15 +27,15 @@ html.blue {
 
 body {
     height: 100%;
-    font-family: @font-base;
-    color: @cl-theme-global;
-    vertical-align: top;
-    -webkit-text-size-adjust: 100%;
     margin: 0;
     padding: 0;
+    font-family: @font-base;
+    vertical-align: top;
+    color: @cl-theme-global;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 }
 
 // global
@@ -45,56 +45,60 @@ img {
 }
 
 a {
-    color: @cl-theme-link;
-    text-decoration: none;
-    // outline: none;
+// outline: none;
     transition: color @animation-time;
-
+    text-decoration: none;
+    color: @cl-theme-link;
     .no-touchevents &:hover,
     .touchevents &:active {
         color: @cl-theme-link-hover;
     }
 }
 
-h1,h2,h3,h4,h5,h6 {
-    font-family: @font-sans;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0px;
-    color: @font-sans;
+    font-family: @font-sans;
     font-size: 1.2rem;
     font-weight: normal;
+    color: @font-sans;
 }
 
 h1 {
-    font-size: 2rem;
     margin: 0 1rem 2rem 0;
+    font-size: 2rem;
 }
 h2 {
-    font-size: 1.8rem;
     margin: 0 1rem 1.8rem 0;
+    font-size: 1.8rem;
 }
 h3 {
-    font-size: 1.6rem;
     margin: 0 1rem 1.6rem 0;
+    font-size: 1.6rem;
 }
 h4 {
-    font-size: 1.4rem;
     margin: 0 1rem 1.4rem 0;
+    font-size: 1.4rem;
 }
 h5 {
-    font-size: 1.2rem;
     margin: 0 1rem 1.2rem 0;
+    font-size: 1.2rem;
 }
 
 hr {
-    background: none;
-    border: none;
-    border-bottom: 1px solid @cl-theme-grey;
-    display: block;
     position: relative;
+    display: block;
     height: 1px;
     margin: 15px 0;
-    line-height: 0;
     font-size: 0;
+    line-height: 0;
+    border: none;
+    border-bottom: 1px solid @cl-theme-grey;
+    background: none;
 }
 
 ul {
@@ -106,25 +110,25 @@ ol {
 }
 
 .table {
-    border: 1px solid @cl-theme-grey;
     margin: 0;
+    border: 1px solid @cl-theme-grey;
 }
 th,
 td {
-    background: none;
-    border: 1px solid @cl-theme-grey;
     padding: 1px;
     text-align: left;
+    border: 1px solid @cl-theme-grey;
+    background: none;
 }
 
 q,
 blockquote {
-    border: none;
-    line-height: 24px;
     margin: 0px auto;
     padding: 0;
+    line-height: 24px;
     text-align: center;
     text-transform: uppercase;
+    border: none;
 }
 
 fieldset {
@@ -134,49 +138,47 @@ fieldset {
 
 // form
 form {
+    position: relative;
     display: block;
     clear: both;
-    position: relative;
     zoom: 1;
 }
 
 label,
-.label {
+.label { position: relative;
     display: block;
-    font-weight: normal;//Сброс значения bold, идущего из битрикса
-    position: relative;
     clear: both;
+    zoom: 1;
     width: 100%;
     margin: 0;
-    zoom: 1;
+    font-weight: normal;//Сброс значения bold, идущего из битрикса
     cursor: pointer;
-
 }
 
 input,
 textarea,
 select {
-    background: #fff;
-    border: 1px solid @cl-theme-grey;
-    box-shadow: none;
-    display: block;
     position: relative;
-    width: 100%;
-    color: @cl-theme-global;
-    vertical-align: top;
-    // outline: none;
+    display: block;
+// outline: none;
     zoom: 1;
+    width: 100%;
+    vertical-align: top;
+    color: @cl-theme-global;
+    border: 1px solid @cl-theme-grey;
+    background: #ffffff;
+    box-shadow: none;
 }
 
-input[type="file"] {
+input[type='file'] {
     position: relative;
     margin: 0;
 }
 
 input[type='submit'] {
     -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+       -moz-appearance: none;
+            appearance: none;
 }
 
 textarea {
@@ -190,52 +192,52 @@ select {
 
 // placeholder
 ::-webkit-input-placeholder {
-    color: @cl-theme-placeholder;
     opacity: 1;
+    color: @cl-theme-placeholder;
 }
 
 :-moz-placeholder {
-    color: @cl-theme-placeholder;
     opacity: 1;
+    color: @cl-theme-placeholder;
 }
 
 :-ms-input-placeholder {
-    color: @cl-theme-placeholder;
     opacity: 1;
+    color: @cl-theme-placeholder;
 }
 
 [v-cloak] {
-  display: none;
+    display: none;
 }
 
 // Условный для ие10-11
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-   body {
+    body {
+        font-family: @font-sans;
         font-size: 30px;
         line-height: 1.6;
-        font-family: @font-sans;
         letter-spacing: 2px;
 
         &:before {
-            content: 'Пожалуйста не используйте IE-11 на своём компьютере.';
             display: block;
             max-width: 740px;
             margin: auto;
-            padding-top: 100px;
             padding: 100px 50px 0;
+            padding-top: 100px;
+            content: 'Пожалуйста не используйте IE-11 на своём компьютере.';
             color: rgb(255, 139, 104);
         }
         &:after {
-            content: 'Для просмотра данного сайта воспользуйтесь последнийми версиями браузеров Google Chrome, Mozilla Firefox, Microsoft Edge, Safari, Opera ...';
             display: block;
             max-width: 740px;
             margin: auto;
-            padding-top: 15px;
             padding: 15px 50px 0;
+            padding-top: 15px;
+            content: 'Для просмотра данного сайта воспользуйтесь последнийми версиями браузеров Google Chrome, Mozilla Firefox, Microsoft Edge, Safari, Opera ...';
         }
-   }
+    }
 
-   .b-landing {
-       display: none;
-   }
+    .b-landing {
+        display: none;
+    }
 }
