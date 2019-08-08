@@ -198,15 +198,16 @@ block content
 
             +e.button-wrapper(:class='vueButtonClass' @click='editButton')
                 +icon('pen-solid').--heading-edit
-                div(title="Add to Calendar", class="addeventatc b-button b-button--flower")
+                //- div(title="", class="addeventatc b-button b-button--flower")
+                a(title="", class="b-button b-button--flower", target="_blank" href="https://docs.google.com/document/d/1x3uTSNrawA5B4XWZx9VtCoww0vhDYTZMKjCpK2nFtnk/edit?usp=sharing")
                     //- TODO: вынести в кнопку
-                    span Добавить в календарь
-                    span(class="info start") 08/14/2018 03:00 AM
-                    span(class="info end") 08/14/2018 3:30 AM
-                    span(class="info timezone") Europe/Moscow
-                    span(class="info title") {{ headingMessage }}
-                    span(class="info description") {{ descriptionTextMessage }}
-                    span(class="info location") Location of the event
+                    span Подать заявку
+                    //- span(class="info start") 08/14/2018 03:00 AM
+                    //- span(class="info end") 08/14/2018 3:30 AM
+                    //- span(class="info timezone") Europe/Moscow
+                    //- span(class="info title") {{ headingMessage }}
+                    //- span(class="info description") {{ descriptionTextMessage }}
+                    //- span(class="info location") Location of the event
 
             +e.clock-form-back(v-if='stateEditButton').--btn
                 +e('form').clock-form
