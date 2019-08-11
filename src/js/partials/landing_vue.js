@@ -98,6 +98,19 @@ var appLanding = new Vue({
         oldPreHeadingMessage: '', // ячейка для сохранения предыдущего пред Заголовка
         newPreHeadingMessage: '', // ячейка для нового пред Заголовка
 
+        flowerButton: {
+            text: 'Подать заявку', // текст описания
+            lastEditText: '', // описание предыдущего сохранения
+            oldText: '', // ячейка для сохранения предыдущего описания во время редактирования
+            newText: '', // ячейка для нового описания
+            link: 'https://docs.google.com/document/d/1x3uTSNrawA5B4XWZx9VtCoww0vhDYTZMKjCpK2nFtnk/edit?usp=sharing', // текст описания
+            lastEditLink: '', // описание предыдущего сохранения
+            oldLink: '', // ячейка для сохранения предыдущего описания во время редактирования
+            newLink: '', // ячейка для нового описания
+            textInputError: false,
+            linkInputError: false,
+        },
+
         // Таймер =================
         finishDate: '', // (year, month, date, hours, minutes, seconds, ms)
         monthName: '',
@@ -247,16 +260,42 @@ var appLanding = new Vue({
             }
         },
 
-        editButton() {
+
+        /** Flower button */
+        // Начинаем редактировать Flower button
+        editButton(e) {
             if (this.createTimerShow) {
+                e.preventDefault();
                 this.stateEditButton = true;
+                this.flowerButton.oldText = this.flowerButton.text; // Запоминаем старое название
+                this.flowerButton.text = ''; // и меняем текст в форме на пустой
             }
         },
         cancelEditButton() {
             this.stateEditButton = false;
         },
         acceptEditButton() {
-            this.stateEditButton = false;
+            // Проверка. Ввели-ли мы значения?
+            if (this.$refs.elFlowerTextInput.value == '' && this.$refs.elFlowerLinkInput.value == '') {
+                this.flowerButton.textInputError = true;
+                this.flowerButton.linkInputError = true;
+            } else if (this.$refs.elFlowerTextInput.value == '') {
+                this.flowerButton.textInputError = true;
+                this.flowerButton.linkInputError = false;
+            } else if (this.$refs.elFlowerLinkInput.value == '') {
+                this.flowerButton.textInputError = false;
+                this.flowerButton.linkInputError = true;
+            } else {
+                this.flowerButton.textInputError = false;
+                this.flowerButton.linkInputError = false;
+
+                this.flowerButton.text = this.$refs.elFlowerTextInput.value;
+                this.flowerButton.link = this.$refs.elFlowerLinkInput.value;
+                this.stateEditButton = false;
+
+                this.stateWasModified = true;
+                this.vueClockClass = 'editable';
+            }
         },
 
         // Начинаем редактировать под-заголовок
@@ -332,6 +371,7 @@ var appLanding = new Vue({
             }
         },
 
+        /** DescriptionText */
         // Начинаем редактировать DescriptionText
         editDescriptionText() {
             if (this.createTimerShow) {
