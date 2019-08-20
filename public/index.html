@@ -9,18 +9,19 @@
     <meta name="msapplication-navbutton-color" content="#111011">
     <meta name="apple-mobile-web-app-status-bar-style" content="dark">
     <meta name="msapplication-TileColor" content="#ff7a20">
-    <meta name="theme-color" content="#ffffff"><meta property="og:image:width" content="1351">
-<meta property="og:image:height" content="707">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:image:width" content="1351">
+    <meta property="og:image:height" content="707">
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
     <link rel="manifest" href="images/favicon/site.webmanifest">
     <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#000000">
-    <link href="css/main.css?1565284144797" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Didact+Gothic&amp;subset=cyrillic-ext" rel="stylesheet">
+    <link href="css/main.css?1566323834574" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Didact+Gothic&amp;subset=cyrillic-ext" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
     <!-- page settings--><meta property="og:title" content="">
 <meta property="og:description" content="">
-<meta property="og:url" content="https://amedomary-san.github.io/">
+<meta property="og:url" content="https://timer-ba52d.firebaseapp.com/">
 <meta property="og:image" content="images/inhtml/og-image.jpg">
 <script type="text/javascript" src="js/partials/addtocalendar.js" async defer></script>
     <title></title>
@@ -33,7 +34,6 @@
 <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-messaging.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-storage.js"></script>
-<!-- initialize the SDK after all desired features are loaded -->
   </head>
   <body>
     <div class="b-landing" id="landing-app" :class="vueAppClass" v-bind:style="styleApp" v-cloak="v-cloak"><img class="b-landing__background" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" title="" :class="vueBackClass" :src="imageSrcBackground" role="presentation"/>
@@ -191,19 +191,19 @@
         </p>
         <div class="b-landing__description-input-wrapper" v-else="v-else"><input class="b-landing__description-text" ref="elInputDescriptionText" id="elInputDescriptionText" type="text" placeholder="Ваше описание" name="" v-model="descriptionTextMessage" @blur="compleateEditDescriptionText"/><i class="b-landing__accept-edit-description b-landing__accept-edit-description--description" :class="vueAcceptEditDescription"></i>
         </div><a class="b-landing__hide-icon" @click="hideDescriptionPanel"></a>
-        <div class="b-landing__button-wrapper" :class="vueButtonClass" @click="editButton"><i class="b-icon b-icon--heading-edit icon-pen-solid"></i><a class="b-button b-button--flower" title="" target="_blank" href="https://docs.google.com/document/d/1x3uTSNrawA5B4XWZx9VtCoww0vhDYTZMKjCpK2nFtnk/edit?usp=sharing"><span>Подать заявку</span></a>
+        <div class="b-landing__button-wrapper" :class="vueButtonClass" @click="editButton"><i class="b-icon b-icon--heading-edit icon-pen-solid"></i><a class="b-button b-button--flower" title="" target="_blank" :href="flowerButton.link"><span>{{ flowerButton.text }}</span></a>
         </div>
         <div class="b-landing__clock-form-back b-landing__clock-form-back--btn" v-if="stateEditButton">
           <form class="b-landing__clock-form">
             <p class="b-landing__clock-title">Что будет делать главная кнопка?
             </p>
-            <label class="b-landing__clock-label" for="btn-input-title-description">Текст кнопки:
-            </label><input class="b-landing__clock-input" ref="elClockInputDate" id="btn-input-title-description" type="text" tabindex="0"/>
-            <label class="b-landing__clock-error" for="btn-input-title-description" v-if="clockDateInputError">Поле не заполнено
+            <label class="b-landing__clock-label" for="qprmd7">Текст кнопки:
+            </label><input class="b-landing__clock-input" id="qprmd7" ref="elFlowerTextInput" type="text" tabindex="0"/>
+            <label class="b-landing__clock-error" for="qprmd7" v-if="flowerButton.textInputError">Поле не заполнено
             </label>
-            <label class="b-landing__clock-label" for="btn-input-url-description">Ссылка:
-            </label><input class="b-landing__clock-input" ref="elClockInputTime" id="btn-input-url-description" type="text" tabindex="0"/>
-            <label class="b-landing__clock-error" for="btn-input-url-description" v-if="clockTimeInputError">Поле не заполнено
+            <label class="b-landing__clock-label" for="vmfhu5z">Ссылка:
+            </label><input class="b-landing__clock-input" id="vmfhu5z" ref="elFlowerLinkInput" type="text" tabindex="0"/>
+            <label class="b-landing__clock-error" for="vmfhu5z" v-if="flowerButton.linkInputError">Поле не заполнено
             </label>
             <div class="b-landing__clock-form-link-wrap"><a class="b-landing__clock-form-link" href="javascript:void(0)" title="" @click="cancelEditButton" tabindex="0">Отмена</a><a class="b-landing__clock-form-link b-landing__clock-form-link--done" href="javascript:void(0)" title="" @click="acceptEditButton" tabindex="0">Готово</a>
             </div>
@@ -218,61 +218,61 @@
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/road-sun.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Солнечная дорога
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/road-sun.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/road-sun.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/trava.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Батанический сад
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/trava.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/trava.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/spiderman.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Человек паук
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/spiderman.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/spiderman.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/botanik.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Божья коровка
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/botanik.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/botanik.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/man.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Смотрящий вдаль
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/man.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/man.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/winter.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Зима
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/winter.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/winter.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/flower.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Кровавый цветок
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/flower.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/flower.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/forest.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Лес
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/forest.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/forest.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/space.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Рассвет галактики
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/space.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/space.jpg" alt="" role="presentation"/>
             </figure>
           </li>
           <li class="b-landing__wallpaper-item" data-wallpaper="images/content/abstract.jpg" @click="swapImageBackground">
             <figure class="b-landing__walpaper-figure">
               <figcaption class="b-landing__wallpaper-title">Звёздное дыханье
-              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/abstract.jpg" alt="" role="presentation"/>
+              </figcaption><img class="b-landing__wallpaper-preview" loading="lazy" src="images/content/preview/abstract.jpg" alt="" role="presentation"/>
             </figure>
           </li>
         </ul>
