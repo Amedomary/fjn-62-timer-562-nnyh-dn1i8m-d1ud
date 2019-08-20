@@ -3,7 +3,7 @@ include ../../node_modules/bemto.pug/bemto.pug
 - set_bemto_settings({ prefix: { '': 'b-', 'js-': true, '-': false }, element: '__', modifier: '--', default_tag: 'div' })
 
 block variables
-- var requireJS = false
+- var requireJS = false;
 
 doctype html
 html(lang="ru", class=htmlClass, data-theme-color='1', data-theme-style='normal')
@@ -18,8 +18,8 @@ html(lang="ru", class=htmlClass, data-theme-color='1', data-theme-style='normal'
 
         meta(name="msapplication-TileColor", content="#ff7a20")
         meta(name="theme-color", content="#ffffff")
-        <meta property="og:image:width" content="1351">
-        <meta property="og:image:height" content="707">
+        meta(property="og:image:width" content="1351")
+        meta(property="og:image:height" content="707")
 
         link(rel="apple-touch-icon", sizes="180x180", href="images/favicon/apple-touch-icon.png")
         link(rel="icon", type="image/png", sizes="32x32", href="images/favicon/favicon-32x32.png")
@@ -48,14 +48,6 @@ html(lang="ru", class=htmlClass, data-theme-color='1', data-theme-style='normal'
         <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
         <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-messaging.js"></script>
         <script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-storage.js"></script>
-        <!-- initialize the SDK after all desired features are loaded -->
-        //- <script defer src="https:///firebasejs/init.js"></script>
-        //- <script defer src="/__/firebase/init.js"></script>
-
-        //- <!-- The core Firebase JS SDK is always required and must be listed first -->
-        //- <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
-
-        //- <!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#config-web-app -->
 
     body
         block content

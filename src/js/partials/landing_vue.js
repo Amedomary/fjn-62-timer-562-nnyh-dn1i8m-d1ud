@@ -19,6 +19,8 @@ const data_json_default = {
     finishDate: "",
     imageSrcBackground: "",
     color_i: 172,
+    buttonText: "Пожалуйста подождите",
+    buttonHref: "",
 }
 
 // Your web app's Firebase configuration
@@ -103,7 +105,7 @@ var appLanding = new Vue({
             lastEditText: '', // описание предыдущего сохранения
             oldText: '', // ячейка для сохранения предыдущего описания во время редактирования
             newText: '', // ячейка для нового описания
-            link: 'https://docs.google.com/document/d/1x3uTSNrawA5B4XWZx9VtCoww0vhDYTZMKjCpK2nFtnk/edit?usp=sharing', // текст описания
+            link: '', // текст описания
             lastEditLink: '', // описание предыдущего сохранения
             oldLink: '', // ячейка для сохранения предыдущего описания во время редактирования
             newLink: '', // ячейка для нового описания
@@ -161,6 +163,8 @@ var appLanding = new Vue({
                 this.lastEditHeadingMessage = this.headingMessage;
                 this.lastEditDescriptionTextMessage = this.descriptionTextMessage;
                 this.lastEditPreHeadingMessage = this.preHeadingMessage;
+                this.flowerButton.lastEditText = this.flowerButton.text;
+                this.flowerButton.lastEditLink = this.flowerButton.link;
 
                 this.weHaveModificateTimer = false; // Включаем состояние модифицированного приложения
 
@@ -180,6 +184,8 @@ var appLanding = new Vue({
                 this.preHeadingMessage = this.lastEditPreHeadingMessage;
                 this.headingMessage = this.lastEditHeadingMessage;
                 this.descriptionTextMessage = this.lastEditDescriptionTextMessage;
+                this.flowerButton.text = this.flowerButton.lastEditText;
+                this.flowerButton.link = this.flowerButton.lastEditLink;
                 this.stateEditClock = false; // off состояние редактирования даты
                 this.stateEditButton = false;
                 this.wallpaperSideBarOpen = false;
@@ -260,7 +266,6 @@ var appLanding = new Vue({
             }
         },
 
-
         /** Flower button */
         // Начинаем редактировать Flower button
         editButton(e) {
@@ -273,6 +278,8 @@ var appLanding = new Vue({
         },
         cancelEditButton() {
             this.stateEditButton = false;
+            this.flowerButton.text = this.flowerButton.oldText;
+            this.flowerButton.link = this.flowerButton.oldLink;
         },
         acceptEditButton() {
             // Проверка. Ввели-ли мы значения?
@@ -594,8 +601,8 @@ var appLanding = new Vue({
         // Отправляем данные в фаирбэйз
         publishNewTimer() {
             vue_this = this;
-            const idPage = (Math.floor(Math.random() * 1000000));
-            // const idPage = 0;
+            // const idPage = (Math.floor(Math.random() * 1000000));
+            const idPage = 0;
             const dataJSON = {
                 pageTitle: vue_this.headingMessage,
                 preHeading: vue_this.preHeadingMessage,
@@ -604,6 +611,8 @@ var appLanding = new Vue({
                 finishDate: vue_this.finishDate.toString(),
                 imageSrcBackground: vue_this.imageSrcBackground,
                 color_i: vue_this.color_i,
+                buttonText: vue_this.flowerButton.text,
+                buttonHref: vue_this.flowerButton.link,
             };
             database.ref('pages/' + idPage).set(dataJSON)
                 .then(function () {
@@ -632,6 +641,9 @@ var appLanding = new Vue({
             this.preHeadingMessage = data.preHeading;
             this.headingMessage = data.heading;
             this.descriptionTextMessage = data.description;
+            // присваеваем переменным значения для кнопки
+            this.flowerButton.text = data.buttonText;
+            this.flowerButton.link = data.buttonHref;
             // присваеваем заголовок страницы
             document.title = data.pageTitle
             // присваеваем фон
@@ -667,6 +679,8 @@ var appLanding = new Vue({
         // Получаем данные
         database.ref('pages/' + currentIdPage.id).once('value')
             .then(function (e) {
+                console.log(e.val());
+
                 _this.acceptData(e.val());
                 // Включаем приложение
                 _this.finishPreloadingDone();
