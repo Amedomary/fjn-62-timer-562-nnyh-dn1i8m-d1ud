@@ -601,8 +601,7 @@ var appLanding = new Vue({
         // Отправляем данные в фаирбэйз
         publishNewTimer() {
             vue_this = this;
-            // const idPage = (Math.floor(Math.random() * 1000000));
-            const idPage = 0;
+            const idPage = (Math.floor(Math.random() * 1000000));
             const dataJSON = {
                 pageTitle: vue_this.headingMessage,
                 preHeading: vue_this.preHeadingMessage,
@@ -679,8 +678,6 @@ var appLanding = new Vue({
         // Получаем данные
         database.ref('pages/' + currentIdPage.id).once('value')
             .then(function (e) {
-                console.log(e.val());
-
                 _this.acceptData(e.val());
                 // Включаем приложение
                 _this.finishPreloadingDone();
