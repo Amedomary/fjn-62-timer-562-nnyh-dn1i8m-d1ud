@@ -618,15 +618,14 @@ var appLanding = new Vue({
 
             console.log(dataJSON);
 
-
-            // database.ref('pages/' + idPage).set(dataJSON)
-            //     .then(function () {
-            //         console.log('Synchronization succeeded');
-            //         vue_this.createdNewPage(idPage);
-            //     })
-            //     .catch(function (error) {
-            //         console.log('Synchronization failed');
-            //     });
+            database.ref('pages/' + idPage).set(dataJSON)
+                .then(function () {
+                    console.log('Synchronization succeeded');
+                    vue_this.createdNewPage(idPage);
+                })
+                .catch(function (error) {
+                    console.log('Synchronization failed');
+                });
 
             this.weHaveModificateTimer = false; // Выключаем состояние модифицированного приложения
         },
