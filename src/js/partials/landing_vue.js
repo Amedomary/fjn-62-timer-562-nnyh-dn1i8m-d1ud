@@ -603,6 +603,7 @@ var appLanding = new Vue({
             vue_this = this;
             const idPage = (Math.floor(Math.random() * 1000000));
             const dataJSON = {
+                id: idPage,
                 pageTitle: vue_this.headingMessage,
                 preHeading: vue_this.preHeadingMessage,
                 heading: vue_this.headingMessage,
@@ -612,15 +613,20 @@ var appLanding = new Vue({
                 color_i: vue_this.color_i,
                 buttonText: vue_this.flowerButton.text,
                 buttonHref: vue_this.flowerButton.link,
+                likes: 0,
             };
-            database.ref('pages/' + idPage).set(dataJSON)
-                .then(function () {
-                    console.log('Synchronization succeeded');
-                    vue_this.createdNewPage(idPage);
-                })
-                .catch(function (error) {
-                    console.log('Synchronization failed');
-                });
+
+            console.log(dataJSON);
+
+
+            // database.ref('pages/' + idPage).set(dataJSON)
+            //     .then(function () {
+            //         console.log('Synchronization succeeded');
+            //         vue_this.createdNewPage(idPage);
+            //     })
+            //     .catch(function (error) {
+            //         console.log('Synchronization failed');
+            //     });
 
             this.weHaveModificateTimer = false; // Выключаем состояние модифицированного приложения
         },
